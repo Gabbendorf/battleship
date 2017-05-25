@@ -22,4 +22,8 @@ class Grid
     cells.include?(position)
   end
 
+  def place_ship(position)
+    
+  end
+
 end
