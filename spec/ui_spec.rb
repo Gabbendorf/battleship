@@ -1,10 +1,12 @@
 require_relative '../lib/ui'
+require_relative '../lib/ships'
 
 RSpec.describe Ui do
 
   let(:input) {StringIO.new}
   let(:output) {StringIO.new}
   let(:ui) {Ui.new(input,output)}
+  let(:ships) {Ships.new}
 
   it "welcomes the players" do
     ui.welcome
@@ -25,9 +27,18 @@ RSpec.describe Ui do
   end
 
   it "displays list of ships" do
+    ships.list_of_ships
     ui.ships
+    expect(output.string).to include ("- submarine\n- submarine\n- destroyer\n- destroyer\n- cruiser\n- aircraft-carrier\n")
+  end
 
-    expect(output.string).to include ("- Submarine\n- Destroyer\n- Cruiser\n- Aircraft-carrier.")
+  it "gets ship to place from player 1" do
+    input = StringIO.new("submarine\n")
+    ui = Ui.new(input, output)
+
+    ui.get_ship
+
+    expect(output.string).to include()
   end
 
 end
