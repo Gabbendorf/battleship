@@ -3,7 +3,6 @@ class Ui
   def initialize(stdin,stdout)
     @stdin = stdin
     @stdout = stdout
-    @ships = Ships.new
   end
 
   def welcome
@@ -21,14 +20,6 @@ class Ui
 
   def invite_to_choose_ship
     @stdout.puts "Player 1: choose a ship to place."
-  end
-
-  def ships
-    @ships.list_of_ships.each {|ship| @stdout.puts "- " + ship + "\n"}
-  end
-
-  def get_ship
-    @stdin.gets
   end
 
 end
