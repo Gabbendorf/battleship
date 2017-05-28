@@ -8,10 +8,10 @@ class Ship
   end
 
   def hit?(attacked_cell,grid)
-    ship_positions.each {|position| position == attacked_cell}
+    occupied_cells(grid).include?(attacked_cell)
   end
 
-  def position(grid)
+  def occupied_cells(grid)
     grid.ships_placed[self]
   end
 
