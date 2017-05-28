@@ -24,7 +24,7 @@ RSpec.describe Grid do
   #   end
   # end
 
-  it "registers placed submarine with its position in the list of ships placed" do
+  it "registers submarine with its position in the list of ships placed" do
     submarine = Ship.new("submarine", 1)
 
     grid.place_ship(5, 5, submarine)
@@ -32,7 +32,7 @@ RSpec.describe Grid do
     expect(grid.ships_placed).to eq({submarine => [5,5]})
   end
 
-  it "registers  placed destroyer with its position in the list of ships placed" do
+  it "registers destroyer with its position in the list of ships placed" do
     destroyer = Ship.new("destroyer", 2)
 
     grid.place_ship(5, 5, destroyer)
@@ -40,7 +40,7 @@ RSpec.describe Grid do
     expect(grid.ships_placed).to eq({destroyer => [[5,5], [6,5]]})
   end
 
-  it "registers placed cruiser with its position in the list of ships placed" do
+  it "registers cruiser with its position in the list of ships placed" do
     cruiser = Ship.new("cruiser", 3)
 
     grid.place_ship(5, 5, cruiser)
@@ -48,7 +48,7 @@ RSpec.describe Grid do
     expect(grid.ships_placed).to eq({cruiser => [[5,5], [6,5],[7,5]]})
   end
 
-  it "registers placed cruiser with its position in the list of ships placed" do
+  it "registers aircraft_carrier with its position in the list of ships placed" do
     aircraft_carrier = Ship.new("aircraft-carrier", 4)
 
     grid.place_ship(5, 5, aircraft_carrier)

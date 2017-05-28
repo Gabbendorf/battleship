@@ -28,16 +28,21 @@ class Grid
   #   cells.include?(position)
   # end
 
-  def place_ship(x, y, ship)
+  def place_ship(x,y,ship)
     if ship.length == 1
-      @ships_placed[ship] = [x,y]
-    elsif ship.length == 2
-      @ships_placed[ship] = [[x,y],[x+1,y]]
-    elsif ship.length == 3
-      @ships_placed[ship] = [[x,y],[x+1,y],[x+2,y]]
-    elsif ship.length == 4
-      @ships_placed[ship] = [[x,y],[x+1,y],[x+2,y],[x+3,y]]
+      @ships_placed[ship] = x,y
+    else
+      @ships_placed[ship] = next_cells_horizontally(x,y,ship.length).insert(0,[x,y])
     end
+  end
+
+  def next_cells_horizontally(x,y, ship_length)
+    next_cells = []
+    (ship_length-1).times do
+      x += 1
+      next_cells.push([x,y])
+    end
+    next_cells
   end
 
 end
