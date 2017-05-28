@@ -10,8 +10,6 @@ class Grid
     @ships_placed[ship] = occupied_cells(x,y,ship.length)
   end
 
-  private
-
   def occupied_cells(x,y, ship_length)
     occupied_cells = [[x,y]]
     (ship_length-1).times do
@@ -19,6 +17,11 @@ class Grid
       occupied_cells.push([x,y])
     end
     occupied_cells
+  end
+
+  def ship?(position)
+     all_occupied_cells = @ships_placed.values.inject {|sum,array| sum + array}
+     all_occupied_cells.include?(position)
   end
 
 end
