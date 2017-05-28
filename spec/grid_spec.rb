@@ -38,20 +38,22 @@ RSpec.describe Grid do
     end
   end
 
-  it "returns true if a cell is occupied" do
-    aircraft_carrier = Ship.new("aircraft-carrier",4)
+  describe "checks if a cell is already occupied by a ship" do
+    it "returns true if a cell is occupied" do
+      aircraft_carrier = Ship.new("aircraft-carrier",4)
 
-    grid.place_ship(2,2,aircraft_carrier)
+      grid.place_ship(2,2,aircraft_carrier)
 
-    expect(grid.ship?([4,2])).to eq(true)
+      expect(grid.ship?([4,2])).to eq(true)
+    end
+
+    it "returns false if a cell is not occupied" do
+      aircraft_carrier = Ship.new("aircraft-carrier",4)
+
+      grid.place_ship(2,2,aircraft_carrier)
+
+      expect(grid.ship?([9,2])).to eq(false)
+    end
   end
-
-  it "returns false if a cell is not occupied" do
-    aircraft_carrier = Ship.new("aircraft-carrier",4)
-
-    grid.place_ship(2,2,aircraft_carrier)
-
-    expect(grid.ship?([9,2])).to eq(false)
-  end
-
+  
 end

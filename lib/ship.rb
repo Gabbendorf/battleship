@@ -7,4 +7,12 @@ class Ship
     @length = length
   end
 
+  def hit?(attacked_cell,grid)
+    ship_positions.each {|position| position == attacked_cell}
+  end
+
+  def position(grid)
+    grid.ships_placed[self]
+  end
+
 end
