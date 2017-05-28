@@ -28,8 +28,16 @@ class Grid
   #   cells.include?(position)
   # end
 
-  def place_ship(start_position, ship)
-      @ships_placed[ship] = [start_position]
+  def place_ship(x, y, ship)
+    if ship.length == 1
+      @ships_placed[ship] = [x,y]
+    elsif ship.length == 2
+      @ships_placed[ship] = [[x,y],[x+1,y]]
+    elsif ship.length == 3
+      @ships_placed[ship] = [[x,y],[x+1,y],[x+2,y]]
+    elsif ship.length == 4
+      @ships_placed[ship] = [[x,y],[x+1,y],[x+2,y],[x+3,y]]
+    end
   end
 
 end
