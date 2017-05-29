@@ -22,4 +22,8 @@ class Ship
     grid.ships_placed[self]
   end
 
+  def sunk?
+    @cells_hit.length == @length
+  end
+
 end

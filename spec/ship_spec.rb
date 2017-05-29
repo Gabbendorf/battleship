@@ -40,18 +40,28 @@ RSpec.describe Ship do
     expect(aircraft_carrier.cells_hit).to eq([[3,2]])
   end
 
-  xit "returns true if it is sunk" do
-    cruiser = Ship.new("cruiser",3)
+  it "returns true if it is sunk" do
+    destroyer = Ship.new("destroyer",2)
+    grid.place_ship(5,5,destroyer)
     attacked_cell1 = [5,5]
     attacked_cell2 = [6,5]
-    attacked_cell3 = [7,5]
 
-    grid.place_ship(5,5,cruiser)
-    ship.hit?(attacked_cell1,grid)
-    ship.hit?(attacked_cell2,grid)
-    ship.hit?(attacked_cell3,grid)
+    destroyer.register_cells_hit(attacked_cell1,grid)
+    destroyer.register_cells_hit(attacked_cell2,grid)
 
-    expect(ship.sunk?).to eq(true)
+    expect(destroyer.sunk?).to eq(true)
+  end
+
+  it "returns false if it is not sunk" do
+    destroyer = Ship.new("destroyer",2)
+    grid.place_ship(5,5,destroyer)
+    attacked_cell1 = [5,5]
+    attacked_cell2 = [7,5]
+
+    destroyer.register_cells_hit(attacked_cell1,grid)
+    destroyer.register_cells_hit(attacked_cell2,grid)
+
+    expect(destroyer.sunk?).to eq(false)
   end
 
 end
