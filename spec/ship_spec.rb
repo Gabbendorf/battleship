@@ -64,4 +64,17 @@ RSpec.describe Ship do
     expect(destroyer.sunk?).to eq(false)
   end
 
+  it "cannot register multiple times same cell hit" do
+    destroyer = Ship.new("destroyer",2)
+    grid.place_ship(5,5,destroyer)
+    attacked_cell1 = [5,5]
+    attacked_cell2 = [7,5]
+
+    destroyer.register_cells_hit(attacked_cell1,grid)
+    destroyer.register_cells_hit(attacked_cell1,grid)
+    destroyer.register_cells_hit(attacked_cell2,grid)
+
+    expect(destroyer.sunk?).to eq(false)
+  end
+
 end

@@ -1,11 +1,13 @@
+require 'set'
+
 class Ship
 
-  attr_reader :name, :length, :cells_hit
+  attr_reader :name, :length
 
   def initialize(name, length)
     @name = name
     @length = length
-    @cells_hit = []
+    @cells_hit_set = Set.new
   end
 
   def hit?(attacked_cell,grid)
@@ -14,7 +16,7 @@ class Ship
 
   def register_cells_hit(attacked_cell,grid)
     if hit?(attacked_cell,grid)
-      @cells_hit.push(attacked_cell)
+      @cells_hit_set.add(attacked_cell)
     end
   end
 
@@ -22,8 +24,12 @@ class Ship
     grid.ships_placed[self]
   end
 
+  def cells_hit
+    @cells_hit_set.to_a
+  end
+
   def sunk?
-    @cells_hit.length == @length
+    @cells_hit_set.length == @length
   end
 
 end
