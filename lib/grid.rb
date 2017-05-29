@@ -4,6 +4,7 @@ class Grid
 
   def initialize
     @ships_placed = {}
+    @ship_cells_hit = {}
   end
 
   def place_ship(x,y,ship)

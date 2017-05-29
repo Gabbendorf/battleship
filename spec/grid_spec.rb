@@ -55,5 +55,5 @@ RSpec.describe Grid do
       expect(grid.ship?([9,2])).to eq(false)
     end
   end
-  
+
 end
