@@ -30,6 +30,16 @@ RSpec.describe Game do
 
       expect(result).to eq(:water)
     end
+
+    it "returns :hit if cell attacked is occupied" do
+      ship = Ship.new("destroyer",2)
+      grid.place_ship(5,5,ship)
+      cell_to_attack = [5,5]
+
+      result = game.attack(cell_to_attack,ship)
+
+      expect(result).to eq(:hit)
+    end
   end
 
 end

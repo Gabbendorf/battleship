@@ -11,6 +11,8 @@ class Game
   def attack(cell_position,ship)
     if !ship.hit?(cell_position,@grid)
       :water
+    else
+      :hit
     end
   end
 
