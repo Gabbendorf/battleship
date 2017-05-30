@@ -3,10 +3,11 @@ class Ui
   def initialize(stdin,stdout)
     @stdin = stdin
     @stdout = stdout
+    @grid = Grid.new
   end
 
   def welcome
-    @stdout.puts "Welcome to Battleship. Are you ready to play?"
+    @stdout.puts "Welcome to Battleship!"
   end
 
   def display_grid
@@ -18,8 +19,19 @@ class Ui
     @stdout.puts grid
   end
 
-  def invite_to_choose_ship
-    @stdout.puts "Player 1: choose a ship to place."
+  def invite_to_select_ship
+    @stdout.puts "Player 1, choose a ship to place:"
+  end
+
+  def list_of_ships
+    {'submarine' => 2,
+     'destroyer' => 2,
+     'cruise' => 1,
+     'aircraft-carrier' => 1}
+  end
+
+  def print_list_of_ships
+    list_of_ships.keys.each {|ship| @stdout.puts "- " + ship}
   end
 
 end

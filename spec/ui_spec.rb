@@ -11,7 +11,7 @@ RSpec.describe Ui do
   it "welcomes the players" do
     ui.welcome
 
-    expect(output.string).to include("Welcome to Battleship. Are you ready to play?")
+    expect(output.string).to include("Welcome to Battleship!")
   end
 
   it "displays the grid" do
@@ -21,9 +21,15 @@ RSpec.describe Ui do
   end
 
   it "invites player 1 to choose ship to place" do
-    ui.invite_to_choose_ship
+    ui.invite_to_select_ship
 
-    expect(output.string).to include("Player 1: choose a ship to place.")
+    expect(output.string).to include("Player 1, choose a ship to place:")
+  end
+
+  it "prints the list of ships to be placed" do
+    ui.print_list_of_ships
+
+    expect(output.string).to include("- submarine\n- destroyer\n- cruise\n- aircraft-carrier\n")
   end
 
 end
