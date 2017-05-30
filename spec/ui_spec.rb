@@ -41,4 +41,10 @@ RSpec.describe Ui do
     expect(input.string).to include("submarine")
   end
 
+  it "asks for coordinates of cell where to place ship" do
+    ui.ask_for_coordinates("submarine")
+
+    expect(output.string).to include("Where do you want to place the submarine (number,number)?")
+  end
+
 end

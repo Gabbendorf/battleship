@@ -38,4 +38,8 @@ class Ui
     @stdin.gets.chomp
   end
 
+  def ask_for_coordinates(ship)
+    @stdout.puts "Where do you want to place the #{ship} (number,number)?"
+  end
+
 end
