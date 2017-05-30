@@ -47,4 +47,13 @@ RSpec.describe Ui do
     expect(output.string).to include("Where do you want to place the submarine (number,number)?")
   end
 
+  it "registers chosen coordinates where to place ship" do
+    input = StringIO.new("1,1")
+    ui = Ui.new(input,output)
+
+    ui.coordinates_for_ship
+
+    expect(input.string).to include("1,1")
+  end
+
 end

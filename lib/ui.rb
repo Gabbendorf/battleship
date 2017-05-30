@@ -42,4 +42,8 @@ class Ui
     @stdout.puts "Where do you want to place the #{ship} (number,number)?"
   end
 
+  def coordinates_for_ship
+    @stdin.gets.chomp
+  end
+
 end
