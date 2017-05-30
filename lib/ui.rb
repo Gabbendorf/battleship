@@ -10,6 +10,10 @@ class Ui
     @stdout.puts "Welcome to Battleship!"
   end
 
+  def ask_name_player1
+    @stdout.puts "Player 1: enter your name"
+  end
+
   def display_grid
     grid = "  "
     (1..10).each {|column| grid << column.to_s + "  "}

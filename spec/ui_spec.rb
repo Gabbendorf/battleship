@@ -14,6 +14,12 @@ RSpec.describe Ui do
     expect(output.string).to include("Welcome to Battleship!")
   end
 
+  it "asks for name of player 1" do
+    ui.ask_name_player1
+
+    expect(output.string).to include("Player 1: enter your name")
+  end
+
   it "displays the grid" do
     ui.display_grid
 
