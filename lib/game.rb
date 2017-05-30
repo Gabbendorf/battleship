@@ -8,8 +8,8 @@ class Game
     @grid.place_ship(x,y,ship_from_name(ship_name))
   end
 
-  def attack(cell_position,ship)
-    if !ship.hit?(cell_position,@grid)
+  def attack(cell_position)
+    if !@grid.ship?(cell_position)
       :water
     else
       :hit

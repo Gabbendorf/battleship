@@ -26,7 +26,7 @@ RSpec.describe Game do
       grid.place_ship(5,5,ship)
       cell_to_attack = [8,5]
 
-      result = game.attack(cell_to_attack,ship)
+      result = game.attack(cell_to_attack)
 
       expect(result).to eq(:water)
     end
@@ -36,7 +36,7 @@ RSpec.describe Game do
       grid.place_ship(5,5,ship)
       cell_to_attack = [5,5]
 
-      result = game.attack(cell_to_attack,ship)
+      result = game.attack(cell_to_attack)
 
       expect(result).to eq(:hit)
     end

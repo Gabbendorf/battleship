@@ -23,11 +23,5 @@ class Grid
      all_occupied_cells = @ships_placed.values.inject {|sum,array| sum + array}
      all_occupied_cells.include?(position)
   end
-  # 
-  # def delete_sunk_ship(ship)
-  #    if ship.sunk?
-  #      @ships_placed.delete(ship)
-  #    end
-  # end
 
 end
