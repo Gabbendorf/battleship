@@ -3,6 +3,7 @@ require_relative "../lib/grid"
 RSpec.describe Grid do
 
   let(:grid) {Grid.new}
+  let(:game) {Game.new(grid)}
 
   describe "registers positions of all ships placed" do
     it "registers submarine with its position in the list of ships placed" do
@@ -54,6 +55,17 @@ RSpec.describe Grid do
 
       expect(grid.ship?([9,2])).to eq(false)
     end
+  end
+
+  it "deletes ship from list of ships placed if this sinks" do
+    submarine = Ship.new("submarine",1)
+    grid.place_ship(5,5,submarine)
+
+    game.attack([5,5],submarine)
+    submarine.register_cells_hit([5,5],grid)
+    grid.delete_sunk_ship(submarine)
+
+    expect(grid.ships_placed.length).to eq(0)
   end
 
 end

@@ -40,6 +40,7 @@ RSpec.describe Game do
 
       expect(result).to eq(:hit)
     end
+
   end
 
 end
