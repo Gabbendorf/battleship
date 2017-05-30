@@ -34,4 +34,8 @@ class Ui
     list_of_ships.keys.each {|ship| @stdout.puts "- " + ship}
   end
 
+  def selected_ship
+    @stdin.gets.chomp
+  end
+
 end

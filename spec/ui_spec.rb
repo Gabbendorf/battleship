@@ -32,4 +32,13 @@ RSpec.describe Ui do
     expect(output.string).to include("- submarine\n- destroyer\n- cruise\n- aircraft-carrier\n")
   end
 
+  it "registers selected ship" do
+    input = StringIO.new("submarine")
+    ui = Ui.new(input,output)
+
+    ui.selected_ship
+
+    expect(input.string).to include("submarine")
+  end
+
 end
