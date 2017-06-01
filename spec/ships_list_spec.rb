@@ -29,4 +29,13 @@ RSpec.describe ShipsList do
     expect(ships_list.ships).to eq({"submarine" => 2, "destroyer" => 2, "aircraft-carrier" =>1})
   end
 
+  it "converts the player's input as number into name of ship" do
+    players_input = 2
+
+    ship_name = ships_list.convert_number_to_name(players_input)
+
+    expect(ship_name).to eq("destroyer")
+  end
+
+
 end

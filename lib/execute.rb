@@ -12,11 +12,7 @@ ui.welcome
 player1 = ui.ask_name_player1
 ui.invite_to_select_ship_number(player1)
 ui.print_list_of_ships
-ship_number = ui.selected_ship_number
-ship = ships_list.convert_number_to_name(ship_number)
+ship = ships_list.convert_number_to_name(ui.selected_ship_number)
 ships_list.delete_selected_ship(ship)
-# ui.ask_for_coordinates(ship)
-ui.print_list_of_ships
-ui.invite_to_select_ship_number(player1)
-# ui.display_grid
-# coordinates = ui.coordinates_for_ship
+ui.ask_for_coordinates(ship)
+# ui.print_list_of_ships

@@ -20,8 +20,6 @@ class ShipsList
     @ships
   end
 
-  private
-
   def convert_number_to_name(number)
     case number
     when 1
