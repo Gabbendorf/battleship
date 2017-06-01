@@ -1,10 +1,10 @@
 require_relative 'ui'
 require_relative 'grid'
-require_relative 'game'
+require_relative 'player'
 
 ui = Ui.new($stdin, $stdout)
 grid = Grid.new
-game = Game.new(grid)
+player1 = Player.new("Gabriella", grid)
 
 ui.welcome
 player1 = ui.ask_name_player1

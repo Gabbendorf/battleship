@@ -3,7 +3,7 @@ require_relative '../lib/player'
 RSpec.describe Player do
 
   let(:grid) {Grid.new}
-  let(:player) {Player.new("Gabriella", grid)}
+  let(:player) {Player.new(grid)}
 
   it "places ship on grid" do
     ship_name = "submarine"
