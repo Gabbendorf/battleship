@@ -18,10 +18,10 @@ RSpec.describe Ui do
     input = StringIO.new("Gabriella")
     ui = Ui.new(input,output)
 
-    ui.ask_name_player1
+    player_name = ui.ask_name_player1
 
     expect(output.string).to include("Player 1: enter your name")
-    expect(input.string).to include("Gabriella")
+    expect(player_name).to eq("Gabriella")
   end
 
   xit "displays the grid" do

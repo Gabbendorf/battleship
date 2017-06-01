@@ -19,5 +19,4 @@ class ShipsList
     @ships
   end
 
-
 end
