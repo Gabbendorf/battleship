@@ -4,7 +4,7 @@ require_relative 'player'
 
 ui = Ui.new($stdin, $stdout)
 grid = Grid.new
-player1 = Player.new("Gabriella", grid)
+player1 = Player.new(grid)
 
 ui.welcome
 player1 = ui.ask_name_player1
