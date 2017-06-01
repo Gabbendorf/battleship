@@ -24,7 +24,8 @@ class Ui
   #   (1..10).each {|column| grid << column.to_s + "   "}
   #   grid << "\n"
   #   dots = " .  " * 10
-  #   (1..10).each {|raw| grid << raw.to_s + dots + "\n"}
+  #   (1..9).each {|raw| grid << raw.to_s + dots + "\n"}
+  #   grid << "10" + ".   " * 10 + "\n"
   #   @stdout.puts grid
   # end
 
@@ -45,8 +46,8 @@ class Ui
   end
 
   def ask_for_coordinates(ship)
-    @stdout.puts "Where do you want to place the #{ship}? (choose 2 coordinates: XY)"
-    @stdin.gets.chomp.split("")
+    @stdout.puts "Where do you want to place the #{ship}? (choose 2 coordinates: X,Y)"
+    @stdin.gets.chomp.split(",")
   end
 
 end

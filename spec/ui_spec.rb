@@ -27,7 +27,8 @@ RSpec.describe Ui do
   xit "displays the grid" do
     ui.display_grid
 
-    expect(output.string).to include("  1  2  3  4  5  6  7  8  9  10  \n1 .  .  .  .  .  .  .  .  .  .  \n2 .  .  .  .  .  .  .  .  .  .  \n3 .  .  .  .  .  .  .  .  .  .  \n4 .  .  .  .  .  .  .  .  .  .  \n5 .  .  .  .  .  .  .  .  .  .  \n6 .  .  .  .  .  .  .  .  .  .  \n7 .  .  .  .  .  .  .  .  .  .  \n8 .  .  .  .  .  .  .  .  .  .  \n9 .  .  .  .  .  .  .  .  .  .  \n10")
+    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10  \n1 .   .   .   .   .   .   .   .   .   .  \n2 .   .   .   .   .   .   .   .   .   .  \n3 .   .   .   .   .   .   .   .   .   .  \n4 .   .   .   .   .   .   .   .   .   .  \n5 .   .   .   .   .   .   .   .   .   .  \n6 .   .   .   .   .   .   .   .   .   .  \n7 .   .   .   .   .   .   .   .   .   .  \n8 .   .   .   .   .   .   .   .   .   .  \n9 .   .   .   .   .   .   .   .   .   .  \n10.   .   .   .   .   .   .   .   .   .   \n")
+
   end
 
   it "invites player 1 to choose number for ship to place" do
@@ -52,13 +53,13 @@ RSpec.describe Ui do
   end
 
   it "asks for coordinates of cell where to place ship" do
-    input = StringIO.new("11")
+    input = StringIO.new("1,10")
     ui = Ui.new(input,output)
 
     coordinates = ui.ask_for_coordinates("submarine")
 
-    expect(output.string).to include("Where do you want to place the submarine? (choose 2 coordinates: XY)")
-    expect(coordinates).to eq(["1","1"])
+    expect(output.string).to include("Where do you want to place the submarine? (choose 2 coordinates: X,Y)")
+    expect(coordinates).to eq(["1","10"])
   end
 
 end

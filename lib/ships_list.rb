@@ -16,7 +16,6 @@ class ShipsList
     if @ships[ship_name] == 0
       @ships.delete(ship_name)
     end
-    @ships
   end
 
   def convert_number_to_name(number)
