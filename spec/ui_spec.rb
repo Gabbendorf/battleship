@@ -33,7 +33,7 @@ RSpec.describe Ui do
   it "invites player 1 to choose ship to place" do
     ui.invite_to_select_ship("Gabriella")
 
-    expect(output.string).to include("Gabriella, choose a ship to place:")
+    expect(output.string).to include("Gabriella, choose a number for type of ship to place:")
   end
 
   xit "prints the list of ships to be placed" do

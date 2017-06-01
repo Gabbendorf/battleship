@@ -1,4 +1,5 @@
 require_relative 'grid'
+require_relative 'ships_list'
 
 class Ui
 
@@ -6,6 +7,7 @@ class Ui
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
+    @ships_list = ShipsList.new
   end
 
   def welcome
@@ -27,11 +29,11 @@ class Ui
   # end
 
   def invite_to_select_ship(player1)
-    @stdout.puts "#{player1}, choose a ship to place:"
+    @stdout.puts "#{player1}, choose a number for type of ship to place:"
   end
 
   # def print_list_of_ships
-  #   @grid.list_of_ships.keys.each {|ship| @stdout.puts "- " + ship}
+  #   @ships_list.ships.keys.each {|ship| @stdout.puts "- " + ship}
   # end
 
   def selected_ship
