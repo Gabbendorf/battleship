@@ -28,7 +28,7 @@ class Ui
   #   @stdout.puts grid
   # end
 
-  def invite_to_select_ship(player1)
+  def invite_to_select_ship_number(player1)
     @stdout.puts "#{player1}, choose a number for type of ship to place:"
   end
 
@@ -40,8 +40,8 @@ class Ui
     end
   end
 
-  def selected_ship
-    @stdin.gets.chomp
+  def selected_ship_number
+    @stdin.gets.chomp.to_i
   end
 
   def ask_for_coordinates(ship)

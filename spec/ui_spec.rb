@@ -30,8 +30,8 @@ RSpec.describe Ui do
     expect(output.string).to include("  1  2  3  4  5  6  7  8  9  10  \n1 .  .  .  .  .  .  .  .  .  .  \n2 .  .  .  .  .  .  .  .  .  .  \n3 .  .  .  .  .  .  .  .  .  .  \n4 .  .  .  .  .  .  .  .  .  .  \n5 .  .  .  .  .  .  .  .  .  .  \n6 .  .  .  .  .  .  .  .  .  .  \n7 .  .  .  .  .  .  .  .  .  .  \n8 .  .  .  .  .  .  .  .  .  .  \n9 .  .  .  .  .  .  .  .  .  .  \n10")
   end
 
-  it "invites player 1 to choose ship to place" do
-    ui.invite_to_select_ship("Gabriella")
+  it "invites player 1 to choose number for ship to place" do
+    ui.invite_to_select_ship_number("Gabriella")
 
     expect(output.string).to include("Gabriella, choose a number for type of ship to place:")
   end
@@ -42,11 +42,11 @@ RSpec.describe Ui do
     expect(output.string).to include("1- submarine\n2- destroyer\n3- cruiser\n4- aircraft-carrier\n")
   end
 
-  it "registers selected ship" do
+  it "registers number for ship" do
     input = StringIO.new("submarine")
     ui = Ui.new(input,output)
 
-    ui.selected_ship
+    ui.selected_ship_number
 
     expect(input.string).to include("submarine")
   end

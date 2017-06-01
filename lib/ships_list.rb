@@ -9,7 +9,8 @@ class ShipsList
               "aircraft-carrier" => 1}
   end
 
-  def delete_selected_ship(ship_name)
+  def delete_selected_ship(number)
+    ship_name = convert_number_to_name(number)
     if @ships[ship_name] != 0
       @ships[ship_name] -= 1
     end
@@ -18,6 +19,8 @@ class ShipsList
     end
     @ships
   end
+
+  private
 
   def convert_number_to_name(number)
     case number
