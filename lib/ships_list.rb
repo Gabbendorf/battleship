@@ -9,12 +9,12 @@ class ShipsList
               4 => 1}
   end
 
-  def delete_selected_ship(ship_name)
-    if @ships[ship_name] != 0
-      @ships[ship_name] -= 1
+  def delete_selected_ship(number)
+    if @ships[number] != 0
+      @ships[number] -= 1
     end
-    if @ships[ship_name] == 0
-      @ships.delete(ship_name)
+    if @ships[number] == 0
+      @ships.delete(number)
     end
     @ships
   end
