@@ -32,9 +32,13 @@ class Ui
     @stdout.puts "#{player1}, choose a number for type of ship to place:"
   end
 
-  # def print_list_of_ships
-  #   @ships_list.ships.keys.each {|ship| @stdout.puts ship}
-  # end
+  def print_list_of_ships
+    list_number = 1
+    @ships_list.ships.keys.each do |ship|
+      @stdout.puts list_number.to_s + "- " + ship
+      list_number += 1
+    end
+  end
 
   def selected_ship
     @stdin.gets.chomp
