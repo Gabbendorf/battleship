@@ -60,7 +60,7 @@ RSpec.describe Ui do
     coordinates = ui.ask_for_coordinates("submarine")
 
     expect(output.string).to include("Where do you want to place the submarine? (choose 2 coordinates: X,Y)")
-    expect(coordinates).to eq(["1","10"])
+    expect(coordinates).to eq([1, 10])
   end
 
 end

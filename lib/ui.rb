@@ -43,7 +43,7 @@ class Ui
 
   def ask_for_coordinates(ship)
     @stdout.puts "Where do you want to place the #{ship}? (choose 2 coordinates: X,Y)"
-    @stdin.gets.chomp.split(",")
+    @stdin.gets.chomp.split(",").map {|number| number.to_i}
   end
 
 end

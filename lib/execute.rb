@@ -9,14 +9,16 @@ player1 = Player.new(grid)
 ships_list = ShipsList.new
 
 ui.welcome
-player1 = ui.ask_name_player1
+name_player1 = ui.ask_name_player1
 
 while ships_list.ships.size > 0
-  ui.invite_to_select_ship_number(player1)
+  ui.invite_to_select_ship_number(name_player1)
   ui.print_list_of_ships(ships_list)
   ship = ships_list.convert_number_to_name(ui.selected_ship_number)
   ships_list.delete_selected_ship(ship)
 
   ui.display_grid
-  ui.ask_for_coordinates(ship)
+  coordinates = ui.ask_for_coordinates(ship)
+  player1.place_ship(coordinates[0], coordinates[1], ship)
+  puts grid.ships_placed
 end
