@@ -21,13 +21,13 @@ class ShipsList
   def convert_number_to_name(number)
     case number
     when 1
-      "submarine"
+      @ships.keys[0]
     when 2
-      "destroyer"
+      @ships.keys[1]
     when 3
-      "cruiser"
+      @ships.keys[2]
     when 4
-      "aircraft-carrier"
+      @ships.keys[3]
     end
   end
 

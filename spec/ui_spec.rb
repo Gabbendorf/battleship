@@ -7,6 +7,7 @@ RSpec.describe Ui do
   let(:output) {StringIO.new}
   let(:ui) {Ui.new(input,output)}
   let(:ship) {Ship.new}
+  let(:ships_list) {ShipsList.new}
 
   it "welcomes the players" do
     ui.welcome
@@ -38,7 +39,7 @@ RSpec.describe Ui do
   end
 
   it "prints the list of ships to be placed" do
-    ui.print_list_of_ships
+    ui.print_list_of_ships(ships_list)
 
     expect(output.string).to include("1- submarine\n2- destroyer\n3- cruiser\n4- aircraft-carrier\n")
   end

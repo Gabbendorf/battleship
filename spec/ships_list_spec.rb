@@ -37,5 +37,4 @@ RSpec.describe ShipsList do
     expect(ship_name).to eq("destroyer")
   end
 
-
 end

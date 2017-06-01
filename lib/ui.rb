@@ -1,13 +1,9 @@
-require_relative 'grid'
-require_relative 'ships_list'
-
 class Ui
 
   def initialize(stdin,stdout)
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
-    @ships_list = ShipsList.new
   end
 
   def welcome
@@ -19,23 +15,23 @@ class Ui
     @stdin.gets.chomp
   end
 
-  # def display_grid
-  #   grid = "  "
-  #   (1..10).each {|column| grid << column.to_s + "   "}
-  #   grid << "\n"
-  #   dots = " .  " * 10
-  #   (1..9).each {|raw| grid << raw.to_s + dots + "\n"}
-  #   grid << "10" + ".   " * 10 + "\n"
-  #   @stdout.puts grid
-  # end
+  def display_grid
+    grid = "  "
+    (1..10).each {|column| grid << column.to_s + "   "}
+    grid << "\n"
+    dots = " .  " * 10
+    (1..9).each {|raw| grid << raw.to_s + dots + "\n"}
+    grid << "10" + ".   " * 10 + "\n"
+    @stdout.puts grid
+  end
 
   def invite_to_select_ship_number(player1)
     @stdout.puts "#{player1}, choose a number for type of ship to place:"
   end
 
-  def print_list_of_ships
+  def print_list_of_ships(list)
     list_number = 1
-    @ships_list.ships.keys.each do |ship|
+    list.ships.keys.each do |ship|
       @stdout.puts list_number.to_s + "- " + ship
       list_number += 1
     end
