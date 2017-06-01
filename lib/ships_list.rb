@@ -9,8 +9,7 @@ class ShipsList
               "aircraft-carrier" => 1}
   end
 
-  def delete_selected_ship(number)
-    ship_name = convert_number_to_name(number)
+  def delete_selected_ship(ship_name)
     if @ships[ship_name] != 0
       @ships[ship_name] -= 1
     end

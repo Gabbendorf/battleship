@@ -15,7 +15,7 @@ RSpec.describe ShipsList do
   end
 
   it "deletes a selected ship from the list of ships to place on grid" do
-    updated_list = ships_list.delete_selected_ship(1)
+    updated_list = ships_list.delete_selected_ship("submarine")
 
     ships_count = count_ships(updated_list)
 
@@ -24,7 +24,7 @@ RSpec.describe ShipsList do
   end
 
   it "deletes ship from list if there are 0 of that type" do
-    ships_list.delete_selected_ship(3)
+    ships_list.delete_selected_ship("cruiser")
 
     expect(ships_list.ships).to eq({"submarine" => 2, "destroyer" => 2, "aircraft-carrier" =>1})
   end
