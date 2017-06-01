@@ -36,7 +36,7 @@ RSpec.describe Ui do
     expect(output.string).to include("Gabriella, choose a number for type of ship to place:")
   end
 
-  it "prints the list of ships to be placed" do
+  xit "prints the list of ships to be placed" do
     ui.print_list_of_ships
 
     expect(output.string).to include("- submarine\n- destroyer\n- cruise\n- aircraft-carrier\n")

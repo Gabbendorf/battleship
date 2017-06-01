@@ -3,23 +3,21 @@ class ShipsList
   attr_reader :ships
 
   def initialize
-    @ships = {1 => 2,
-              2 => 2,
-              3 => 1,
-              4 => 1}
+    @ships = {"submarine" => 2,
+              "destroyer" => 2,
+              "cruiser" => 1,
+              "aircraft-carrier" => 1}
   end
 
-  def delete_selected_ship(number)
-    if @ships[number] != 0
-      @ships[number] -= 1
+  def delete_selected_ship(ship_name)
+    if @ships[ship_name] != 0
+      @ships[ship_name] -= 1
     end
-    if @ships[number] == 0
-      @ships.delete(number)
+    if @ships[ship_name] == 0
+      @ships.delete(ship_name)
     end
     @ships
   end
-
-  public
 
   def convert_number_to_name(number)
     case number
