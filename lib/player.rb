@@ -11,6 +11,14 @@ class Player
     @grid.place_ship(x,y,ship_from_name(ship_name))
   end
 
+  def attack(cell_position)
+    if !@grid.ship?(cell_position)
+      :water
+    else
+      :hit
+    end
+  end
+
   private
 
   def ship_from_name(ship_name)
