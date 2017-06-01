@@ -17,22 +17,22 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid
-    grid = "  "
-    (1..10).each {|column| grid << column.to_s + "   "}
-    grid << "\n"
-    dots = " .  " * 10
-    (1..10).each {|raw| grid << raw.to_s + dots + "\n"}
-    @stdout.puts grid
-  end
+  # def display_grid
+  #   grid = "  "
+  #   (1..10).each {|column| grid << column.to_s + "   "}
+  #   grid << "\n"
+  #   dots = " .  " * 10
+  #   (1..10).each {|raw| grid << raw.to_s + dots + "\n"}
+  #   @stdout.puts grid
+  # end
 
   def invite_to_select_ship(player1)
     @stdout.puts "#{player1}, choose a ship to place:"
   end
 
-  def print_list_of_ships
-    @grid.list_of_ships.keys.each {|ship| @stdout.puts "- " + ship}
-  end
+  # def print_list_of_ships
+  #   @grid.list_of_ships.keys.each {|ship| @stdout.puts "- " + ship}
+  # end
 
   def selected_ship
     @stdin.gets.chomp

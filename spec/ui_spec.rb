@@ -24,7 +24,7 @@ RSpec.describe Ui do
     expect(input.string).to include("Gabriella")
   end
 
-  it "displays the grid" do
+  xit "displays the grid" do
     ui.display_grid
 
     expect(output.string).to include("  1  2  3  4  5  6  7  8  9  10  \n1 .  .  .  .  .  .  .  .  .  .  \n2 .  .  .  .  .  .  .  .  .  .  \n3 .  .  .  .  .  .  .  .  .  .  \n4 .  .  .  .  .  .  .  .  .  .  \n5 .  .  .  .  .  .  .  .  .  .  \n6 .  .  .  .  .  .  .  .  .  .  \n7 .  .  .  .  .  .  .  .  .  .  \n8 .  .  .  .  .  .  .  .  .  .  \n9 .  .  .  .  .  .  .  .  .  .  \n10")
@@ -36,7 +36,7 @@ RSpec.describe Ui do
     expect(output.string).to include("Gabriella, choose a ship to place:")
   end
 
-  it "prints the list of ships to be placed" do
+  xit "prints the list of ships to be placed" do
     ui.print_list_of_ships
 
     expect(output.string).to include("- submarine\n- destroyer\n- cruise\n- aircraft-carrier\n")
