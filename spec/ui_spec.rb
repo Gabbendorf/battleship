@@ -15,21 +15,25 @@ RSpec.describe Ui do
   end
 
   it "asks for name of player 1" do
+    input = StringIO.new("Gabriella")
+    ui = Ui.new(input,output)
+
     ui.ask_name_player1
 
     expect(output.string).to include("Player 1: enter your name")
+    expect(input.string).to include("Gabriella")
   end
 
   it "displays the grid" do
     ui.display_grid
 
-    expect(output.string).to include("  1  2  3  4  5  6  7  8  9  10  \nA .  .  .  .  .  .  .  .  .  .  \nB .  .  .  .  .  .  .  .  .  .  \nC .  .  .  .  .  .  .  .  .  .  \nD .  .  .  .  .  .  .  .  .  .  \nE .  .  .  .  .  .  .  .  .  .  \nF .  .  .  .  .  .  .  .  .  .  \nG .  .  .  .  .  .  .  .  .  .  \nH .  .  .  .  .  .  .  .  .  .  \nI .  .  .  .  .  .  .  .  .  .  \nJ")
+    expect(output.string).to include("  1  2  3  4  5  6  7  8  9  10  \n1 .  .  .  .  .  .  .  .  .  .  \n2 .  .  .  .  .  .  .  .  .  .  \n3 .  .  .  .  .  .  .  .  .  .  \n4 .  .  .  .  .  .  .  .  .  .  \n5 .  .  .  .  .  .  .  .  .  .  \n6 .  .  .  .  .  .  .  .  .  .  \n7 .  .  .  .  .  .  .  .  .  .  \n8 .  .  .  .  .  .  .  .  .  .  \n9 .  .  .  .  .  .  .  .  .  .  \n10")
   end
 
   it "invites player 1 to choose ship to place" do
-    ui.invite_to_select_ship
+    ui.invite_to_select_ship("Gabriella")
 
-    expect(output.string).to include("Player 1, choose a ship to place:")
+    expect(output.string).to include("Gabriella, choose a ship to place:")
   end
 
   it "prints the list of ships to be placed" do
@@ -50,16 +54,14 @@ RSpec.describe Ui do
   it "asks for coordinates of cell where to place ship" do
     ui.ask_for_coordinates("submarine")
 
-    expect(output.string).to include("Where do you want to place the submarine (number,number)?")
+    expect(output.string).to include("Where do you want to place the submarine (choose 2 coordinates: X,Y)?")
   end
 
   it "registers chosen coordinates where to place ship" do
     input = StringIO.new("1,1")
     ui = Ui.new(input,output)
 
-    ui.coordinates_for_ship
-
-    expect(input.string).to include("1,1")
+    expect(ui.coordinates_for_ship).to eq("1,1")
   end
 
 end
