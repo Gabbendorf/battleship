@@ -36,8 +36,9 @@ class Ui
     end
   end
 
-  def selected_ship_number
-    @stdin.gets.chomp.to_i
+  def selected_ship
+    ship_number = @stdin.gets.chomp.to_i
+    ShipsList.new.convert_number_to_name(ship_number)
   end
 
   def coordinates_and_orientation(ship)

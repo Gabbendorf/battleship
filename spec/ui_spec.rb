@@ -44,13 +44,13 @@ RSpec.describe Ui do
     expect(output.string).to include("1- submarine\n2- destroyer\n3- cruiser\n4- aircraft-carrier\n")
   end
 
-  it "registers number for ship" do
-    input = StringIO.new("submarine")
+  it "registers selected ship" do
+    input = StringIO.new("1")
     ui = Ui.new(input,output)
 
-    ui.selected_ship_number
+    ship = ui.selected_ship
 
-    expect(input.string).to include("submarine")
+    expect(ship).to eq("submarine")
   end
 
   it "asks for coordinates where to place ship and orientation" do

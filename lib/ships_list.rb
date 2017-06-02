@@ -19,7 +19,7 @@ class ShipsList
   end
 
   def convert_number_to_name(number)
-    @ships.keys[number - 1]
+    @ships.keys[number-1]
   end
 
 end

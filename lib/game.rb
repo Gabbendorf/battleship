@@ -23,7 +23,7 @@ class Game
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player_name)
       @ui.print_list_of_ships(@ships_list)
-      ship = @ships_list.convert_number_to_name(@ui.selected_ship_number)
+      ship = @ui.selected_ship
       @ships_list.delete_selected_ship(ship)
       ask_to_choose_coordinates_and_orientation(ship)
     end
