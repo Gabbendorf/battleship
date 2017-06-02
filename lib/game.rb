@@ -15,11 +15,11 @@ class Game
   def start
     @ui.welcome
     name = @ui.ask_name_player1
-    ask_to_place_ships_on_grid(name)
+    place_ships_on_grid(name)
     print_ships_placed
   end
 
-  def ask_to_place_ships_on_grid(player_name)
+  def place_ships_on_grid(player_name)
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player_name)
       @ui.print_list_of_ships(@ships_list)
