@@ -41,7 +41,7 @@ class Ui
   end
 
   def coordinates_and_orientation(ship)
-    @stdout.puts "Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,A,vertical)"
+    @stdout.puts "Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)"
     input = @stdin.gets.chomp.split(",")
     input[0] = input[0].to_i
     input[1] = input[1].capitalize
