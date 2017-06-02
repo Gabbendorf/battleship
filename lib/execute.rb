@@ -20,4 +20,5 @@ while ships_list.ships.size > 0
   ui.display_grid
   coordinates = ui.ask_for_coordinates(ship)
   player1.place_ship(coordinates[0], coordinates[1], ship)
+  puts grid.ships_placed
 end
