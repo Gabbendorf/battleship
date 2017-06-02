@@ -19,16 +19,7 @@ class ShipsList
   end
 
   def convert_number_to_name(number)
-    case number
-    when 1
-      @ships.keys[0]
-    when 2
-      @ships.keys[1]
-    when 3
-      @ships.keys[2]
-    when 4
-      @ships.keys[3]
-    end
+    @ships.keys[number - 1]
   end
 
 end
