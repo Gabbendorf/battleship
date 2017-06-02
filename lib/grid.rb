@@ -1,3 +1,5 @@
+require_relative 'orientation'
+
 class Grid
 
   attr_reader :ships_placed
@@ -6,17 +8,16 @@ class Grid
     @ships_placed = {}
   end
 
-  def mark_ship_positions(x,y,ship)
-    @ships_placed[ship] = occupied_cells(x,y,ship.length)
+  def mark_ship_positions(x, y, ship, orientation)
+    @ships_placed[ship] = occupied_cells(x, y, ship.length, orientation)
   end
 
-  def occupied_cells(x,y, ship_length)
-    occupied_cells = [[x,y]]
-    (ship_length-1).times do
-      x += 1
-      occupied_cells.push([x,y])
+  def occupied_cells(x, y, ship_length, orientation)
+    if orientation == "horizontal"
+      Orientation.new.horizontal_cells(x, y, ship_length)
+    elsif orientation == "vertical"
+      Orientation.new.vertical_cells(x, y, ship_length)
     end
-    occupied_cells
   end
 
   def ship?(position)
