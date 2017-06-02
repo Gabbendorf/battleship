@@ -25,10 +25,10 @@ RSpec.describe Ui do
     expect(player_name).to eq("Gabriella")
   end
 
-  xit "displays the grid" do
+  it "displays the grid" do
     ui.display_grid
 
-    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10  \n1 .   .   .   .   .   .   .   .   .   .  \n2 .   .   .   .   .   .   .   .   .   .  \n3 .   .   .   .   .   .   .   .   .   .  \n4 .   .   .   .   .   .   .   .   .   .  \n5 .   .   .   .   .   .   .   .   .   .  \n6 .   .   .   .   .   .   .   .   .   .  \n7 .   .   .   .   .   .   .   .   .   .  \n8 .   .   .   .   .   .   .   .   .   .  \n9 .   .   .   .   .   .   .   .   .   .  \n10.   .   .   .   .   .   .   .   .   .   \n")
+    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10   \nA .   .   .   .   .   .   .   .   .   .  \nB .   .   .   .   .   .   .   .   .   .  \nC .   .   .   .   .   .   .   .   .   .  \nD .   .   .   .   .   .   .   .   .   .  \nE .   .   .   .   .   .   .   .   .   .  \nF .   .   .   .   .   .   .   .   .   .  \nG .   .   .   .   .   .   .   .   .   .  \nH .   .   .   .   .   .   .   .   .   .  \nI .   .   .   .   .   .   .   .   .   .  \nJ .   .   .   .   .   .   .   .   .   .  \n")
 
   end
 
