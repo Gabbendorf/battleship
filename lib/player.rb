@@ -7,7 +7,7 @@ class Player
   end
 
   def place_ship(x,y,ship_name)
-    @grid.place_ship(x,y,ship_from_name(ship_name))
+    @grid.mark_ship_positions(x,y,ship_from_name(ship_name))
   end
 
   def attack(cell_position)

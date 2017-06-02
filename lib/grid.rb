@@ -6,7 +6,7 @@ class Grid
     @ships_placed = {}
   end
 
-  def place_ship(x,y,ship)
+  def mark_ship_positions(x,y,ship)
     @ships_placed[ship] = occupied_cells(x,y,ship.length)
   end
 
