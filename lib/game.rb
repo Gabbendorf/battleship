@@ -13,26 +13,26 @@ class Game
   end
 
   def start
-    welcome_player
-    prompt_to_place_ships_on_grid
+    @ui.welcome
+    name = @ui.ask_name_player1
+    ask_to_place_ships_on_grid(name)
     print_ships_placed
   end
 
-  def welcome_player
-    @ui.welcome
-  end
-
-  def prompt_to_place_ships_on_grid
-    name = @ui.ask_name_player1
+  def ask_to_place_ships_on_grid(player_name)
     while @ships_list.ships.size > 0
-      @ui.invite_to_select_ship_number(name)
+      @ui.invite_to_select_ship_number(player_name)
       @ui.print_list_of_ships(@ships_list)
       ship = @ships_list.convert_number_to_name(@ui.selected_ship_number)
       @ships_list.delete_selected_ship(ship)
-      @ui.display_grid
-      coordinates_and_orientation = @ui.coordinates_and_orientation(ship)
-      @player1.place_ship(coordinates_and_orientation[0], coordinates_and_orientation[1], ship, coordinates_and_orientation[2])
+      ask_to_choose_coordinates_and_orientation(ship)
     end
+  end
+
+  def ask_to_choose_coordinates_and_orientation(ship)
+    @ui.display_grid
+    coordinates_and_orientation = @ui.coordinates_and_orientation(ship)
+    @player1.place_ship(coordinates_and_orientation[0], coordinates_and_orientation[1], ship, coordinates_and_orientation[2])
   end
 
   def print_ships_placed
