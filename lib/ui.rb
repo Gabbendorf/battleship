@@ -40,8 +40,8 @@ class Ui
     @stdin.gets.chomp.to_i
   end
 
-  def ask_for_coordinates(ship)
-    @stdout.puts "Where do you want to place the #{ship}? (choose 2 coordinates: X,Y)"
+  def coordinates_and_orientation(ship)
+    @stdout.puts "Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,A,vertical)"
     input = @stdin.gets.chomp.split(",")
     input[0] = input[0].to_i
     input[1] = input[1].capitalize

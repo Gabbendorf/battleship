@@ -53,14 +53,14 @@ RSpec.describe Ui do
     expect(input.string).to include("submarine")
   end
 
-  it "asks for coordinates of cell where to place ship" do
-    input = StringIO.new("1,a")
+  it "asks for coordinates where to place ship and orientation" do
+    input = StringIO.new("1,a,vertical")
     ui = Ui.new(input,output)
 
-    coordinates = ui.ask_for_coordinates("submarine")
+    input = ui.coordinates_and_orientation("submarine")
 
-    expect(output.string).to include("Where do you want to place the submarine? (choose 2 coordinates: X,Y)")
-    expect(coordinates).to eq([1, "A"])
+    expect(output.string).to include("Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,A,vertical)")
+    expect(input).to eq([1, "A", "vertical"])
   end
 
 end
