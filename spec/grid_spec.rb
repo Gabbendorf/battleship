@@ -9,9 +9,9 @@ RSpec.describe Grid do
     it "registers submarine with its position in the list of ships placed" do
       submarine = Ship.new("submarine", 1)
 
-      grid.place_ship(5, 5, submarine)
+      grid.place_ship(5, "A", submarine)
 
-      expect(grid.ships_placed).to eq({submarine => [[5, 5]]})
+      expect(grid.ships_placed).to eq({submarine => [[5, "A"]]})
     end
 
     it "registers destroyer with its position in the list of ships placed" do
