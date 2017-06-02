@@ -22,13 +22,10 @@ class Game
     @ui.welcome
   end
 
-  def register_player_name
-    @ui.ask_name_player1
-  end
-
   def prompt_to_place_ships_on_grid
+    name = @ui.ask_name_player1
     while @ships_list.ships.size > 0
-      @ui.invite_to_select_ship_number(register_player_name)
+      @ui.invite_to_select_ship_number(name)
       @ui.print_list_of_ships(@ships_list)
       ship = @ships_list.convert_number_to_name(@ui.selected_ship_number)
       @ships_list.delete_selected_ship(ship)
