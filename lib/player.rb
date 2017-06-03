@@ -1,9 +1,10 @@
-require_relative 'ship'
+require_relative 'create_ship'
 
 class Player
 
   def initialize(grid)
     @grid = grid
+    @create_ship = CreateShip.new
   end
 
   def place_ship(x, y, ship_name, orientation)
@@ -21,16 +22,7 @@ class Player
   private
 
   def ship_from_name(ship_name)
-    case ship_name
-    when "submarine"
-      Ship.new("submarine", 1)
-    when "destroyer"
-      Ship.new("destroyer", 2)
-    when "cruiser"
-      Ship.new("cruiser", 3)
-    when "aircraft-carrier"
-      Ship.new("aircraft-carrier", 4)
-    end
+    @create_ship.ship_from_name(ship_name)
   end
 
 end

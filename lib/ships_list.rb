@@ -18,6 +18,7 @@ class ShipsList
     end
   end
 
+# Need to fix bug
   def convert_number_to_name(number)
     @ships.keys[number-1]
   end
