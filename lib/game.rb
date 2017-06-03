@@ -31,8 +31,13 @@ class Game
 
   def ask_to_choose_coordinates_and_orientation(ship)
     @ui.display_grid
-    coordinates_and_orientation = @ui.coordinates_and_orientation(ship)
-    @player1.place_ship(coordinates_and_orientation[0], coordinates_and_orientation[1], ship, coordinates_and_orientation[2])
+    coordinates_and_orientation = @ui.coordinates_and_orientation
+    @player1.place_ship(
+      coordinates_and_orientation[:x],
+      coordinates_and_orientation[:y],
+      ship,
+      coordinates_and_orientation[:orientation]
+    )
   end
 
   def print_ships_placed

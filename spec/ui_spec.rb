@@ -57,10 +57,10 @@ RSpec.describe Ui do
     input = StringIO.new("1,a,vertical")
     ui = Ui.new(input,output)
 
-    coordinates_and_orientation = ui.coordinates_and_orientation("submarine")
+    coordinates_and_orientation = ui.coordinates_and_orientation
 
     expect(output.string).to include("Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)")
-    expect(coordinates_and_orientation).to eq([1, "A", "vertical"])
+    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => "vertical"})
   end
 
 end

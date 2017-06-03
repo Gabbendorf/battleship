@@ -41,12 +41,10 @@ class Ui
     ShipsList.new.convert_number_to_name(ship_number)
   end
 
-  def coordinates_and_orientation(ship)
+  def coordinates_and_orientation
     @stdout.puts "Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)"
     input = @stdin.gets.chomp.split(",")
-    input[0] = input[0].to_i
-    input[1] = input[1].capitalize
-    input
+    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => input[2]}
   end
 
 end
