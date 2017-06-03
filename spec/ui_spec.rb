@@ -63,4 +63,14 @@ RSpec.describe Ui do
     expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => "vertical"})
   end
 
+  it "asks for name of player 2" do
+    input = StringIO.new("Gabriella")
+    ui = Ui.new(input,output)
+
+    player_name = ui.ask_name_player2
+
+    expect(output.string).to include("Player 2: enter your name")
+    expect(player_name).to eq("Gabriella")
+  end
+
 end

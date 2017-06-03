@@ -47,4 +47,9 @@ class Ui
     {:x => input[0].to_i, :y => input[1].capitalize, :orientation => input[2]}
   end
 
+  def ask_name_player2
+    @stdout.puts "Player 2: enter your name"
+    @stdin.gets.chomp
+  end
+
 end
