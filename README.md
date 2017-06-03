@@ -10,3 +10,17 @@ Once the ships have been placed, the other player selects the cells on the grid 
 * Destroyer: size 2 cells, x 2.
 * Cruiser: size 3 cells, x 1.
 * Aircraft-carrier: size 4, x 1.
+
+### How to run the tests from terminal:
+
+From main directory: `rspec spec` to run all tests inside `spec` directory
+
+From `spec` directory: `rspec <file_name_spec.rb>`
+
+### How to include color when running the tests:
+
+To add color from the command line: `rspec spec --color`
+
+### How to run the game from terminal
+
+From `lib` directory: `ruby execute.rb`
