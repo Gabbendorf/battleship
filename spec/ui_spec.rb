@@ -73,4 +73,10 @@ RSpec.describe Ui do
     expect(player_name).to eq("Gabriella")
   end
 
+  it "declares a winner" do
+    ui.declare_winner
+
+    expect(output.string).to include("Congratulations: YOU WON!")
+  end
+
 end

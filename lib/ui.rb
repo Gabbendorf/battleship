@@ -52,4 +52,8 @@ class Ui
     @stdin.gets.chomp
   end
 
+  def declare_winner
+    @stdout.puts "Congratulations: YOU WON!"
+  end
+
 end
