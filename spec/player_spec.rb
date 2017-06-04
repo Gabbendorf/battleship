@@ -34,9 +34,13 @@ RSpec.describe Player do
       grid.mark_ship_positions(5, "B", destroyer, "horizontal")
       cell_to_attack = [5, "B"]
 
+      cell_hit = destroyer.register_cells_hit(cell_to_attack).to_a
+      sunk_ships = grid.add_sunk_ship(destroyer)
       result = player.attack(cell_to_attack)
 
       expect(result).to eq(:hit)
+      expect(cell_hit).to eq([[5, "B"]])
+      expect(sunk_ships).to eq(nil)
     end
   end
 
