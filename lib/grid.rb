@@ -36,9 +36,9 @@ class Grid
     nil
   end
 
-  def add_ship_sunk(ship)
+  def add_sunk_ship(ship)
     if ship.sunk?
-      @ships_sunk.add(ship)
+      @ships_sunk.push(ship)
     end
   end
 

@@ -87,12 +87,12 @@ RSpec.describe Grid do
     it "adds a sunk ship in a list" do
       submarine = Ship.new("submarine", 1)
       grid.mark_ship_positions(1, "G", submarine, "vertical")
-      # player.attack([1, "G"])
       submarine.register_cells_hit([1, "G"])
+      sunk_submarine = grid.ships_placed.keys[0]
 
-      grid.add_ship_sunk(submarine)
+      grid.add_sunk_ship(sunk_submarine)
 
-      expect(grid.ships_sunk).to eq(submarine)
+      expect(grid.ships_sunk).to eq([sunk_submarine])
     end
 
     xit "returns :winner if all ships are sunk" do

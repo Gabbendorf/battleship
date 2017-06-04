@@ -4,7 +4,7 @@ RSpec.describe Ship do
 
   let(:grid) {Grid.new}
 
-  it "knows its position in grid" do
+  xit "knows its position in grid" do
     cruiser = Ship.new("cruiser", 3)
 
     grid.mark_ship_positions(5, "B", cruiser, "vertical")
