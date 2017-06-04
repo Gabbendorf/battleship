@@ -99,13 +99,24 @@ RSpec.describe Grid do
     expect(grid.ships_sunk).to eq([sunk_submarine])
   end
 
-  it "returns :winner if all ships are sunk" do
+  it "returns true if all ships are sunk" do
     sunk_submarine = set_up_sunk_submarine
     grid.add_sunk_ship(sunk_submarine)
 
     verdict = grid.end_game?
 
     expect(verdict).to eq(true)
+  end
+
+  it "returns false if not all ships are sunk" do
+    sunk_submarine = set_up_sunk_submarine
+    grid.add_sunk_ship(sunk_submarine)
+    submarine2 = Ship.new("submarine", 1)
+    grid.mark_ship_positions(2, "G", submarine2, "vertical")
+
+    verdict = grid.end_game?
+
+    expect(verdict).to eq(false)
   end
 
 end
