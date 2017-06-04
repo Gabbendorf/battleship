@@ -22,8 +22,8 @@ class Ship
     @cells_hit_set.to_a
   end
 
-  def sunk?(grid)
-    occupied_cells(grid).length == @cells_hit_set.length
+  def sunk?
+    @cells_hit_set.length == @length
   end
 
 end

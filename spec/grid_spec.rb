@@ -4,6 +4,7 @@ RSpec.describe Grid do
 
   let(:grid) {Grid.new}
   let(:game) {Game.new(grid)}
+  let(:player) {Player.new(grid)}
 
   describe "registers positions of all ships placed" do
     it "registers submarine with its position in the list of ships placed" do
@@ -68,7 +69,7 @@ RSpec.describe Grid do
     end
 
     it "returns nil if there is no ship on a position" do
-      aircraft_carrier = Ship.new("aircraft-carrier",4)
+      aircraft_carrier = Ship.new("aircraft-carrier", 4)
 
       grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
       ship = grid.ship_on([4, "C"])
@@ -82,5 +83,26 @@ RSpec.describe Grid do
       expect(ship).to eq(nil)
     end
   end
+
+    it "adds a sunk ship in a list" do
+      submarine = Ship.new("submarine", 1)
+      grid.mark_ship_positions(1, "G", submarine, "vertical")
+      # player.attack([1, "G"])
+      submarine.register_cells_hit([1, "G"])
+
+      grid.add_ship_sunk(submarine)
+
+      expect(grid.ships_sunk).to eq(submarine)
+    end
+
+    xit "returns :winner if all ships are sunk" do
+      aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
+      ship_sunk = grid.ships_placed.keys[0]
+
+      verdict = grid.declare_winner
+
+      expect(verdict).to eq(:winner)
+    end
 
 end

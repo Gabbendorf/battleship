@@ -33,7 +33,7 @@ RSpec.describe Ship do
     destroyer.register_cells_hit(attacked_cell1)
     destroyer.register_cells_hit(attacked_cell2)
 
-    expect(destroyer.sunk?(grid)).to eq(true)
+    expect(destroyer.sunk?).to eq(true)
   end
 
   it "returns false if it is not sunk" do
@@ -43,7 +43,7 @@ RSpec.describe Ship do
 
     destroyer.register_cells_hit(attacked_cell1)
 
-    expect(destroyer.sunk?(grid)).to eq(false)
+    expect(destroyer.sunk?).to eq(false)
   end
 
   it "cannot register multiple times same cell hit" do

@@ -1,11 +1,13 @@
 require_relative 'orientation'
+require_relative 'ship'
 
 class Grid
 
-  attr_reader :ships_placed
+  attr_reader :ships_placed, :ships_sunk
 
   def initialize
     @ships_placed = {}
+    @ships_sunk = []
   end
 
   def mark_ship_positions(x, y, ship, orientation)
@@ -33,5 +35,17 @@ class Grid
     end
     nil
   end
+
+  def add_ship_sunk(ship)
+    if ship.sunk?
+      @ships_sunk.add(ship)
+    end
+  end
+
+  # def declare_winner
+  #   if @ships_placed.length == @ships_sunk
+  #     :winner
+  #   end
+  # end
 
 end
