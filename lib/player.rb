@@ -12,10 +12,10 @@ class Player
   end
 
   def attack(cell_position)
-    if !@grid.ship?(cell_position)
-      :water
-    else
-      :hit
+    if @grid.ship?(cell_position)
+    #   :water
+    # else
+    #   :hit
     end
   end
 

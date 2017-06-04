@@ -25,4 +25,12 @@ class Grid
      all_occupied_cells.include?(position)
   end
 
+  def ship_on(position)
+    @ships_placed.each do |key, value|
+      if value.include?(position)
+        return key
+      end
+    end
+  end
+
 end

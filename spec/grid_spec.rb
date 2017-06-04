@@ -57,4 +57,13 @@ RSpec.describe Grid do
     end
   end
 
+  it "returns the ship that occupies a position" do
+    aircraft_carrier = Ship.new("aircraft-carrier", 4)
+
+    grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
+    ship = grid.ship_on([4, "B"])
+
+    expect(ship.name).to eq("aircraft-carrier")
+  end
+
 end

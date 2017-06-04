@@ -10,14 +10,14 @@ class Ship
     @cells_hit_set = Set.new
   end
 
-  def hit?(attacked_cell,grid)
-    occupied_cells(grid).include?(attacked_cell)
-  end
+  # def hit?(attacked_cell, grid)
+  #   occupied_cells(grid).include?(attacked_cell)
+  # end
 
-  def register_cells_hit(attacked_cell,grid)
-    if hit?(attacked_cell,grid)
+  def register_cells_hit(attacked_cell)
+    # if hit?(attacked_cell,grid)
       @cells_hit_set.add(attacked_cell)
-    end
+    # end
   end
 
   def occupied_cells(grid)
