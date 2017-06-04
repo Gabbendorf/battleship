@@ -73,6 +73,16 @@ RSpec.describe Ui do
     expect(player_name).to eq("Gabriella")
   end
 
+  it "asks for coordinates x,y to attack" do
+    input = StringIO.new("1,a")
+    ui = Ui.new(input,output)
+
+    cell_to_attack = ui.cell_to_attack("Gabriella")
+
+    expect(output.string).to include("Gabriella, where do you want to attack (ex. 3,b)?")
+    expect(cell_to_attack).to eq([1, "A"])
+  end
+
   it "declares a winner" do
     ui.declare_winner
 

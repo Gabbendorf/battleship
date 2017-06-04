@@ -52,6 +52,12 @@ class Ui
     @stdin.gets.chomp
   end
 
+  def cell_to_attack(player_name)
+    @stdout.puts "#{player_name}, where do you want to attack (ex. 3,b)?"
+    input = @stdin.gets.chomp.split(",")
+    [input[0].to_i, input[1].capitalize]
+  end
+
   def declare_winner
     @stdout.puts "Congratulations: YOU WON!"
   end
