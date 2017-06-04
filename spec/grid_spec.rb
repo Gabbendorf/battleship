@@ -84,27 +84,28 @@ RSpec.describe Grid do
     end
   end
 
-    it "adds a sunk ship in a list" do
-      submarine = Ship.new("submarine", 1)
-      grid.mark_ship_positions(1, "G", submarine, "vertical")
-      submarine.register_cells_hit([1, "G"])
-      sunk_submarine = grid.ships_placed.keys[0]
+  def set_up_sunk_submarine
+    submarine = Ship.new("submarine", 1)
+    grid.mark_ship_positions(1, "G", submarine, "vertical")
+    submarine.register_cells_hit([1, "G"])
+    grid.ships_placed.keys[0]
+  end
 
-      grid.add_sunk_ship(sunk_submarine)
+  it "adds a sunk ship in a list" do
+    sunk_submarine = set_up_sunk_submarine
 
-      expect(grid.ships_sunk).to eq([sunk_submarine])
-    end
+    grid.add_sunk_ship(sunk_submarine)
 
-    it "returns :winner if all ships are sunk" do
-      submarine = Ship.new("submarine", 1)
-      grid.mark_ship_positions(1, "G", submarine, "vertical")
-      submarine.register_cells_hit([1, "G"])
-      sunk_submarine = grid.ships_placed.keys[0]
-      grid.add_sunk_ship(sunk_submarine)
+    expect(grid.ships_sunk).to eq([sunk_submarine])
+  end
 
-      verdict = grid.declare_winner
+  it "returns :winner if all ships are sunk" do
+    sunk_submarine = set_up_sunk_submarine
+    grid.add_sunk_ship(sunk_submarine)
 
-      expect(verdict).to eq(:winner)
-    end
+    verdict = grid.declare_winner
+
+    expect(verdict).to eq(:winner)
+  end
 
 end
