@@ -14,15 +14,22 @@ class Player
 
   def attack(cell_position)
     ship = @grid.ship_on(cell_position)
-    if ship != nil
-      ship.register_cells_hit(cell_position)
-      :hit
-    else
-      :water
-    end
+    ship != nil ? hit(cell_position, ship) : :water
   end
 
   private
+
+  def hit(cell_position, ship)
+    ship.register_cells_hit(cell_position)
+    update_sunk_ships_list(ship)
+    :hit
+  end
+
+  def update_sunk_ships_list(ship)
+    if ship.sunk?
+      @grid.add_sunk_ship(ship)
+    end
+  end
 
   def ship_from_name(ship_name)
     @create_ship.ship_from_name(ship_name)
