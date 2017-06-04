@@ -42,7 +42,7 @@ class Grid
     end
   end
 
-  def declare_winner
+  def end_game
     if @ships_placed.length == @ships_sunk.length
       :winner
     end

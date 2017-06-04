@@ -103,7 +103,7 @@ RSpec.describe Grid do
     sunk_submarine = set_up_sunk_submarine
     grid.add_sunk_ship(sunk_submarine)
 
-    verdict = grid.declare_winner
+    verdict = grid.end_game
 
     expect(verdict).to eq(:winner)
   end
