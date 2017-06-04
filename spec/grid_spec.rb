@@ -57,13 +57,30 @@ RSpec.describe Grid do
     end
   end
 
-  it "returns the ship that occupies a position" do
-    aircraft_carrier = Ship.new("aircraft-carrier", 4)
+  describe "looks for the ship that occupies a position" do
+    it "returns the ship that occupies a position" do
+      aircraft_carrier = Ship.new("aircraft-carrier", 4)
 
-    grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
-    ship = grid.ship_on([4, "B"])
+      grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
+      ship = grid.ship_on([4, "B"])
 
-    expect(ship.name).to eq("aircraft-carrier")
+      expect(ship.name).to eq("aircraft-carrier")
+    end
+
+    it "returns nil if there is no ship on a position" do
+      aircraft_carrier = Ship.new("aircraft-carrier",4)
+
+      grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
+      ship = grid.ship_on([4, "C"])
+
+      expect(ship).to eq(nil)
+    end
+
+    it "returns nil if there are no ships in the list" do
+      ship = grid.ship_on([4, "C"])
+
+      expect(ship).to eq(nil)
+    end
   end
 
 end

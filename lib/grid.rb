@@ -31,6 +31,7 @@ class Grid
         return key
       end
     end
+    nil
   end
 
 end
