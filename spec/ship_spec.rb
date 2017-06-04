@@ -12,24 +12,6 @@ RSpec.describe Ship do
     expect(cruiser.occupied_cells(grid)).to eq([[5, "B"], [5, "C"], [5, "D"]])
   end
 
-  xit "returns true if it is hit" do
-    cruiser = Ship.new("cruiser", 3)
-    attacked_cell = [7, "B"]
-
-    grid.mark_ship_positions(5, "B", cruiser, "horizontal")
-
-    expect(cruiser.hit?(attacked_cell, grid)).to eq(true)
-  end
-
-  xit "returns false if it is not hit" do
-    cruiser = Ship.new("cruiser", 3)
-    attacked_cell = [7, "B"]
-
-    grid.mark_ship_positions(5, "A", cruiser, "vertical")
-
-    expect(cruiser.hit?(attacked_cell, grid)).to eq(false)
-  end
-
   it "keeps track of its cells hit" do
     aircraft_carrier = Ship.new("aircraft-carrier", 4)
     grid.mark_ship_positions(2, "B", aircraft_carrier, "vertical")
@@ -40,26 +22,26 @@ RSpec.describe Ship do
     expect(aircraft_carrier.cells_hit).to eq([[2, "D"]])
   end
 
-  xit "returns true if it is sunk" do
+  it "returns true if it is sunk" do
     destroyer = Ship.new("destroyer", 2)
     grid.mark_ship_positions(5, "B", destroyer, "horizontal")
     attacked_cell1 = [5, "B"]
     attacked_cell2 = [6, "B"]
 
-    destroyer.register_cells_hit(attacked_cell1, grid)
-    destroyer.register_cells_hit(attacked_cell2, grid)
+    destroyer.register_cells_hit(attacked_cell1)
+    destroyer.register_cells_hit(attacked_cell2)
 
     expect(destroyer.sunk?).to eq(true)
   end
 
-  xit "returns false if it is not sunk" do
+  it "returns false if it is not sunk" do
     destroyer = Ship.new("destroyer", 2)
     grid.mark_ship_positions(5, "B", destroyer, "horizontal")
     attacked_cell1 = [5, "B"]
     attacked_cell2 = [7, "B"]
 
-    destroyer.register_cells_hit(attacked_cell1, grid)
-    destroyer.register_cells_hit(attacked_cell2, grid)
+    destroyer.register_cells_hit(attacked_cell1)
+    destroyer.register_cells_hit(attacked_cell2)
 
     expect(destroyer.sunk?).to eq(false)
   end
@@ -70,9 +52,9 @@ RSpec.describe Ship do
     attacked_cell1 = [5,"B"]
     attacked_cell2 = [7,"B"]
 
-    destroyer.register_cells_hit(attacked_cell1, grid)
-    destroyer.register_cells_hit(attacked_cell1, grid)
-    destroyer.register_cells_hit(attacked_cell2, grid)
+    destroyer.register_cells_hit(attacked_cell1)
+    destroyer.register_cells_hit(attacked_cell1)
+    destroyer.register_cells_hit(attacked_cell2)
 
     expect(destroyer.sunk?).to eq(false)
   end
