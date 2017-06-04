@@ -95,10 +95,12 @@ RSpec.describe Grid do
       expect(grid.ships_sunk).to eq([sunk_submarine])
     end
 
-    xit "returns :winner if all ships are sunk" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      grid.mark_ship_positions(2, "B", aircraft_carrier, "horizontal")
-      ship_sunk = grid.ships_placed.keys[0]
+    it "returns :winner if all ships are sunk" do
+      submarine = Ship.new("submarine", 1)
+      grid.mark_ship_positions(1, "G", submarine, "vertical")
+      submarine.register_cells_hit([1, "G"])
+      sunk_submarine = grid.ships_placed.keys[0]
+      grid.add_sunk_ship(sunk_submarine)
 
       verdict = grid.declare_winner
 
