@@ -1,4 +1,5 @@
 require_relative '../lib/player'
+require_relative '../lib/ship'
 
 RSpec.describe Player do
 
@@ -19,8 +20,9 @@ RSpec.describe Player do
   end
 
   describe "selects cell to attack from grid" do
-    xit "returns :water if cell attacked is empty" do
-      grid.mark_ship_positions(5, "B", "destroyer", "vertical")
+    it "returns :water if cell attacked is empty" do
+      destroyer = Ship.new("destroyer", 2)
+      grid.mark_ship_positions(5, "B", destroyer, "vertical")
       cell_to_attack = [8, "B"]
 
       result = player.attack(cell_to_attack)
@@ -28,8 +30,9 @@ RSpec.describe Player do
       expect(result).to eq(:water)
     end
 
-    xit "returns :hit if cell attacked is occupied" do
-      grid.mark_ship_positions(5, "B", "destroyer", "horizontal")
+    it "returns :hit if cell attacked is occupied" do
+      destroyer = Ship.new("destroyer", 2)
+      grid.mark_ship_positions(5, "B", destroyer, "horizontal")
       cell_to_attack = [5, "B"]
 
       result = player.attack(cell_to_attack)

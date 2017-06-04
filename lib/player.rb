@@ -1,4 +1,5 @@
 require_relative 'create_ship'
+require_relative 'ship'
 
 class Player
 
@@ -12,10 +13,12 @@ class Player
   end
 
   def attack(cell_position)
-    if @grid.ship?(cell_position)
-    #   :water
-    # else
-    #   :hit
+    ship = @grid.ship_on(cell_position)
+    if ship != nil
+      ship.register_cells_hit(cell_position)
+      :hit
+    else
+      :water
     end
   end
 
