@@ -4,6 +4,7 @@ class Ui
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
+    @create_grid = CreateGrid.new
   end
 
   def welcome
@@ -16,18 +17,7 @@ class Ui
   end
 
   def display_grid(cells)
-    @stdout.puts """       1  2  3  4  5  6  7  8  9  10
-    A  #{cells}
-    B  #{cells}
-    C  #{cells}
-    D  #{cells}
-    E  #{cells}
-    F  #{cells}
-    G  #{cells}
-    H  #{cells}
-    I  #{cells}
-    J  #{cells}
-    """
+    @stdout.puts @create_grid.grid(cells)
   end
 
   def invite_to_select_ship_number(player1)
