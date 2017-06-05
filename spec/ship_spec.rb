@@ -4,14 +4,6 @@ RSpec.describe Ship do
 
   let(:grid) {Grid.new}
 
-  xit "knows its position in grid" do
-    cruiser = Ship.new("cruiser", 3)
-
-    grid.mark_ship_positions(5, "B", cruiser, "vertical")
-
-    expect(cruiser.occupied_cells(grid)).to eq([[5, "B"], [5, "C"], [5, "D"]])
-  end
-
   it "keeps track of its cells hit" do
     aircraft_carrier = Ship.new("aircraft-carrier", 4)
     grid.mark_ship_positions(2, "B", aircraft_carrier, "vertical")

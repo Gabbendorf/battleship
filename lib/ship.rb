@@ -14,10 +14,6 @@ class Ship
     @cells_hit_set.add(attacked_cell)
   end
 
-  # def occupied_cells(grid)
-  #   grid.ships_placed[self]
-  # end
-
   def cells_hit
     @cells_hit_set.to_a
   end
