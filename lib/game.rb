@@ -25,11 +25,11 @@ class Game
       @ui.print_list_of_ships(@ships_list)
       ship = @ui.selected_ship
       @ships_list.delete_selected_ship(ship)
-      ask_to_choose_coordinates_and_orientation(ship)
+      coordinates_and_orientation_for(ship)
     end
   end
 
-  def ask_to_choose_coordinates_and_orientation(ship)
+  def coordinates_and_orientation_for(ship)
     @ui.display_grid
     coordinates_and_orientation = @ui.coordinates_and_orientation
     @player1.place_ship(
