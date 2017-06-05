@@ -15,13 +15,19 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid
-    grid = "  "
-    (1..10).each {|column| grid << column.to_s + "   "}
-    grid << "\n"
-    dots = " .  " * 10
-    ("A".."J").each {|raw| grid << raw.to_s + dots + "\n"}
-    @stdout.puts grid
+  def display_grid(cells)
+    @stdout.puts """       1  2  3  4  5  6  7  8  9  10
+    A  #{cells}
+    B  #{cells}
+    C  #{cells}
+    D  #{cells}
+    E  #{cells}
+    F  #{cells}
+    G  #{cells}
+    H  #{cells}
+    I  #{cells}
+    J  #{cells}
+    """
   end
 
   def invite_to_select_ship_number(player1)

@@ -26,9 +26,11 @@ RSpec.describe Ui do
   end
 
   it "displays the grid" do
-    ui.display_grid
+    cells = [".  .  .  .  .  .  .  .  .  ."]
 
-    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10   \nA .   .   .   .   .   .   .   .   .   .  \nB .   .   .   .   .   .   .   .   .   .  \nC .   .   .   .   .   .   .   .   .   .  \nD .   .   .   .   .   .   .   .   .   .  \nE .   .   .   .   .   .   .   .   .   .  \nF .   .   .   .   .   .   .   .   .   .  \nG .   .   .   .   .   .   .   .   .   .  \nH .   .   .   .   .   .   .   .   .   .  \nI .   .   .   .   .   .   .   .   .   .  \nJ .   .   .   .   .   .   .   .   .   .  \n")
+    ui.display_grid(cells)
+
+    expect(output.string).to include("       1  2  3  4  5  6  7  8  9  10\n")
 
   end
 
