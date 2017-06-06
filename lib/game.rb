@@ -37,16 +37,20 @@ class Game
       @ui.display_grid
       cell_to_attack = @ui.cell_to_attack(attacker)
       result = @player1.attack(cell_to_attack)
-      if result == :hit
-        @grid_display.hit(cell_to_attack)
-      elsif result == :water
-        @grid_display.water(cell_to_attack)
-      end
+      hit_or_water(result)
     end
     @ui.declare_winner
   end
 
   private
+
+  def hit_or_water(result)
+    if result == :hit
+      @grid_display.hit(cell_to_attack)
+    elsif result == :water
+      @grid_display.water(cell_to_attack)
+    end
+  end
 
   def coordinates_and_orientation_for(ship)
     @ui.display_grid

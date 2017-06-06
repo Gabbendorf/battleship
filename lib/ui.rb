@@ -54,8 +54,8 @@ class Ui
     [input[0].to_i, input[1].capitalize]
   end
 
-  def declare_winner
-    @stdout.puts "Congratulations: YOU WON!"
+  def declare_winner(player_name)
+    @stdout.puts "Congratulations #{player_name}: YOU WON!"
   end
 
 end

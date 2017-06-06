@@ -86,9 +86,9 @@ RSpec.describe Ui do
   end
 
   it "declares a winner" do
-    ui.declare_winner
+    ui.declare_winner("Nic")
 
-    expect(output.string).to include("Congratulations: YOU WON!")
+    expect(output.string).to include("Congratulations Nic: YOU WON!")
   end
 
 end
