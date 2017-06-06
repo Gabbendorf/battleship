@@ -3,6 +3,7 @@ require_relative 'grid'
 require_relative 'player'
 require_relative 'ships_list'
 require_relative 'grid_display'
+require_relative 'ship'
 
 class Game
 
@@ -37,19 +38,19 @@ class Game
       @ui.display_grid
       cell_to_attack = @ui.cell_to_attack(attacker)
       result = @player1.attack(cell_to_attack)
-      hit_or_water(result)
+      hit_or_water(result, cell_to_attack)
     end
-    @ui.declare_winner
+    @ui.declare_winner(attacker)
   end
 
   private
 
-  def hit_or_water(result)
+  def hit_or_water(result, cell_to_attack)
     if result == :hit
       @grid_display.hit(cell_to_attack)
       hit_ship = @grid.ship_on(cell_to_attack)
         if hit_ship.sunk?
-          :sunk
+          @grid_display.sunk(hit_ship.positions)  #=> need method for ship that returns its position
         end
     elsif result == :water
       @grid_display.water(cell_to_attack)
