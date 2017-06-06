@@ -41,9 +41,9 @@ class Grid
   private
 
   def occupied_cells(x, y, ship_length, orientation)
-    if orientation == "horizontal"
+    if orientation == "h"
       Orientation.new.horizontal_cells(x, y, ship_length)
-    elsif orientation == "vertical"
+    elsif orientation == "v"
       Orientation.new.vertical_cells(x, y, ship_length)
     end
   end

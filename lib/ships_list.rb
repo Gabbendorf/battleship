@@ -6,7 +6,8 @@ class ShipsList
     @ships = {"submarine" => 2,
               "destroyer" => 2,
               "cruiser" => 1,
-              "aircraft-carrier" => 1}
+              "aircraft-carrier" => 1
+            }
   end
 
   def delete_selected_ship(ship_name)

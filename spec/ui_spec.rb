@@ -26,11 +26,9 @@ RSpec.describe Ui do
   end
 
   it "displays the grid" do
-    cells = [".  .  .  .  .  .  .  .  .  ."]
+    ui.display_grid
 
-    ui.display_grid(cells)
-
-    expect(output.string).to include("       1  2  3  4  5  6  7  8  9  10\n")
+    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10   \n")
 
   end
 
@@ -56,13 +54,13 @@ RSpec.describe Ui do
   end
 
   it "asks for coordinates where to place ship and orientation" do
-    input = StringIO.new("1,a,vertical")
+    input = StringIO.new("1,a,v")
     ui = Ui.new(input,output)
 
     coordinates_and_orientation = ui.coordinates_and_orientation
 
-    expect(output.string).to include("Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)")
-    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => "vertical"})
+    expect(output.string).to include("Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)")
+    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => "v"})
   end
 
   it "asks for name of player 2" do

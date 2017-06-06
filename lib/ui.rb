@@ -4,7 +4,6 @@ class Ui
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
-    @create_grid = CreateGrid.new
   end
 
   def welcome
@@ -16,8 +15,13 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid(cells)
-    @stdout.puts @create_grid.grid(cells)
+  def display_grid
+    grid = "  "
+    (1..10).each {|column| grid << column.to_s + "   "}
+    grid << "\n"
+    dots = " .  " * 10
+    ("A".."J").each {|raw| grid << raw.to_s + dots + "\n"}
+    @stdout.puts grid
   end
 
   def invite_to_select_ship_number(player1)
@@ -38,7 +42,7 @@ class Ui
   end
 
   def coordinates_and_orientation
-    @stdout.puts "Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)"
+    @stdout.puts "Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)"
     input = @stdin.gets.chomp.split(",")
     {:x => input[0].to_i, :y => input[1].capitalize, :orientation => input[2]}
   end

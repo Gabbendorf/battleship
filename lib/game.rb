@@ -16,7 +16,8 @@ class Game
     @ui.welcome
     name = @ui.ask_name_player1
     place_ships_on_grid(name)
-    print_ships_placed
+    # print_ships_placed
+    ask_to_attack
   end
 
   def place_ships_on_grid(player_name)
@@ -29,6 +30,23 @@ class Game
     end
   end
 
+  def ask_to_attack
+    attacker = @ui.ask_name_player2
+    while !@grid.end_game?
+      @ui.display_grid
+      cell_to_attack = @ui.cell_to_attack(attacker)
+      result = @player1.attack(cell_to_attack)
+      if result == :hit
+        puts "hit"
+      elsif result == :water
+        puts "missed"
+      end
+    end
+    @ui.declare_winner
+  end
+
+  private
+
   def coordinates_and_orientation_for(ship)
     @ui.display_grid
     coordinates_and_orientation = @ui.coordinates_and_orientation
@@ -40,8 +58,8 @@ class Game
     )
   end
 
-  def print_ships_placed
-    puts @grid.ships_placed
-  end
+  # def print_ships_placed
+  #   puts @grid.ships_placed
+  # end
 
 end
