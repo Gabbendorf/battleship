@@ -28,4 +28,12 @@ RSpec.describe CreateGrid do
      expect(grid_position).to eq("H")
    end
 
+   it "adds H for position [4, c]" do
+     create_grid.hit([4, "C"])
+
+     grid_position = create_grid.grid[3][4]
+
+     expect(grid_position).to eq("H")
+   end
+
 end

@@ -19,15 +19,23 @@ class CreateGrid
   end
 
   def hit(position)
-    if position[1] = "A" && position[0] = 1
-      @grid[1][1] = "H"
-    end
-    if position[1] = "B" && position[0] = 1
-      @grid[2][1] = "H"
-    end
-    if position[1] = "C" && position[0] = 3
-      @grid[3][3] = "H"
-    end
+    @grid[rows[position[1]]][position[0]] = "H"
+  end
+
+  private
+
+  def rows
+    {"A" => 1,
+     "B" => 2,
+     "C" => 3,
+     "D" => 4,
+     "E" => 5,
+     "F" => 6,
+     "G" => 7,
+     "H" => 8,
+     "I" => 9,
+     "J" => 10,
+    }
   end
 
 end
