@@ -30,6 +30,14 @@ class GridDisplay
     @grid[number_of[row]][column] = "W"
   end
 
+  def sunk(ship_position)
+    ship_position.each do |position|
+      row = position[1]
+      column = position[0]
+      @grid[number_of[row]][column] = "S"
+    end
+  end
+
   private
 
   def number_of

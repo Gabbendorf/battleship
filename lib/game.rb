@@ -47,6 +47,10 @@ class Game
   def hit_or_water(result)
     if result == :hit
       @grid_display.hit(cell_to_attack)
+      hit_ship = @grid.ship_on(cell_to_attack)
+        if hit_ship.sunk?
+          :sunk
+        end
     elsif result == :water
       @grid_display.water(cell_to_attack)
     end
