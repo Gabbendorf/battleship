@@ -40,6 +40,7 @@ class Game
       result = @player1.attack(cell_to_attack)
       hit_or_water(result, cell_to_attack)
     end
+    @ui.display_grid
     @ui.declare_winner(attacker)
   end
 
@@ -50,7 +51,8 @@ class Game
       @grid_display.hit(cell_to_attack)
       hit_ship = @grid.ship_on(cell_to_attack)
         if hit_ship.sunk?
-          @grid_display.sunk(hit_ship.positions)  #=> need method for ship that returns its position
+          sunk_ship_positions = hit_ship.occupied_cells(@grid)
+          @grid_display.sunk(sunk_ship_positions)
         end
     elsif result == :water
       @grid_display.water(cell_to_attack)
