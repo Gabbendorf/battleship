@@ -1,5 +1,6 @@
 require_relative '../lib/ui'
 require_relative '../lib/ship'
+require_relative '../lib/grid_display'
 
 RSpec.describe Ui do
 
@@ -29,7 +30,7 @@ RSpec.describe Ui do
   it "displays the grid" do
     ui.display_grid
 
-    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10   \n")
+    expect(output.string).to include("       1   2   3   4   5   6   7   8   9   10   \n   A   .   .   .   .   .   .   .   .   .   .   \n   B   .   .   .   .   .   .   .   .   .   .   \n   C   .   .   .   .   .   .   .   .   .   .   \n   D   .   .   .   .   .   .   .   .   .   .   \n   E   .   .   .   .   .   .   .   .   .   .   \n   F   .   .   .   .   .   .   .   .   .   .   \n   G   .   .   .   .   .   .   .   .   .   .   \n   H   .   .   .   .   .   .   .   .   .   .   \n   I   .   .   .   .   .   .   .   .   .   .   \n   J   .   .   .   .   .   .   .   .   .   .   \n")
 
   end
 

@@ -8,7 +8,7 @@ class Game
 
   def initialize
     @grid_display = GridDisplay.new
-    @ui = Ui.new($stdin, $stdout, @create_grid)
+    @ui = Ui.new($stdin, $stdout, @grid_display)
     @grid = Grid.new
     @player1 = Player.new(@grid)
     @ships_list = ShipsList.new
@@ -18,7 +18,6 @@ class Game
     @ui.welcome
     name = @ui.ask_name_player1
     place_ships_on_grid(name)
-    # print_ships_placed
     ask_to_attack
   end
 
@@ -38,11 +37,11 @@ class Game
       @ui.display_grid
       cell_to_attack = @ui.cell_to_attack(attacker)
       result = @player1.attack(cell_to_attack)
-      if result == :hit
-        puts "hit"
-      elsif result == :water
-        puts "missed"
-      end
+      # if result == :hit
+      #   puts "hit"
+      # elsif result == :water
+      #   puts "missed"
+      # end
     end
     @ui.declare_winner
   end
@@ -59,9 +58,5 @@ class Game
       coordinates_and_orientation[:orientation]
     )
   end
-
-  # def print_ships_placed
-  #   puts @grid.ships_placed
-  # end
 
 end

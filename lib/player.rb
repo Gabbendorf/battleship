@@ -5,6 +5,7 @@ class Player
 
   def initialize(grid)
     @grid = grid
+    @grid_display = GridDisplay.new
     @create_ship = CreateShip.new
   end
 
@@ -14,7 +15,7 @@ class Player
 
   def attack(cell_position)
     ship = @grid.ship_on(cell_position)
-    there?(ship) ? hit(cell_position, ship) : :water
+    there?(ship) ? hit(cell_position, ship) : @grid_display.water(cell_position)
   end
 
   private
@@ -26,7 +27,7 @@ class Player
   def hit(cell_position, ship)
     ship.register_cells_hit(cell_position)
     update_sunk_ships_list(ship)
-    @grid_display.hit
+    @grid_display.hit(cell_position)
   end
 
   def update_sunk_ships_list(ship)
