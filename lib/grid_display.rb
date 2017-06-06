@@ -19,12 +19,14 @@ class GridDisplay
   end
 
   def hit(position)
-    @grid[rows[position[1]]][position[0]] = "H"
+    row = position[1]
+    column = position[0]
+    @grid[number_of[row]][column] = "H"
   end
 
   private
 
-  def rows
+  def number_of
     {"A" => 1,
      "B" => 2,
      "C" => 3,
