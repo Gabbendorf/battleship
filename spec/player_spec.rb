@@ -18,7 +18,7 @@ RSpec.describe Player do
     expect(destroyer_position).to eq([[3, "B"], [3, "C"]])
   end
 
-  xdescribe "selects cell to attack from grid" do
+  describe "selects cell to attack from grid" do
     it "returns :water if cell attacked is empty" do
       destroyer = Ship.new("destroyer", 2)
       grid.mark_ship_positions(5, "B", destroyer, "v")
@@ -29,7 +29,7 @@ RSpec.describe Player do
       expect(result).to eq(:water)
     end
 
-    xit "takes action for when a ship is hit" do
+    it "returns :hit if cell attacked is occupied" do
       destroyer = Ship.new("destroyer", 2)
       grid.mark_ship_positions(5, "B", destroyer, "h")
       cell_to_attack = [5, "B"]

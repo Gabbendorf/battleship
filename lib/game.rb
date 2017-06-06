@@ -37,11 +37,11 @@ class Game
       @ui.display_grid
       cell_to_attack = @ui.cell_to_attack(attacker)
       result = @player1.attack(cell_to_attack)
-      # if result == :hit
-      #   puts "hit"
-      # elsif result == :water
-      #   puts "missed"
-      # end
+      if result == :hit
+        @grid_display.hit(cell_to_attack)
+      elsif result == :water
+        @grid_display.water(cell_to_attack)
+      end
     end
     @ui.declare_winner
   end
