@@ -2,12 +2,12 @@ require_relative 'ui'
 require_relative 'grid'
 require_relative 'player'
 require_relative 'ships_list'
-require_relative 'create_grid'
+require_relative 'grid_display'
 
 class Game
 
   def initialize
-    @create_grid = CreateGrid.new
+    @grid_display = GridDisplay.new
     @ui = Ui.new($stdin, $stdout, @create_grid)
     @grid = Grid.new
     @player1 = Player.new(@grid)

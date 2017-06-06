@@ -24,6 +24,12 @@ class GridDisplay
     @grid[number_of[row]][column] = "H"
   end
 
+  def water(position)
+    row = position[1]
+    column = position[0]
+    @grid[number_of[row]][column] = "W"
+  end
+
   private
 
   def number_of
