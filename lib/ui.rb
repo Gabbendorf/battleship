@@ -1,9 +1,10 @@
 class Ui
 
-  def initialize(stdin,stdout)
+  def initialize(stdin, stdout, create_grid)
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
+    @create_grid = create_grid
   end
 
   def welcome
@@ -16,12 +17,13 @@ class Ui
   end
 
   def display_grid
-    grid = "  "
-    (1..10).each {|column| grid << column.to_s + "   "}
-    grid << "\n"
-    dots = " .  " * 10
-    ("A".."J").each {|raw| grid << raw.to_s + dots + "\n"}
-    @stdout.puts grid
+    @stdout.puts @create_grid.grid.join("   ")
+    # grid = "  "
+    # (1..10).each {|column| grid << column.to_s + "   "}
+    # grid << "\n"
+    # dots = " .  " * 10
+    # ("A".."J").each {|raw| grid << raw.to_s + dots + "\n"}
+    # @stdout.puts grid
   end
 
   def invite_to_select_ship_number(player1)
