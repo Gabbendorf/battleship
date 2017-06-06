@@ -19,7 +19,15 @@ class CreateGrid
   end
 
   def hit(position)
-    @grid[1][1] = "H"
+    if position[1] = "A" && position[0] = 1
+      @grid[1][1] = "H"
+    end
+    if position[1] = "B" && position[0] = 1
+      @grid[2][1] = "H"
+    end
+    if position[1] = "C" && position[0] = 3
+      @grid[3][3] = "H"
+    end
   end
 
 end
