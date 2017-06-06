@@ -3,10 +3,10 @@ require_relative '../lib/ship'
 
 RSpec.describe Ui do
 
-  let(:create_grid) {CreateGrid.new}
+  let(:grid_display) {GridDisplay.new}
   let(:input) {StringIO.new}
   let(:output) {StringIO.new}
-  let(:ui) {Ui.new(input, output, create_grid)}
+  let(:ui) {Ui.new(input, output, grid_display)}
   let(:ship) {Ship.new}
   let(:ships_list) {ShipsList.new}
 
@@ -18,7 +18,7 @@ RSpec.describe Ui do
 
   it "asks for name of player 1" do
     input = StringIO.new("Gabriella")
-    ui = Ui.new(input,output,create_grid)
+    ui = Ui.new(input, output, grid_display)
 
     player_name = ui.ask_name_player1
 
@@ -47,7 +47,7 @@ RSpec.describe Ui do
 
   it "registers selected ship" do
     input = StringIO.new("1")
-    ui = Ui.new(input,output,create_grid)
+    ui = Ui.new(input, output, grid_display)
 
     ship = ui.selected_ship
 
@@ -56,7 +56,7 @@ RSpec.describe Ui do
 
   it "asks for coordinates where to place ship and orientation" do
     input = StringIO.new("1,a,v")
-    ui = Ui.new(input,output,create_grid)
+    ui = Ui.new(input, output, grid_display)
 
     coordinates_and_orientation = ui.coordinates_and_orientation
 
@@ -66,7 +66,7 @@ RSpec.describe Ui do
 
   it "asks for name of player 2" do
     input = StringIO.new("Gabriella")
-    ui = Ui.new(input,output,create_grid)
+    ui = Ui.new(input, output, grid_display)
 
     player_name = ui.ask_name_player2
 
@@ -76,7 +76,7 @@ RSpec.describe Ui do
 
   it "asks for coordinates x,y to attack" do
     input = StringIO.new("1,a")
-    ui = Ui.new(input,output,create_grid)
+    ui = Ui.new(input, output, grid_display)
 
     cell_to_attack = ui.cell_to_attack("Gabriella")
 

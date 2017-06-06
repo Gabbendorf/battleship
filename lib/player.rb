@@ -26,7 +26,7 @@ class Player
   def hit(cell_position, ship)
     ship.register_cells_hit(cell_position)
     update_sunk_ships_list(ship)
-    :hit
+    @grid_display.hit
   end
 
   def update_sunk_ships_list(ship)

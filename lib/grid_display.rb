@@ -1,4 +1,4 @@
-class CreateGrid
+class GridDisplay
 
   attr_reader :grid
 
