@@ -29,7 +29,7 @@ RSpec.describe Ui do
   end
 
   it "displays the grid" do
-    ui.display_grid
+    ui.display_grid(grid_display)
 
     expect(output.string).to include("       1   2   3   4   5   6   7   8   9   10   \n   A   .   .   .   .   .   .   .   .   .   .   \n   B   .   .   .   .   .   .   .   .   .   .   \n   C   .   .   .   .   .   .   .   .   .   .   \n   D   .   .   .   .   .   .   .   .   .   .   \n   E   .   .   .   .   .   .   .   .   .   .   \n   F   .   .   .   .   .   .   .   .   .   .   \n   G   .   .   .   .   .   .   .   .   .   .   \n   H   .   .   .   .   .   .   .   .   .   .   \n   I   .   .   .   .   .   .   .   .   .   .   \n   J   .   .   .   .   .   .   .   .   .   .   \n")
 
@@ -51,7 +51,7 @@ RSpec.describe Ui do
     input = StringIO.new("1")
     ui = Ui.new(input, output, grid_display)
 
-    ship = ui.selected_ship
+    ship = ui.selected_ship(ships_list)
 
     expect(ship).to eq("submarine")
   end

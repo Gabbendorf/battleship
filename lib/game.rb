@@ -22,11 +22,12 @@ class Game
     ask_to_attack
   end
 
+# move to player class?
   def place_ships_on_grid(player_name)
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player_name)
       @ui.print_list_of_ships(@ships_list)
-      ship = @ui.selected_ship
+      ship = @ui.selected_ship(@ships_list)
       @ships_list.delete_selected_ship(ship)
       coordinates_and_orientation_for(ship)
     end
@@ -40,12 +41,13 @@ class Game
       result = @player1.attack(cell_to_attack)
       hit_or_water(result, cell_to_attack)
     end
-    @ui.display_grid
+    @ui.display_grid(@grid_display.hit_or_water)
     @ui.declare_winner(attacker)
   end
 
   private
 
+# move to GridDisplay
   def hit_or_water(result, cell_to_attack)
     if result == :hit
       @grid_display.hit(cell_to_attack)

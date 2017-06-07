@@ -11,7 +11,7 @@ class ShipsList
   end
 
   def delete_selected_ship(ship_name)
-    if @ships[ship_name] > 0
+    if @ships[ship_name] != 0
       @ships[ship_name] -= 1
       if @ships[ship_name] == 0
        @ships.delete(ship_name)

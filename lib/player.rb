@@ -15,12 +15,12 @@ class Player
 
   def attack(cell_position)
     ship = @grid.ship_on(cell_position)
-    there?(ship) ? hit(cell_position, ship) : :water
+    ship_exist?(ship) ? hit(cell_position, ship) : :water
   end
 
   private
 
-  def there?(ship)
+  def ship_exist?(ship)
     ship != nil
   end
 

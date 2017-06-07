@@ -4,7 +4,6 @@ class Ui
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
-    @grid_display = grid_display
   end
 
   def welcome
@@ -16,8 +15,8 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid
-    @stdout.puts @grid_display.grid.join("   ")
+  def display_grid(grid_display)
+    @stdout.puts grid_display.grid.join("   ")
   end
 
   def invite_to_select_ship_number(player1)
@@ -32,9 +31,9 @@ class Ui
     end
   end
 
-  def selected_ship
+  def selected_ship(ships_list)
     ship_number = @stdin.gets.chomp.to_i
-    ShipsList.new.convert_number_to_name(ship_number)
+    ships_list.convert_number_to_name(ship_number)
   end
 
   def coordinates_and_orientation
