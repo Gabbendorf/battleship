@@ -11,15 +11,14 @@ class ShipsList
   end
 
   def delete_selected_ship(ship_name)
-    if @ships[ship_name] != 0
+    if @ships[ship_name] > 0
       @ships[ship_name] -= 1
-    end
-    if @ships[ship_name] == 0
-      @ships.delete(ship_name)
+      if @ships[ship_name] == 0
+       @ships.delete(ship_name)
+      end
     end
   end
 
-# Need to fix bug
   def convert_number_to_name(number)
     @ships.keys[number-1]
   end

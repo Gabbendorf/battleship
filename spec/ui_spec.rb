@@ -1,6 +1,7 @@
 require_relative '../lib/ui'
 require_relative '../lib/ship'
 require_relative '../lib/grid_display'
+require_relative '../lib/ships_list'
 
 RSpec.describe Ui do
 
@@ -37,7 +38,7 @@ RSpec.describe Ui do
   it "invites player 1 to choose number for ship to place" do
     ui.invite_to_select_ship_number("Gabriella")
 
-    expect(output.string).to include("Gabriella, choose a number for type of ship to place:")
+    expect(output.string).to include("Gabriella, choose a number for ship to place:")
   end
 
   it "prints the list of ships to be placed" do

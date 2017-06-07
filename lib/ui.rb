@@ -21,7 +21,7 @@ class Ui
   end
 
   def invite_to_select_ship_number(player1)
-    @stdout.puts "#{player1}, choose a number for type of ship to place:"
+    @stdout.puts "#{player1}, choose a number for ship to place:"
   end
 
   def print_list_of_ships(list)
