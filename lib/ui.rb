@@ -1,6 +1,6 @@
 class Ui
 
-  def initialize(stdin,stdout)
+  def initialize(stdin, stdout, grid_display)
     @stdin = stdin
     @stdout = stdout
     @grid = Grid.new
@@ -15,17 +15,12 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid
-    grid = "  "
-    (1..10).each {|column| grid << column.to_s + "   "}
-    grid << "\n"
-    dots = " .  " * 10
-    ("A".."J").each {|raw| grid << raw.to_s + dots + "\n"}
-    @stdout.puts grid
+  def display_grid(grid_display)
+    @stdout.puts grid_display.grid.join("   ")
   end
 
   def invite_to_select_ship_number(player1)
-    @stdout.puts "#{player1}, choose a number for type of ship to place:"
+    @stdout.puts "#{player1}, choose a number for ship to place:"
   end
 
   def print_list_of_ships(list)
@@ -36,15 +31,35 @@ class Ui
     end
   end
 
-  def selected_ship
+  def selected_ship(ships_list)
     ship_number = @stdin.gets.chomp.to_i
-    ShipsList.new.convert_number_to_name(ship_number)
+    ships_list.convert_number_to_name(ship_number)
   end
 
   def coordinates_and_orientation
-    @stdout.puts "Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)"
+    @stdout.puts "Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)"
     input = @stdin.gets.chomp.split(",")
-    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => input[2]}
+    if input[2] == "v"
+      orientation_symbol = :vertical
+    elsif input[2] == "h"
+      orientation_symbol = :horizontal
+    end
+    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
+  end
+
+  def ask_name_player2
+    @stdout.puts "Player 2: enter your name"
+    @stdin.gets.chomp
+  end
+
+  def cell_to_attack(player_name)
+    @stdout.puts "#{player_name}, where do you want to attack (ex. 3,b)?"
+    input = @stdin.gets.chomp.split(",")
+    [input[0].to_i, input[1].capitalize]
+  end
+
+  def declare_winner(player_name)
+    @stdout.puts "Congratulations #{player_name}: YOU WON!"
   end
 
 end

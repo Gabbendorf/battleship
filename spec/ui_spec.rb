@@ -1,11 +1,14 @@
 require_relative '../lib/ui'
 require_relative '../lib/ship'
+require_relative '../lib/grid_display'
+require_relative '../lib/ships_list'
 
 RSpec.describe Ui do
 
+  let(:grid_display) {GridDisplay.new}
   let(:input) {StringIO.new}
   let(:output) {StringIO.new}
-  let(:ui) {Ui.new(input,output)}
+  let(:ui) {Ui.new(input, output, grid_display)}
   let(:ship) {Ship.new}
   let(:ships_list) {ShipsList.new}
 
@@ -17,7 +20,7 @@ RSpec.describe Ui do
 
   it "asks for name of player 1" do
     input = StringIO.new("Gabriella")
-    ui = Ui.new(input,output)
+    ui = Ui.new(input, output, grid_display)
 
     player_name = ui.ask_name_player1
 
@@ -26,16 +29,16 @@ RSpec.describe Ui do
   end
 
   it "displays the grid" do
-    ui.display_grid
+    ui.display_grid(grid_display)
 
-    expect(output.string).to include("  1   2   3   4   5   6   7   8   9   10   \nA .   .   .   .   .   .   .   .   .   .  \nB .   .   .   .   .   .   .   .   .   .  \nC .   .   .   .   .   .   .   .   .   .  \nD .   .   .   .   .   .   .   .   .   .  \nE .   .   .   .   .   .   .   .   .   .  \nF .   .   .   .   .   .   .   .   .   .  \nG .   .   .   .   .   .   .   .   .   .  \nH .   .   .   .   .   .   .   .   .   .  \nI .   .   .   .   .   .   .   .   .   .  \nJ .   .   .   .   .   .   .   .   .   .  \n")
+    expect(output.string).to include("       1   2   3   4   5   6   7   8   9   10   \n   A   .   .   .   .   .   .   .   .   .   .   \n   B   .   .   .   .   .   .   .   .   .   .   \n   C   .   .   .   .   .   .   .   .   .   .   \n   D   .   .   .   .   .   .   .   .   .   .   \n   E   .   .   .   .   .   .   .   .   .   .   \n   F   .   .   .   .   .   .   .   .   .   .   \n   G   .   .   .   .   .   .   .   .   .   .   \n   H   .   .   .   .   .   .   .   .   .   .   \n   I   .   .   .   .   .   .   .   .   .   .   \n   J   .   .   .   .   .   .   .   .   .   .   \n")
 
   end
 
   it "invites player 1 to choose number for ship to place" do
     ui.invite_to_select_ship_number("Gabriella")
 
-    expect(output.string).to include("Gabriella, choose a number for type of ship to place:")
+    expect(output.string).to include("Gabriella, choose a number for ship to place:")
   end
 
   it "prints the list of ships to be placed" do
@@ -46,21 +49,47 @@ RSpec.describe Ui do
 
   it "registers selected ship" do
     input = StringIO.new("1")
-    ui = Ui.new(input,output)
+    ui = Ui.new(input, output, grid_display)
 
-    ship = ui.selected_ship
+    ship = ui.selected_ship(ships_list)
 
     expect(ship).to eq("submarine")
   end
 
   it "asks for coordinates where to place ship and orientation" do
-    input = StringIO.new("1,a,vertical")
-    ui = Ui.new(input,output)
+    input = StringIO.new("1,a,v")
+    ui = Ui.new(input, output, grid_display)
 
     coordinates_and_orientation = ui.coordinates_and_orientation
 
-    expect(output.string).to include("Choose 2 coordinates X,Y and an orientation 'horizontal' or 'vertical' (ex. 2,b,vertical)")
-    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => "vertical"})
+    expect(output.string).to include("Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)")
+    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => :vertical})
+  end
+
+  it "asks for name of player 2" do
+    input = StringIO.new("Gabriella")
+    ui = Ui.new(input, output, grid_display)
+
+    player_name = ui.ask_name_player2
+
+    expect(output.string).to include("Player 2: enter your name")
+    expect(player_name).to eq("Gabriella")
+  end
+
+  it "asks for coordinates x,y to attack" do
+    input = StringIO.new("1,a")
+    ui = Ui.new(input, output, grid_display)
+
+    cell_to_attack = ui.cell_to_attack("Gabriella")
+
+    expect(output.string).to include("Gabriella, where do you want to attack (ex. 3,b)?")
+    expect(cell_to_attack).to eq([1, "A"])
+  end
+
+  it "declares a winner" do
+    ui.declare_winner("Nic")
+
+    expect(output.string).to include("Congratulations Nic: YOU WON!")
   end
 
 end
