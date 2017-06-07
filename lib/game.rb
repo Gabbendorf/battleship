@@ -36,12 +36,12 @@ class Game
   def ask_to_attack
     attacker = @ui.ask_name_player2
     while !@grid.end_game?
-      @ui.display_grid
+      @ui.display_grid(@grid_display)
       cell_to_attack = @ui.cell_to_attack(attacker)
       result = @player1.attack(cell_to_attack)
       hit_or_water(result, cell_to_attack)
     end
-    @ui.display_grid(@grid_display.hit_or_water)
+    @ui.display_grid(@grid_display) #=> change to (@grid_display.hit_or_water)
     @ui.declare_winner(attacker)
   end
 
@@ -58,7 +58,7 @@ class Game
   end
 
   def coordinates_and_orientation_for(ship)
-    @ui.display_grid
+    @ui.display_grid(@grid_display)
     coordinates_and_orientation = @ui.coordinates_and_orientation
     @player1.place_ship(
       coordinates_and_orientation[:x],

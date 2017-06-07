@@ -39,7 +39,12 @@ class Ui
   def coordinates_and_orientation
     @stdout.puts "Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)"
     input = @stdin.gets.chomp.split(",")
-    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => input[2]}
+    if input[2] == "v"
+      orientation_symbol = :vertical
+    elsif input[2] == "h"
+      orientation_symbol = :horizontal
+    end
+    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
   end
 
   def ask_name_player2

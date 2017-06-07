@@ -6,8 +6,8 @@ RSpec.describe Player do
   let(:player) {Player.new(grid)}
 
   it "places ship on grid" do
-    player.place_ship(2, "A", "submarine", "h")
-    player.place_ship(3, "B", "destroyer", "v")
+    player.place_ship(2, "A", "submarine", :horizontal)
+    player.place_ship(3, "B", "destroyer", :vertical)
 
     submarine = grid.ships_placed.keys[0]
     destroyer = grid.ships_placed.keys[1]
@@ -21,7 +21,7 @@ RSpec.describe Player do
   describe "selects cell to attack from grid" do
     it "returns :water if cell attacked is empty" do
       destroyer = Ship.new("destroyer", 2)
-      grid.mark_ship_positions(5, "B", destroyer, "v")
+      grid.mark_ship_positions(5, "B", destroyer, :vertical)
       cell_to_attack = [8, "B"]
 
       result = player.attack(cell_to_attack)
@@ -31,7 +31,8 @@ RSpec.describe Player do
 
     it "returns :hit if cell attacked is occupied" do
       destroyer = Ship.new("destroyer", 2)
-      grid.mark_ship_positions(5, "B", destroyer, "h")
+
+      grid.mark_ship_positions(5, "B", destroyer, :horizontal)
       cell_to_attack = [5, "B"]
 
       cell_hit = destroyer.register_cells_hit(cell_to_attack).to_a

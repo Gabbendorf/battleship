@@ -63,7 +63,7 @@ RSpec.describe Ui do
     coordinates_and_orientation = ui.coordinates_and_orientation
 
     expect(output.string).to include("Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)")
-    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => "v"})
+    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => :vertical})
   end
 
   it "asks for name of player 2" do
