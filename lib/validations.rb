@@ -8,7 +8,7 @@ class Validations
     end
   end
 
-  def validate_ship_to_place_position(position)
+  def validate_position_for_ship(position)
     splitted_position = position.split(",")
     if !valid_coordinates_and_orientation?(splitted_position)
       :error

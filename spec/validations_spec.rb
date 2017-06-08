@@ -21,37 +21,37 @@ RSpec.describe Validations do
 
   describe "checks player's inputs for ship to place are all valid" do
     it "returns :error if 1st coordinate is not number" do
-      output = validations.validate_ship_to_place_position("a,b,h")
+      output = validations.validate_position_for_ship("a,b,h")
 
       expect(output).to eq(:error)
     end
 
     it "returns :error if 1st coordinate is not valid number" do
-      output = validations.validate_ship_to_place_position("100,b,h")
+      output = validations.validate_position_for_ship("100,b,h")
 
       expect(output).to eq(:error)
     end
 
     it "returns :error if 2nd coordinate is a number" do
-      output = validations.validate_ship_to_place_position("1,2,h")
+      output = validations.validate_position_for_ship("1,2,h")
 
       expect(output).to eq(:error)
     end
 
     it "returns :error if 2nd coordinate is an invalid letter" do
-      output = validations.validate_ship_to_place_position("1,x,h")
+      output = validations.validate_position_for_ship("1,x,h")
 
       expect(output).to eq(:error)
     end
 
     it "returns :error if 3rd coordinate (orientation) is not v (vertical case)" do
-      output = validations.validate_ship_to_place_position("1,b,c")
+      output = validations.validate_position_for_ship("1,b,c")
 
       expect(output).to eq(:error)
     end
 
     it "returns :error if 3rd coordinate (orientation) is not h (horizontal case)" do
-      output = validations.validate_ship_to_place_position("1,b,d")
+      output = validations.validate_position_for_ship("1,b,d")
 
       expect(output).to eq(:error)
     end
