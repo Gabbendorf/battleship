@@ -15,14 +15,27 @@ class Validations
     end
   end
 
-  def validate_ship_position_on_grid(ship, position)
-    splitted_position = position.split(",")
-    if splitted_position[2] == "v" && number_for[splitted_position[1]] < ship.length || splitted_position[2] == "h" && (splitted_position[0].to_i + ship.length-1) > 10
+  def check_ship_is_inside_grid(ship, position)
+    position_details = position.split(",")
+    orientation = position_details[2]
+    if not_inside_grid?(orientation, ship, position_details)
       :error
     end
   end
 
   private
+
+  def not_inside_grid?(orientation, ship, position)
+    invalid_vertically?(orientation, ship, position) || invalid_horizontally?(orientation, ship, position)
+  end
+
+  def invalid_vertically?(orientation, ship, position)
+    orientation == "v" && number_for[position[1]] < ship.length
+  end
+
+  def invalid_horizontally?(orientation, ship, position)
+    orientation == "h" && (position[0].to_i + ship.length-1) > 10
+  end
 
   def number_for
     {"a" => 1,

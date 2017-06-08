@@ -62,7 +62,7 @@ RSpec.describe Validations do
       destroyer = Ship.new("destroyer", 2)
       grid_position = "1,a,v"
 
-      output = validations.validate_ship_position_on_grid(destroyer, grid_position)
+      output = validations.check_ship_is_inside_grid(destroyer, grid_position)
 
       expect(output).to eq(:error)
     end
@@ -71,7 +71,7 @@ RSpec.describe Validations do
       destroyer = Ship.new("destroyer", 2)
       grid_position = "6,a,v"
 
-      output = validations.validate_ship_position_on_grid(destroyer, grid_position)
+      output = validations.check_ship_is_inside_grid(destroyer, grid_position)
 
       expect(output).to eq(:error)
     end
@@ -80,7 +80,7 @@ RSpec.describe Validations do
       destroyer = Ship.new("destroyer", 2)
       grid_position = "2,b,v"
 
-      output = validations.validate_ship_position_on_grid(destroyer, grid_position)
+      output = validations.check_ship_is_inside_grid(destroyer, grid_position)
 
       expect(output).to eq(nil)
     end
@@ -89,7 +89,7 @@ RSpec.describe Validations do
       destroyer = Ship.new("destroyer", 2)
       grid_position = "10,a,h"
 
-      output = validations.validate_ship_position_on_grid(destroyer, grid_position)
+      output = validations.check_ship_is_inside_grid(destroyer, grid_position)
 
       expect(output).to eq(:error)
     end
@@ -98,7 +98,7 @@ RSpec.describe Validations do
       destroyer = Ship.new("destroyer", 2)
       grid_position = "10,j,h"
 
-      output = validations.validate_ship_position_on_grid(destroyer, grid_position)
+      output = validations.check_ship_is_inside_grid(destroyer, grid_position)
 
       expect(output).to eq(:error)
     end
@@ -107,7 +107,7 @@ RSpec.describe Validations do
       destroyer = Ship.new("destroyer", 2)
       grid_position = "9,j,h"
 
-      output = validations.validate_ship_position_on_grid(destroyer, grid_position)
+      output = validations.check_ship_is_inside_grid(destroyer, grid_position)
 
       expect(output).to eq(nil)
     end
