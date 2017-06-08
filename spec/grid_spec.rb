@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative "../lib/grid"
 
 RSpec.describe Grid do

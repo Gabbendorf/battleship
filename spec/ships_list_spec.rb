@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative '../lib/ships_list'
 
 RSpec.describe ShipsList do
