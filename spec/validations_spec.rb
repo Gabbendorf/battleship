@@ -113,4 +113,24 @@ RSpec.describe Validations do
     end
   end
 
+  describe "checks that position to attack is valid" do
+    it "returns :error for invalid coordinate x" do
+      output = validations.validate_position_to_attack("11,a")
+
+      expect(output).to eq(:error)
+    end
+
+    it "returns :error for invalid coordinate y" do
+      output = validations.validate_position_to_attack("8,z")
+
+      expect(output).to eq(:error)
+    end
+
+    it "returns nil for valid coordinates" do
+      output = validations.validate_position_to_attack("8,a")
+
+      expect(output).to eq(nil)
+    end
+  end
+
 end

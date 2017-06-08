@@ -23,6 +23,13 @@ class Validations
     end
   end
 
+  def validate_position_to_attack(position)
+    coordinates = position.split(",")
+    if !valid_number?(coordinates) || !valid_letter?(coordinates)
+      :error
+    end
+  end
+
   private
 
   def not_inside_grid?(orientation, ship, position)
