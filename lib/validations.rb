@@ -18,18 +18,14 @@ class Validations
   end
 
   def check_ship_is_inside_grid(ship, input)
-    details = input.split(",")
-    number = details[0].to_i
-    letter = details[1]
-    orientation = details[2]
-    if not_inside_grid?(orientation, ship.length, letter, number)
+    if not_inside_grid?(split(input)[:orientation], ship.length, split(input)[:letter], split(input)[:number])
       :error
     end
   end
 
   def validate_position_to_attack(position)
     coordinates = position.split(",")
-    number = coordinates[0]
+    number = coordinates[0].to_i
     letter = coordinates[1]
     if !valid_number?(number) || !valid_letter?(letter)
       :error
@@ -38,13 +34,13 @@ class Validations
 
   private
 
-  # def split(input)
-  #   details = input.split(",")
-  #   {:number => details[0].to_i,
-  #    :letter => details[1],
-  #    :orientation => details[2]
-  #  }
-  # end
+  def split(input)
+    details = input.split(",")
+    {:number => details[0].to_i,
+     :letter => details[1],
+     :orientation => details[2]
+   }
+  end
 
   def not_inside_grid?(orientation, ship_length, letter, number)
     invalid_vertically?(orientation, ship_length, letter) || invalid_horizontally?(orientation, ship_length, number)
