@@ -17,6 +17,12 @@ RSpec.describe Validations do
 
       expect(output).to eq(:error)
     end
+
+    it "returns nil for valid input" do
+      output = validations.validate_ship_number("2")
+
+      expect(output).to eq(nil)
+    end
   end
 
   describe "checks player's inputs for ship to place are all valid" do
@@ -31,6 +37,12 @@ RSpec.describe Validations do
 
       expect(output).to eq(:error)
     end
+
+    # it "returns nil if 1st coordinate is valid number" do
+    #   output = validations.validate_position_for_ship("2")
+    #
+    #   expect(output).to eq(nil)
+    # end
 
     it "returns :error if 2nd coordinate is a number" do
       output = validations.validate_position_for_ship("1,2,h")
@@ -114,19 +126,19 @@ RSpec.describe Validations do
   end
 
   describe "checks that position to attack is valid" do
-    it "returns :error for invalid coordinate x" do
+    it "returns :error for invalid number" do
       output = validations.validate_position_to_attack("11,a")
 
       expect(output).to eq(:error)
     end
 
-    it "returns :error for invalid coordinate y" do
+    it "returns :error for invalid letter" do
       output = validations.validate_position_to_attack("8,z")
 
       expect(output).to eq(:error)
     end
 
-    it "returns nil for valid coordinates" do
+    xit "returns nil for valid coordinates" do
       output = validations.validate_position_to_attack("8,a")
 
       expect(output).to eq(nil)

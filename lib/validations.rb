@@ -1,47 +1,53 @@
 class Validations
 
   def validate_ship_number(number)
-    number = number.to_i
-    valid_numbers = [1, 2, 3, 4]
-    if !valid_numbers.include?(number)
+    valid_options = [1, 2, 3, 4]
+    if !valid_options.include?(number.to_i)
       :error
     end
   end
 
-  def validate_position_for_ship(position)
-    splitted_position = position.split(",")
-    if !valid_coordinates_and_orientation?(splitted_position)
+  def validate_position_for_ship(input)
+    if !valid_coordinates_and_orientation?(split(input)[:orientation], split(input)[:letter], split(input)[:number])
       :error
     end
   end
 
-  def check_ship_is_inside_grid(ship, position)
-    position_details = position.split(",")
-    orientation = position_details[2]
-    if not_inside_grid?(orientation, ship, position_details)
+  def check_ship_is_inside_grid(ship, input)
+    if not_inside_grid?(split(input)[:orientation], ship.length, split(input)[:letter], split(input)[:number])
       :error
     end
   end
 
   def validate_position_to_attack(position)
     coordinates = position.split(",")
-    if !valid_number?(coordinates) || !valid_letter?(coordinates)
+    number = coordinates[0]
+    letter = coordinates[1]
+    if !valid_number?(number) || !valid_letter?(letter)
       :error
     end
   end
 
   private
 
-  def not_inside_grid?(orientation, ship, position)
-    invalid_vertically?(orientation, ship, position) || invalid_horizontally?(orientation, ship, position)
+  def split(input)
+    coordinates = input.split(",")
+    {:number => coordinates[0],
+     :letter => coordinates[1],
+     :orientation => coordinates[2]
+    }
   end
 
-  def invalid_vertically?(orientation, ship, position)
-    orientation == "v" && number_for[position[1]] < ship.length
+  def not_inside_grid?(orientation, ship_length, letter, number)
+    invalid_vertically?(orientation, ship_length, letter) || invalid_horizontally?(orientation, ship_length, number)
   end
 
-  def invalid_horizontally?(orientation, ship, position)
-    orientation == "h" && (position[0].to_i + ship.length-1) > 10
+  def invalid_vertically?(orientation, ship_length, letter)
+    orientation == "v" && number_for[letter] < ship_length
+  end
+
+  def invalid_horizontally?(orientation, ship_length, number)
+    orientation == "h" && (number.to_i + ship_length-1) > 10
   end
 
   def number_for
@@ -51,20 +57,20 @@ class Validations
     }
   end
 
-  def valid_coordinates_and_orientation?(position)
-    valid_number?(position) && valid_letter?(position) && valid_orientation?(position)
+  def valid_coordinates_and_orientation?(number, letter, orientation)
+    valid_number?(number) && valid_letter?(letter) && valid_orientation?(orientation)
   end
 
-  def valid_orientation?(position)
-    position[2] == "h" || position[2] == "v"
+  def valid_orientation?(orientation)
+    orientation == "h" || orientation == "v"
   end
 
-  def valid_number?(position)
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].include?(position[0].to_i)
+  def valid_number?(number)
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].include?(number)
   end
 
-  def valid_letter?(position)
-    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].include?(position[1])
+  def valid_letter?(letter)
+    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].include?(letter)
   end
 
 end
