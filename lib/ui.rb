@@ -66,7 +66,7 @@ class Ui
     @stdout.puts "Not valid number:"
   end
 
-  def ask_for_valid_ship_position
+  def ask_for_valid_position
     @stdout.puts "Not valid position:"
   end
 end
