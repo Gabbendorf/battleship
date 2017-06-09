@@ -8,11 +8,7 @@ class Validations
   end
 
   def validate_position_for_ship(input)
-    details = input.split(",")
-    number = details[0].to_i
-    letter = details[1]
-    orientation = details[2]
-    if input_validity(number, letter, orientation) == :invalid_input
+    if input_validity(split(input)[:number], split(input)[:letter], split(input)[:orientation]) == :invalid_input
       :error
     end
   end
