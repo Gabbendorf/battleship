@@ -98,4 +98,10 @@ RSpec.describe Ui do
     expect(output.string).to include("Not valid number:")
   end
 
+  it "prints message for invalid position for ship to place" do
+    ui.ask_for_valid_ship_position
+
+    expect(output.string).to include("Not valid position:")
+  end
+
 end
