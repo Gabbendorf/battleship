@@ -1,3 +1,4 @@
+require 'spec_helper.rb'
 require_relative '../lib/create_ship'
 
 RSpec.describe CreateShip do

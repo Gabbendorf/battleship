@@ -1,3 +1,4 @@
+require 'spec_helper.rb'
 require_relative '../lib/validations'
 require_relative '../lib/ship'
 

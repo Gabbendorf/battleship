@@ -1,3 +1,4 @@
+require 'spec_helper.rb'
 require_relative '../lib/ui'
 require_relative '../lib/ship'
 require_relative '../lib/grid_display'

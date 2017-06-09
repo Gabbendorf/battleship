@@ -1,3 +1,4 @@
+require 'spec_helper.rb'
 require_relative '../lib/grid_display'
 
 RSpec.describe GridDisplay do
