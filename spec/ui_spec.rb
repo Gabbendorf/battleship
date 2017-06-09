@@ -92,4 +92,10 @@ RSpec.describe Ui do
     expect(output.string).to include("Congratulations Nic: YOU WON!")
   end
 
+  it "prints message for wrong ship number" do
+    ui.ask_for_valid_ship_number
+
+    expect(output.string).to include("Not valid number:")
+  end
+
 end

@@ -62,4 +62,7 @@ class Ui
     @stdout.puts "Congratulations #{player_name}: YOU WON!"
   end
 
+  def ask_for_valid_ship_number
+    @stdout.puts "Not valid number:"
+  end
 end
