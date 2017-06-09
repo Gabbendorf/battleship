@@ -39,12 +39,6 @@ RSpec.describe Validations do
       expect(output).to eq(:error)
     end
 
-    # it "returns nil if 1st coordinate is valid number" do
-    #   output = validations.validate_position_for_ship("2")
-    #
-    #   expect(output).to eq(nil)
-    # end
-
     it "returns :error if 2nd coordinate is a number" do
       output = validations.validate_position_for_ship("1,2,h")
 
@@ -57,16 +51,28 @@ RSpec.describe Validations do
       expect(output).to eq(:error)
     end
 
-    it "returns :error if 3rd coordinate (orientation) is not v (vertical case)" do
+    it "returns :error if 3rd coordinate (orientation) is not valid (vertical case)" do
       output = validations.validate_position_for_ship("1,b,c")
 
       expect(output).to eq(:error)
     end
 
-    it "returns :error if 3rd coordinate (orientation) is not h (horizontal case)" do
+    it "returns :error if 3rd coordinate (orientation) is not valid (horizontal case)" do
       output = validations.validate_position_for_ship("1,b,d")
 
       expect(output).to eq(:error)
+    end
+
+    it "returns :error if all inputs are invalid" do
+      output = validations.validate_position_for_ship("100,x,c")
+
+      expect(output).to eq(:error)
+    end
+
+    it "returns nil if all inputs are valid" do
+      output = validations.validate_position_for_ship("1,a,h")
+
+      expect(output).to eq(nil)
     end
   end
 
@@ -139,7 +145,7 @@ RSpec.describe Validations do
       expect(output).to eq(:error)
     end
 
-    xit "returns nil for valid coordinates" do
+    it "returns nil for valid coordinates" do
       output = validations.validate_position_to_attack("8,a")
 
       expect(output).to eq(nil)

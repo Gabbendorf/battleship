@@ -14,27 +14,27 @@
       <img src="./assets/0.10.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-09T11:40:51+01:00">2017-06-09T11:40:51+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-09T16:48:53+01:00">2017-06-09T16:48:53+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">98.95%</span></span>
+    (<span class="covered_percent"><span class="green">99.66%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.79
+         2.77
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>17</b> files in total.
-    <b>570</b> relevant lines. 
-    <span class="green"><b>564</b> lines covered</span> and
-    <span class="red"><b>6</b> lines missed </span>
+    <b>584</b> relevant lines. 
+    <span class="green"><b>582</b> lines covered</span> and
+    <span class="red"><b>2</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -132,12 +132,12 @@
       
       <tr>
         <td class="strong"><a href="#49aee95b49372776952f6c7f7380b080d662120e" class="src_link" title="lib/validations.rb">lib/validations.rb</a></td>
-        <td class="green strong">94.59 %</td>
-        <td>76</td>
-        <td>37</td>
-        <td>35</td>
-        <td>2</td>
-        <td>4.3</td>
+        <td class="green strong">100.0 %</td>
+        <td>88</td>
+        <td>45</td>
+        <td>45</td>
+        <td>0</td>
+        <td>3.9</td>
       </tr>
       
       <tr>
@@ -212,11 +212,11 @@
       
       <tr>
         <td class="strong"><a href="#782f14b7f8c44d9be77d8bd81afb98fbbf7d4117" class="src_link" title="spec/validations_spec.rb">spec/validations_spec.rb</a></td>
-        <td class="green strong">97.33 %</td>
-        <td>149</td>
-        <td>75</td>
-        <td>73</td>
-        <td>2</td>
+        <td class="green strong">100.0 %</td>
+        <td>155</td>
+        <td>81</td>
+        <td>81</td>
+        <td>0</td>
         <td>1.2</td>
       </tr>
       
@@ -2311,11 +2311,11 @@
         <div class="source_table" id="49aee95b49372776952f6c7f7380b080d662120e">
   <div class="header">
     <h3>lib/validations.rb</h3>
-    <h4><span class="green">94.59 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>37</b> relevant lines. 
-      <span class="green"><b>35</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <b>45</b> relevant lines. 
+      <span class="green"><b>45</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -2382,178 +2382,178 @@
           <code class="ruby">  def validate_position_for_ship(input)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="11">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="8" data-linenumber="11">
+          <span class="hits">8</span>
           
-          <code class="ruby">    if !valid_coordinates_and_orientation?(split(input)[:orientation], split(input)[:letter], split(input)[:number])</code>
+          <code class="ruby">    details = input.split(&quot;,&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="12">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="8" data-linenumber="12">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    number = details[0].to_i</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="13">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    letter = details[1]</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="14">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    orientation = details[2]</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="15">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    if input_validity(number, letter, orientation) == :invalid_input</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="16">
+          <span class="hits">7</span>
           
           <code class="ruby">      :error</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="13">
+        <li class="never" data-hits="" data-linenumber="17">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="14">
+        <li class="never" data-hits="" data-linenumber="18">
           
           
           <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="15">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="16">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def check_ship_is_inside_grid(ship, input)</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="17">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    if not_inside_grid?(split(input)[:orientation], ship.length, split(input)[:letter], split(input)[:number])</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="18">
-          <span class="hits">4</span>
-          
-          <code class="ruby">      :error</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="19">
           
           
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="20">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="21">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="22">
+        <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">  def validate_position_to_attack(position)</code>
+          <code class="ruby">  def check_ship_is_inside_grid(ship, input)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="23">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="6" data-linenumber="21">
+          <span class="hits">6</span>
           
-          <code class="ruby">    coordinates = position.split(&quot;,&quot;)</code>
+          <code class="ruby">    details = input.split(&quot;,&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="24">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="6" data-linenumber="22">
+          <span class="hits">6</span>
           
-          <code class="ruby">    number = coordinates[0]</code>
+          <code class="ruby">    number = details[0].to_i</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="25">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="6" data-linenumber="23">
+          <span class="hits">6</span>
           
-          <code class="ruby">    letter = coordinates[1]</code>
+          <code class="ruby">    letter = details[1]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="26">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="6" data-linenumber="24">
+          <span class="hits">6</span>
           
-          <code class="ruby">    if !valid_number?(number) || !valid_letter?(letter)</code>
+          <code class="ruby">    orientation = details[2]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="27">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="6" data-linenumber="25">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    if not_inside_grid?(orientation, ship.length, letter, number)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="26">
+          <span class="hits">4</span>
           
           <code class="ruby">      :error</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="28">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="29">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="30">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="31">
+        <li class="covered" data-hits="1" data-linenumber="30">
           <span class="hits">1</span>
           
-          <code class="ruby">  private</code>
+          <code class="ruby">  def validate_position_to_attack(position)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="32">
+        <li class="covered" data-hits="3" data-linenumber="31">
+          <span class="hits">3</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    coordinates = position.split(&quot;,&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="33">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="32">
+          <span class="hits">3</span>
           
-          <code class="ruby">  def split(input)</code>
+          <code class="ruby">    number = coordinates[0]</code>
         </li>
       
-        <li class="covered" data-hits="36" data-linenumber="34">
-          <span class="hits">36</span>
+        <li class="covered" data-hits="3" data-linenumber="33">
+          <span class="hits">3</span>
           
-          <code class="ruby">    coordinates = input.split(&quot;,&quot;)</code>
+          <code class="ruby">    letter = coordinates[1]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="35">
+        <li class="covered" data-hits="3" data-linenumber="34">
+          <span class="hits">3</span>
           
+          <code class="ruby">    if !valid_number?(number) || !valid_letter?(letter)</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="35">
+          <span class="hits">3</span>
           
-          <code class="ruby">    {:number =&gt; coordinates[0],</code>
+          <code class="ruby">      :error</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="36">
           
           
-          <code class="ruby">     :letter =&gt; coordinates[1],</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="37">
           
           
-          <code class="ruby">     :orientation =&gt; coordinates[2]</code>
-        </li>
-      
-        <li class="covered" data-hits="36" data-linenumber="38">
-          <span class="hits">36</span>
-          
-          <code class="ruby">    }</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="39">
-          
-          
           <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -2562,46 +2562,46 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="41">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="41">
           
-          <code class="ruby">  def not_inside_grid?(orientation, ship_length, letter, number)</code>
+          
+          <code class="ruby">  # def split(input)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="42">
-          <span class="hits">6</span>
+        <li class="never" data-hits="" data-linenumber="42">
           
-          <code class="ruby">    invalid_vertically?(orientation, ship_length, letter) || invalid_horizontally?(orientation, ship_length, number)</code>
+          
+          <code class="ruby">  #   details = input.split(&quot;,&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">  #   {:number =&gt; details[0].to_i,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  #    :letter =&gt; details[1],</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="45">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="45">
           
-          <code class="ruby">  def invalid_vertically?(orientation, ship_length, letter)</code>
+          
+          <code class="ruby">  #    :orientation =&gt; details[2]</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="46">
-          <span class="hits">6</span>
+        <li class="never" data-hits="" data-linenumber="46">
           
-          <code class="ruby">    orientation == &quot;v&quot; &amp;&amp; number_for[letter] &lt; ship_length</code>
+          
+          <code class="ruby">  #  }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">  # end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="48">
@@ -2613,13 +2613,13 @@
         <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
-          <code class="ruby">  def invalid_horizontally?(orientation, ship_length, number)</code>
+          <code class="ruby">  def not_inside_grid?(orientation, ship_length, letter, number)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="50">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="50">
+          <span class="hits">6</span>
           
-          <code class="ruby">    orientation == &quot;h&quot; &amp;&amp; (number.to_i + ship_length-1) &gt; 10</code>
+          <code class="ruby">    invalid_vertically?(orientation, ship_length, letter) || invalid_horizontally?(orientation, ship_length, number)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="51">
@@ -2637,79 +2637,79 @@
         <li class="covered" data-hits="1" data-linenumber="53">
           <span class="hits">1</span>
           
-          <code class="ruby">  def number_for</code>
+          <code class="ruby">  def invalid_vertically?(orientation, ship_length, letter)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="covered" data-hits="6" data-linenumber="54">
+          <span class="hits">6</span>
           
-          
-          <code class="ruby">    {&quot;a&quot; =&gt; 1,</code>
+          <code class="ruby">    orientation == &quot;v&quot; &amp;&amp; number_for[letter] &lt; ship_length</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="55">
           
           
-          <code class="ruby">     &quot;b&quot; =&gt; 2,</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="56">
           
           
-          <code class="ruby">     &quot;c&quot; =&gt; 3,</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="57">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
           
-          <code class="ruby">    }</code>
+          <code class="ruby">  def invalid_horizontally?(orientation, ship_length, number)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="58">
+        <li class="covered" data-hits="4" data-linenumber="58">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    orientation == &quot;h&quot; &amp;&amp; (number.to_i + ship_length-1) &gt; 10</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="60">
+        <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
-          <code class="ruby">  def valid_coordinates_and_orientation?(number, letter, orientation)</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="61">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    valid_number?(number) &amp;&amp; valid_letter?(letter) &amp;&amp; valid_orientation?(orientation)</code>
+          <code class="ruby">  def number_for</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    {&quot;a&quot; =&gt; 1,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="63">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">     &quot;b&quot; =&gt; 2,</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="64">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="64">
           
-          <code class="ruby">  def valid_orientation?(orientation)</code>
+          
+          <code class="ruby">     &quot;c&quot; =&gt; 3,</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="65">
+        <li class="covered" data-hits="3" data-linenumber="65">
+          <span class="hits">3</span>
           
-          
-          <code class="ruby">    orientation == &quot;h&quot; || orientation == &quot;v&quot;</code>
+          <code class="ruby">    }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
@@ -2727,37 +2727,37 @@
         <li class="covered" data-hits="1" data-linenumber="68">
           <span class="hits">1</span>
           
-          <code class="ruby">  def valid_number?(number)</code>
+          <code class="ruby">  def input_validity(number, letter, orientation)</code>
         </li>
       
         <li class="covered" data-hits="8" data-linenumber="69">
           <span class="hits">8</span>
           
-          <code class="ruby">    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].include?(number)</code>
+          <code class="ruby">    if !valid_number?(number) || !valid_letter?(letter) || !valid_orientation?(orientation)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="70">
+        <li class="covered" data-hits="7" data-linenumber="70">
+          <span class="hits">7</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      return :invalid_input</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    elsif valid_number?(number) &amp;&amp; valid_letter?(letter) &amp;&amp; valid_orientation?(orientation)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="72">
           <span class="hits">1</span>
           
-          <code class="ruby">  def valid_letter?(letter)</code>
+          <code class="ruby">      return :valid_input</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="73">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
-          <code class="ruby">    [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;].include?(letter)</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="74">
@@ -2772,7 +2772,79 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def valid_orientation?(orientation)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="77">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    orientation == &quot;h&quot; || orientation == &quot;v&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="80">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def valid_number?(number)</code>
+        </li>
+      
+        <li class="covered" data-hits="12" data-linenumber="81">
+          <span class="hits">12</span>
+          
+          <code class="ruby">    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].include?(number)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="82">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="84">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def valid_letter?(letter)</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="85">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;].include?(letter)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="86">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="88">
           
           
           <code class="ruby">end</code>
@@ -6087,11 +6159,11 @@
         <div class="source_table" id="782f14b7f8c44d9be77d8bd81afb98fbbf7d4117">
   <div class="header">
     <h3>spec/validations_spec.rb</h3>
-    <h4><span class="green">97.33 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>75</b> relevant lines. 
-      <span class="green"><b>73</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <b>81</b> relevant lines. 
+      <span class="green"><b>81</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -6134,8 +6206,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="7">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="21" data-linenumber="7">
+          <span class="hits">21</span>
           
           <code class="ruby">  let(:validations) {Validations.new}</code>
         </li>
@@ -6344,34 +6416,34 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="covered" data-hits="1" data-linenumber="42">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # it &quot;returns nil if 1st coordinate is valid number&quot; do</code>
+          <code class="ruby">    it &quot;returns :error if 2nd coordinate is a number&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #   output = validations.validate_position_for_ship(&quot;2&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,2,h&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby">    #</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="covered" data-hits="1" data-linenumber="45">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    #   expect(output).to eq(nil)</code>
+          <code class="ruby">      expect(output).to eq(:error)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby">    # end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
@@ -6383,13 +6455,13 @@
         <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns :error if 2nd coordinate is a number&quot; do</code>
+          <code class="ruby">    it &quot;returns :error if 2nd coordinate is an invalid letter&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
-          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,2,h&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,x,h&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="50">
@@ -6419,13 +6491,13 @@
         <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns :error if 2nd coordinate is an invalid letter&quot; do</code>
+          <code class="ruby">    it &quot;returns :error if 3rd coordinate (orientation) is not valid (vertical case)&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
-          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,x,h&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,b,c&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="56">
@@ -6455,13 +6527,13 @@
         <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns :error if 3rd coordinate (orientation) is not v (vertical case)&quot; do</code>
+          <code class="ruby">    it &quot;returns :error if 3rd coordinate (orientation) is not valid (horizontal case)&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
-          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,b,c&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,b,d&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
@@ -6491,13 +6563,13 @@
         <li class="covered" data-hits="1" data-linenumber="66">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns :error if 3rd coordinate (orientation) is not h (horizontal case)&quot; do</code>
+          <code class="ruby">    it &quot;returns :error if all inputs are invalid&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="67">
           <span class="hits">1</span>
           
-          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,b,d&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_for_ship(&quot;100,x,c&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="68">
@@ -6521,103 +6593,103 @@
         <li class="never" data-hits="" data-linenumber="71">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &quot;returns nil if all inputs are valid&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="73">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;checks if ship stays inside grid according to player&#39;s input for its position&quot; do</code>
+          <code class="ruby">      output = validations.validate_position_for_ship(&quot;1,a,h&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="74">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="74">
           
-          <code class="ruby">    it &quot;returns :error if ship doesn&#39;t stay inside grid vertically&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="75">
           <span class="hits">1</span>
           
-          <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
+          <code class="ruby">      expect(output).to eq(nil)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      grid_position = &quot;1,a,v&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="77">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="78">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="79">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="80">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(output).to eq(:error)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="81">
+        <li class="never" data-hits="" data-linenumber="76">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="83">
+        <li class="covered" data-hits="1" data-linenumber="79">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;checks if ship stays inside grid according to player&#39;s input for its position&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="80">
           <span class="hits">1</span>
           
           <code class="ruby">    it &quot;returns :error if ship doesn&#39;t stay inside grid vertically&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="84">
+        <li class="covered" data-hits="1" data-linenumber="81">
           <span class="hits">1</span>
           
           <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="85">
+        <li class="covered" data-hits="1" data-linenumber="82">
           <span class="hits">1</span>
           
-          <code class="ruby">      grid_position = &quot;6,a,v&quot;</code>
+          <code class="ruby">      grid_position = &quot;1,a,v&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="83">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="87">
+        <li class="covered" data-hits="1" data-linenumber="84">
           <span class="hits">1</span>
           
           <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="85">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="86">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(output).to eq(:error)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="88">
@@ -6629,49 +6701,49 @@
         <li class="covered" data-hits="1" data-linenumber="89">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(output).to eq(:error)</code>
+          <code class="ruby">    it &quot;returns :error if ship doesn&#39;t stay inside grid vertically&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="90">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="91">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="92">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;returns nil if ship stays inside grid vertically&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="90">
           <span class="hits">1</span>
           
           <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="94">
+        <li class="covered" data-hits="1" data-linenumber="91">
           <span class="hits">1</span>
           
-          <code class="ruby">      grid_position = &quot;2,b,v&quot;</code>
+          <code class="ruby">      grid_position = &quot;6,a,v&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="95">
+        <li class="never" data-hits="" data-linenumber="92">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="96">
+        <li class="covered" data-hits="1" data-linenumber="93">
           <span class="hits">1</span>
           
           <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="95">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(output).to eq(:error)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="97">
@@ -6683,49 +6755,49 @@
         <li class="covered" data-hits="1" data-linenumber="98">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(output).to eq(nil)</code>
+          <code class="ruby">    it &quot;returns nil if ship stays inside grid vertically&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="100">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="101">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;returns :error if ship doesn&#39;t stay inside grid horizontally&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="102">
+        <li class="covered" data-hits="1" data-linenumber="99">
           <span class="hits">1</span>
           
           <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="103">
+        <li class="covered" data-hits="1" data-linenumber="100">
           <span class="hits">1</span>
           
-          <code class="ruby">      grid_position = &quot;10,a,h&quot;</code>
+          <code class="ruby">      grid_position = &quot;2,b,v&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="104">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="105">
+        <li class="covered" data-hits="1" data-linenumber="102">
           <span class="hits">1</span>
           
           <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(output).to eq(nil)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="105">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="106">
@@ -6737,49 +6809,49 @@
         <li class="covered" data-hits="1" data-linenumber="107">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(output).to eq(:error)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="108">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="109">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="110">
-          <span class="hits">1</span>
-          
           <code class="ruby">    it &quot;returns :error if ship doesn&#39;t stay inside grid horizontally&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="111">
+        <li class="covered" data-hits="1" data-linenumber="108">
           <span class="hits">1</span>
           
           <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="112">
+        <li class="covered" data-hits="1" data-linenumber="109">
           <span class="hits">1</span>
           
-          <code class="ruby">      grid_position = &quot;10,j,h&quot;</code>
+          <code class="ruby">      grid_position = &quot;10,a,h&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="113">
+        <li class="never" data-hits="" data-linenumber="110">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="114">
+        <li class="covered" data-hits="1" data-linenumber="111">
           <span class="hits">1</span>
           
           <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="112">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="113">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(output).to eq(:error)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="114">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="115">
@@ -6791,49 +6863,49 @@
         <li class="covered" data-hits="1" data-linenumber="116">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(output).to eq(:error)</code>
+          <code class="ruby">    it &quot;returns :error if ship doesn&#39;t stay inside grid horizontally&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="117">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="118">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="119">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;returns nil if ship stays inside grid horizontally&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="120">
+        <li class="covered" data-hits="1" data-linenumber="117">
           <span class="hits">1</span>
           
           <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="121">
+        <li class="covered" data-hits="1" data-linenumber="118">
           <span class="hits">1</span>
           
-          <code class="ruby">      grid_position = &quot;9,j,h&quot;</code>
+          <code class="ruby">      grid_position = &quot;10,j,h&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="119">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="123">
+        <li class="covered" data-hits="1" data-linenumber="120">
           <span class="hits">1</span>
           
           <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="121">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="122">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(output).to eq(:error)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="124">
@@ -6845,19 +6917,19 @@
         <li class="covered" data-hits="1" data-linenumber="125">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(output).to eq(nil)</code>
+          <code class="ruby">    it &quot;returns nil if ship stays inside grid horizontally&quot; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="126">
+        <li class="covered" data-hits="1" data-linenumber="126">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      destroyer = Ship.new(&quot;destroyer&quot;, 2)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="127">
+        <li class="covered" data-hits="1" data-linenumber="127">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      grid_position = &quot;9,j,h&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="128">
@@ -6869,55 +6941,55 @@
         <li class="covered" data-hits="1" data-linenumber="129">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &quot;checks that position to attack is valid&quot; do</code>
+          <code class="ruby">      output = validations.check_ship_is_inside_grid(destroyer, grid_position)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="130">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="130">
           
-          <code class="ruby">    it &quot;returns :error for invalid number&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="131">
           <span class="hits">1</span>
           
-          <code class="ruby">      output = validations.validate_position_to_attack(&quot;11,a&quot;)</code>
+          <code class="ruby">      expect(output).to eq(nil)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="132">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="133">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="133">
           
-          <code class="ruby">      expect(output).to eq(:error)</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="134">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="135">
+        <li class="covered" data-hits="1" data-linenumber="135">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">  describe &quot;checks that position to attack is valid&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="136">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;returns :error for invalid letter&quot; do</code>
+          <code class="ruby">    it &quot;returns :error for invalid number&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="137">
           <span class="hits">1</span>
           
-          <code class="ruby">      output = validations.validate_position_to_attack(&quot;8,z&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_to_attack(&quot;11,a&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="138">
@@ -6947,13 +7019,13 @@
         <li class="covered" data-hits="1" data-linenumber="142">
           <span class="hits">1</span>
           
-          <code class="ruby">    xit &quot;returns nil for valid coordinates&quot; do</code>
+          <code class="ruby">    it &quot;returns :error for invalid letter&quot; do</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="143">
+        <li class="covered" data-hits="1" data-linenumber="143">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      output = validations.validate_position_to_attack(&quot;8,a&quot;)</code>
+          <code class="ruby">      output = validations.validate_position_to_attack(&quot;8,z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="144">
@@ -6962,10 +7034,10 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="145">
+        <li class="covered" data-hits="1" data-linenumber="145">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      expect(output).to eq(nil)</code>
+          <code class="ruby">      expect(output).to eq(:error)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="146">
@@ -6977,16 +7049,52 @@
         <li class="never" data-hits="" data-linenumber="147">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="148">
+        <li class="covered" data-hits="1" data-linenumber="148">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns nil for valid coordinates&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="149">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      output = validations.validate_position_to_attack(&quot;8,a&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="150">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="149">
+        <li class="covered" data-hits="1" data-linenumber="151">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(output).to eq(nil)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="152">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="153">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="154">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="155">
           
           
           <code class="ruby">end</code>
