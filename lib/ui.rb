@@ -69,4 +69,8 @@ class Ui
   def ask_for_valid_position
     @stdout.puts "Not valid position:"
   end
+
+  def ask_for_realistic_position
+    @stdout.puts "Ship could not be placed"
+  end
 end

@@ -104,4 +104,10 @@ RSpec.describe Ui do
     expect(output.string).to include("Not valid position:")
   end
 
+  it "prints message if input entered let ship go outside grid" do
+    ui.ask_for_realistic_position
+
+    expect(output.string).to include("Ship could not be placed")
+  end
+
 end
