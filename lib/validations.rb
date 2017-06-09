@@ -23,11 +23,8 @@ class Validations
     end
   end
 
-  def validate_position_to_attack(position)
-    coordinates = position.split(",")
-    number = coordinates[0].to_i
-    letter = coordinates[1]
-    if !valid_number?(number) || !valid_letter?(letter)
+  def validate_position_to_attack(input)
+    if !valid_number?(split(input)[:number]) || !valid_letter?(split(input)[:letter])
       :error
     end
   end
