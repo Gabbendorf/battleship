@@ -38,6 +38,14 @@ class GridDisplay
     end
   end
 
+  def update_grid(result, cell_to_attack)
+    if result == :hit
+      hit(cell_to_attack)
+    elsif result == :water
+      water(cell_to_attack)
+    end
+  end
+
   private
 
   def number_of

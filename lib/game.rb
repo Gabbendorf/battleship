@@ -20,12 +20,12 @@ class Game
   def start
     @ui.welcome
     name = @ui.ask_name_player1
-    place_ships_on_grid(name)
+    ask_to_place_ships_on_grid(name)
     ask_to_attack
   end
 
 # move to player class?
-  def place_ships_on_grid(player_name)
+  def ask_to_place_ships_on_grid(player_name)
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player_name)
       @ui.print_list_of_ships(@ships_list)
@@ -41,23 +41,14 @@ class Game
       @ui.display_grid(@grid_display)
       cell_to_attack = @ui.cell_to_attack(attacker)
       result = @player1.attack(cell_to_attack)
-      hit_or_water(result, cell_to_attack)
+      @grid_display.update_grid(result, cell_to_attack)
+      check_if_sunk(cell_to_attack)
     end
-    @ui.display_grid(@grid_display) #=> change to (@grid_display.hit_or_water)
+    @ui.display_grid(@grid_display)
     @ui.declare_winner(attacker)
   end
 
   private
-
-# move to GridDisplay
-  def hit_or_water(result, cell_to_attack)
-    if result == :hit
-      @grid_display.hit(cell_to_attack)
-      check_if_sunk(cell_to_attack)
-    elsif result == :water
-      @grid_display.water(cell_to_attack)
-    end
-  end
 
   def coordinates_and_orientation_for(ship)
     @ui.display_grid(@grid_display)
