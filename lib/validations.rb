@@ -48,7 +48,7 @@ class Validations
   end
 
   def invalid_vertically?(orientation, ship_length, letter)
-    orientation == :vertical && number_for[letter] < ship_length
+    orientation == :vertical && (number_for[letter] + ship_length-1) > 10
   end
 
   def invalid_horizontally?(orientation, ship_length, number)
@@ -59,6 +59,13 @@ class Validations
     {"a" => 1,
      "b" => 2,
      "c" => 3,
+     "d" => 4,
+     "e" => 5,
+     "f" => 6,
+     "g" => 7,
+     "h" => 8,
+     "i" => 9,
+     "j" => 10
     }
   end
 

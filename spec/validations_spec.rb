@@ -80,7 +80,7 @@ RSpec.describe Validations do
   describe "checks if ship stays inside grid according to player's input for its position" do
     it "returns :error if ship doesn't stay inside grid vertically" do
       destroyer = Ship.new("destroyer", 2)
-      ui_output = {:x => "1".to_i, :y => "a", :orientation => :vertical}
+      ui_output = {:x => "1".to_i, :y => "j", :orientation => :vertical}
 
       output = validations.check_ship_is_inside_grid(destroyer, ui_output)
 
@@ -89,7 +89,7 @@ RSpec.describe Validations do
 
     it "returns :error if ship doesn't stay inside grid vertically" do
       destroyer = Ship.new("destroyer", 2)
-      ui_output = {:x => "6".to_i, :y => "a", :orientation => :vertical}
+      ui_output = {:x => "6".to_i, :y => "j", :orientation => :vertical}
 
       output = validations.check_ship_is_inside_grid(destroyer, ui_output)
 
@@ -98,7 +98,7 @@ RSpec.describe Validations do
 
     it "returns nil if ship stays inside grid vertically" do
       destroyer = Ship.new("destroyer", 2)
-      ui_output = {:x => "2".to_i, :y => "b", :orientation => :vertical}
+      ui_output = {:x => "9".to_i, :y => "i", :orientation => :vertical}
 
       output = validations.check_ship_is_inside_grid(destroyer, ui_output)
 
