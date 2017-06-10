@@ -19,15 +19,16 @@ class Game
 
   def start
     @ui.welcome
-    name = @ui.ask_name_player1
-    ask_to_place_ships_on_grid(name)
-    ask_to_attack
+    player1 = @ui.ask_name_player1
+    ask_to_place_ships_on_grid(player1)
+    player2 = @ui.ask_name_player2
+    ask_to_attack(player2)
+    end_game(player2)
   end
 
-# move to player class?
-  def ask_to_place_ships_on_grid(player_name)
+  def ask_to_place_ships_on_grid(player1_name)
     while @ships_list.ships.size > 0
-      @ui.invite_to_select_ship_number(player_name)
+      @ui.invite_to_select_ship_number(player1_name)
       @ui.print_list_of_ships(@ships_list)
       ship = @ui.selected_ship(@ships_list)
       @ships_list.delete_selected_ship(ship)
@@ -35,17 +36,19 @@ class Game
     end
   end
 
-  def ask_to_attack
-    attacker = @ui.ask_name_player2
+  def ask_to_attack(player2_name)
     while !@grid.end_game?
       @ui.display_grid(@grid_display)
-      cell_to_attack = @ui.cell_to_attack(attacker)
+      cell_to_attack = @ui.cell_to_attack(player2_name)
       result = @player1.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
       check_if_sunk(cell_to_attack)
     end
+  end
+
+  def end_game(player2_name)
     @ui.display_grid(@grid_display)
-    @ui.declare_winner(attacker)
+    @ui.declare_winner(player2_name)
   end
 
   private

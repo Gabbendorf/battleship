@@ -3,10 +3,10 @@ class ShipsList
   attr_reader :ships
 
   def initialize
-    @ships = {"submarine" => 2,
-              "destroyer" => 2,
-              "cruiser" => 1,
-              "aircraft-carrier" => 1
+    @ships = {"submarine" => 2
+              # "destroyer" => 2,
+              # "cruiser" => 1,
+              # "aircraft-carrier" => 1
             }
   end
 
