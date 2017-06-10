@@ -60,13 +60,16 @@ class Game
 
   def player_places(ship)
     position = @ui.coordinates_and_orientation
-    puts position[:x]
-    puts position[:y]
-    puts ship
-    puts position[:orientation]
-    puts @grid.ships_placed
     while @validations.validate_position_for_ship(position) == :invalid_ship_position
       position = @ui.ask_for_valid_position
+    end
+    while @validations.check_ship_is_inside_grid(ship, position) == :invalid_ship_position
+      position = @ui.ask_for_realistic_position
+      # puts position[:x]
+      # puts position[:y]
+      # puts ship
+      # puts position[:orientation]
+      # puts @grid.ships_placed
     end
     @player.place_ship(
       position[:x],
@@ -74,11 +77,6 @@ class Game
       ship,
       position[:orientation]
     )
-    puts position[:x]
-    puts position[:y]
-    puts ship
-    puts position[:orientation]
-    puts @grid.ships_placed
   end
 
   def check_if_sunk(cell_to_attack)

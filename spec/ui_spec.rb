@@ -114,13 +114,13 @@ RSpec.describe Ui do
   end
 
   it "prints message if input entered let ship go outside grid" do
-    input = StringIO.new("1,a\n")
+    input = StringIO.new("1,a,v\n")
     ui = Ui.new(input, output, grid_display)
 
     cell_to_attack = ui.ask_for_realistic_position
 
     expect(output.string).to include("Ship could not be placed")
-    expect(cell_to_attack).to eq("1,a")
+    expect(cell_to_attack).to eq({:x => 1, :y=> "A", :orientation => :vertical})
   end
 
 end

@@ -79,6 +79,12 @@ class Ui
 
   def ask_for_realistic_position
     @stdout.puts "Ship could not be placed"
-    @stdin.gets.chomp
+    input = @stdin.gets.chomp.split(",")
+    if input[2] == "v"
+      orientation_symbol = :vertical
+    elsif input[2] == "h"
+      orientation_symbol = :horizontal
+    end
+    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
   end
 end
