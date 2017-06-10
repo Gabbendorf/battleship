@@ -68,7 +68,13 @@ class Ui
 
   def ask_for_valid_position
     @stdout.puts "Not valid position:"
-    input = @stdin.gets.chomp
+    input = @stdin.gets.chomp.split(",")
+    if input[2] == "v"
+      orientation_symbol = :vertical
+    elsif input[2] == "h"
+      orientation_symbol = :horizontal
+    end
+    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
   end
 
   def ask_for_realistic_position

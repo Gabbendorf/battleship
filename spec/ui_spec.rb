@@ -110,7 +110,7 @@ RSpec.describe Ui do
     position = ui.ask_for_valid_position
 
     expect(output.string).to include("Not valid position:")
-    expect(position).to eq("1,a,h")
+    expect(position).to eq({:x => 1, :y => "A", :orientation => :horizontal})
   end
 
   it "prints message if input entered let ship go outside grid" do
