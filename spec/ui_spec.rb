@@ -54,7 +54,7 @@ RSpec.describe Ui do
 
     ship = ui.selected_ship(ships_list)
 
-    expect(ship).to eq("submarine")
+    expect(ship).to eq(1)
   end
 
   it "asks for coordinates where to place ship and orientation" do
@@ -93,26 +93,34 @@ RSpec.describe Ui do
     expect(output.string).to include("Congratulations Nic: YOU WON!")
   end
 
-  it "prints message for wrong ship number" do
+  it "prints message for wrong ship number and asks for new number" do
     input = StringIO.new("2\n")
     ui = Ui.new(input, output, grid_display)
 
     number = ui.ask_for_valid_ship_number
 
     expect(output.string).to include("Not valid number:")
-    expect(number).to eq("2")
+    expect(number).to eq(2)
   end
 
-  it "prints message for invalid position for ship to place and cell to attack" do
-    ui.ask_for_valid_position
+  it "prints message for invalid position for ship to place and asks for new position" do
+    input = StringIO.new("1,a,h\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_valid_position
 
     expect(output.string).to include("Not valid position:")
+    expect(position).to eq("1,a,h")
   end
 
   it "prints message if input entered let ship go outside grid" do
-    ui.ask_for_realistic_position
+    input = StringIO.new("1,a\n")
+    ui = Ui.new(input, output, grid_display)
+
+    cell_to_attack = ui.ask_for_realistic_position
 
     expect(output.string).to include("Ship could not be placed")
+    expect(cell_to_attack).to eq("1,a")
   end
 
 end

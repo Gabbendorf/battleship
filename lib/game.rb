@@ -30,7 +30,11 @@ class Game
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player1_name)
       @ui.print_list_of_ships(@ships_list)
-      ship = @ui.selected_ship(@ships_list)
+      ship_number = @ui.selected_ship(@ships_list)
+      while @validations.validate_ship_number(ship_number) == :invalid_ship_number
+        ship_number = @ui.ask_for_valid_ship_number
+      end
+      ship = @ships_list.convert_number_to_name(ship_number)
       @ships_list.delete_selected_ship(ship)
       @ui.display_grid(@grid_display)
       player_places(ship)
@@ -55,7 +59,10 @@ class Game
   private
 
   def player_places(ship)
-    coordinates_and_orientation = @ui.coordinates_and_orientation
+    position = @ui.coordinates_and_orientation
+    while @validations.validate_position_for_ship(position) == :invalid_ship_position
+      position = @ui.ask_for_valid_position
+    end
     @player.place_ship(
       coordinates_and_orientation[:x],
       coordinates_and_orientation[:y],

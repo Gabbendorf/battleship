@@ -32,8 +32,7 @@ class Ui
   end
 
   def selected_ship(ships_list)
-    ship_number = @stdin.gets.chomp.to_i
-    ships_list.convert_number_to_name(ship_number)
+    @stdin.gets.chomp.to_i
   end
 
   def coordinates_and_orientation
@@ -64,14 +63,16 @@ class Ui
 
   def ask_for_valid_ship_number
     @stdout.puts "Not valid number:"
-    @stdin.gets.chomp
+    @stdin.gets.chomp.to_i
   end
 
   def ask_for_valid_position
     @stdout.puts "Not valid position:"
+    @stdin.gets.chomp
   end
 
   def ask_for_realistic_position
     @stdout.puts "Ship could not be placed"
+    @stdin.gets.chomp
   end
 end
