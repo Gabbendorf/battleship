@@ -18,7 +18,7 @@ class Validations
   end
 
   def check_ship_is_inside_grid(ship, input)
-    if not_inside_grid?(split(input)[:orientation], ship.length, split(input)[:letter], split(input)[:number])
+    if not_inside_grid?(input[:orientation], ship.length, input[:y].downcase, input[:x])
       :invalid_placement
     else
       :valid_placement
@@ -48,11 +48,11 @@ class Validations
   end
 
   def invalid_vertically?(orientation, ship_length, letter)
-    orientation == "v" && number_for[letter] < ship_length
+    orientation == :vertical && number_for[letter] < ship_length
   end
 
   def invalid_horizontally?(orientation, ship_length, number)
-    orientation == "h" && (number.to_i + ship_length-1) > 10
+    orientation == :horizontal && (number.to_i + ship_length-1) > 10
   end
 
   def number_for
