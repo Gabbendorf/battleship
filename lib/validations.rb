@@ -3,25 +3,35 @@ class Validations
   def validate_ship_number(number)
     valid_options = [1, 2, 3, 4]
     if !valid_options.include?(number.to_i)
-      :error
+      :invalid_ship_number
+    else
+      :valid_ship_number
     end
   end
 
   def validate_position_for_ship(input)
-    if input_validity(split(input)[:number], split(input)[:letter], split(input)[:orientation]) == :invalid_input
-      :error
+    if invalid_position?(split(input)[:number], split(input)[:letter], split(input)[:orientation])
+      :invalid_ship_position
+
+    else
+      :valid_ship_position
     end
   end
 
   def check_ship_is_inside_grid(ship, input)
     if not_inside_grid?(split(input)[:orientation], ship.length, split(input)[:letter], split(input)[:number])
-      :error
+      :invalid_placement
+    else
+      :valid_placement
     end
   end
 
   def validate_position_to_attack(input)
     if !valid_number?(split(input)[:number]) || !valid_letter?(split(input)[:letter])
-      :error
+      :invalid_attack
+
+    else
+      :valid_attack
     end
   end
 
@@ -54,12 +64,8 @@ class Validations
     }
   end
 
-  def input_validity(number, letter, orientation)
-    if !valid_number?(number) || !valid_letter?(letter) || !valid_orientation?(orientation)
-      return :invalid_input
-    elsif valid_number?(number) && valid_letter?(letter) && valid_orientation?(orientation)
-      return :valid_input
-    end
+  def invalid_position?(number, letter, orientation)
+    !valid_number?(number) || !valid_letter?(letter) || !valid_orientation?(orientation)
   end
 
   def valid_orientation?(orientation)
