@@ -68,7 +68,7 @@ class Ui
 
   def ask_for_valid_position
     @stdout.puts "Not valid position:"
-    @stdin.gets.chomp
+    input = @stdin.gets.chomp
   end
 
   def ask_for_realistic_position

@@ -10,9 +10,8 @@ class Validations
   end
 
   def validate_position_for_ship(input)
-    if invalid_position?(split(input)[:number], split(input)[:letter], split(input)[:orientation])
+    if invalid_position?(input[:x], input[:y], input[:orientation])
       :invalid_ship_position
-
     else
       :valid_ship_position
     end
@@ -29,7 +28,6 @@ class Validations
   def validate_position_to_attack(input)
     if !valid_number?(split(input)[:number]) || !valid_letter?(split(input)[:letter])
       :invalid_attack
-
     else
       :valid_attack
     end
@@ -69,7 +67,7 @@ class Validations
   end
 
   def valid_orientation?(orientation)
-    orientation == "h" || orientation == "v"
+    orientation == :horizontal || orientation == :vertical
   end
 
   def valid_number?(number)
@@ -77,7 +75,7 @@ class Validations
   end
 
   def valid_letter?(letter)
-    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].include?(letter)
+    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].include?(letter.downcase)
   end
 
 end

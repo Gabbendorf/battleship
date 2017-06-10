@@ -28,49 +28,50 @@ RSpec.describe Validations do
 
   describe "checks player's inputs for ship to place are all valid" do
     it "returns :error if 1st coordinate is not number" do
-      output = validations.validate_position_for_ship("a,b,h")
+      ui_output = {:x=> "a", :y=> "b", :orientation=> :horizontal}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:invalid_ship_position)
     end
 
     it "returns :error if 1st coordinate is not valid number" do
-      output = validations.validate_position_for_ship("100,b,h")
+      ui_output = {:x=> "100", :y=> "b", :orientation=> :horizontal}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:invalid_ship_position)
     end
 
     it "returns :error if 2nd coordinate is a number" do
-      output = validations.validate_position_for_ship("1,2,h")
+      ui_output = {:x=> "1", :y=> "2", :orientation=> :horizontal}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:invalid_ship_position)
     end
 
     it "returns :error if 2nd coordinate is an invalid letter" do
-      output = validations.validate_position_for_ship("1,x,h")
+      ui_output = {:x=> "1", :y=> "x", :orientation=> :horizontal}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:invalid_ship_position)
     end
 
-    it "returns :error if 3rd coordinate (orientation) is not valid (vertical case)" do
-      output = validations.validate_position_for_ship("1,b,c")
-
-      expect(output).to eq(:invalid_ship_position)
-    end
-
-    it "returns :error if 3rd coordinate (orientation) is not valid (horizontal case)" do
-      output = validations.validate_position_for_ship("1,b,d")
+    it "returns :error if 3rd coordinate (orientation) is not valid" do
+      ui_output = {:x=> "1", :y=> "b", :orientation=> "c"}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:invalid_ship_position)
     end
 
     it "returns :error if all inputs are invalid" do
-      output = validations.validate_position_for_ship("100,x,c")
+      ui_output = {:x=> "100", :y=> "x", :orientation=> "c"}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:invalid_ship_position)
     end
 
     it "returns nil if all inputs are valid" do
-      output = validations.validate_position_for_ship("1,a,h")
+      ui_output = {:x=> "1".to_i, :y=> "a", :orientation=> :horizontal}
+      output = validations.validate_position_for_ship(ui_output)
 
       expect(output).to eq(:valid_ship_position)
     end
