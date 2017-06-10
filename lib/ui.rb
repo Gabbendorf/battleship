@@ -64,6 +64,7 @@ class Ui
 
   def ask_for_valid_ship_number
     @stdout.puts "Not valid number:"
+    @stdin.gets.chomp
   end
 
   def ask_for_valid_position

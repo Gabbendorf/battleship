@@ -94,9 +94,13 @@ RSpec.describe Ui do
   end
 
   it "prints message for wrong ship number" do
-    ui.ask_for_valid_ship_number
+    input = StringIO.new("2\n")
+    ui = Ui.new(input, output, grid_display)
+
+    number = ui.ask_for_valid_ship_number
 
     expect(output.string).to include("Not valid number:")
+    expect(number).to eq("2")
   end
 
   it "prints message for invalid position for ship to place and cell to attack" do

@@ -4,6 +4,7 @@ require_relative 'player'
 require_relative 'ships_list'
 require_relative 'grid_display'
 require_relative 'ship'
+require_relative 'validations'
 
 class Game
 
@@ -13,6 +14,7 @@ class Game
     @grid = Grid.new
     @player1 = Player.new(@grid)
     @ships_list = ShipsList.new
+    @validations = Validations.new
   end
 
   def start
