@@ -12,7 +12,7 @@ class Game
     @grid_display = GridDisplay.new
     @ui = Ui.new($stdin, $stdout, @grid_display)
     @grid = Grid.new
-    @player1 = Player.new(@grid)
+    @player = Player.new(@grid)
     @ships_list = ShipsList.new
     @validations = Validations.new
   end
@@ -32,7 +32,8 @@ class Game
       @ui.print_list_of_ships(@ships_list)
       ship = @ui.selected_ship(@ships_list)
       @ships_list.delete_selected_ship(ship)
-      coordinates_and_orientation_for(ship)
+      @ui.display_grid(@grid_display)
+      player_places(ship)
     end
   end
 
@@ -40,7 +41,7 @@ class Game
     while !@grid.end_game?
       @ui.display_grid(@grid_display)
       cell_to_attack = @ui.cell_to_attack(player2_name)
-      result = @player1.attack(cell_to_attack)
+      result = @player.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
       check_if_sunk(cell_to_attack)
     end
@@ -53,10 +54,9 @@ class Game
 
   private
 
-  def coordinates_and_orientation_for(ship)
-    @ui.display_grid(@grid_display)
+  def player_places(ship)
     coordinates_and_orientation = @ui.coordinates_and_orientation
-    @player1.place_ship(
+    @player.place_ship(
       coordinates_and_orientation[:x],
       coordinates_and_orientation[:y],
       ship,
