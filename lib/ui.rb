@@ -38,12 +38,7 @@ class Ui
   def coordinates_and_orientation
     @stdout.puts "Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)"
     input = @stdin.gets.chomp.split(",")
-    if input[2] == "v"
-      orientation_symbol = :vertical
-    elsif input[2] == "h"
-      orientation_symbol = :horizontal
-    end
-    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
+    details_for(input)
   end
 
   def ask_name_player2
@@ -69,17 +64,16 @@ class Ui
   def ask_for_valid_position
     @stdout.puts "Not valid position:"
     input = @stdin.gets.chomp.split(",")
-    if input[2] == "v"
-      orientation_symbol = :vertical
-    elsif input[2] == "h"
-      orientation_symbol = :horizontal
-    end
-    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
+    details_for(input)
   end
 
   def ask_for_realistic_position
     @stdout.puts "Ship could not be placed"
     input = @stdin.gets.chomp.split(",")
+    details_for(input)
+  end
+
+  def details_for(input)
     if input[2] == "v"
       orientation_symbol = :vertical
     elsif input[2] == "h"
