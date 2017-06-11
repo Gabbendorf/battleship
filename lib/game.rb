@@ -22,13 +22,13 @@ class Game
   def start
     @ui.welcome
     player1 = @ui.ask_name_player1
-    ask_to_place_ships_on_grid(player1)
+    ships_placement(player1)
     player2 = @ui.ask_name_player2
-    ask_to_attack(player2)
+    ships_attack(player2)
     end_game(player2)
   end
 
-  def ask_to_place_ships_on_grid(player1_name)
+  def ships_placement(player1_name)
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player1_name)
       ship_name = player1_selects_ship
@@ -37,7 +37,7 @@ class Game
     end
   end
 
-  def ask_to_attack(player2_name)
+  def ships_attack(player2_name)
     while !@grid.end_game?
       @ui.display_grid(@grid_display)
       cell_to_attack = valid_cell_to_attack(player2_name)
