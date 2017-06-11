@@ -5,6 +5,7 @@ require_relative 'ships_list'
 require_relative 'grid_display'
 require_relative 'ship'
 require_relative 'validations'
+require_relative 'create_ship'
 
 class Game
 
@@ -15,6 +16,7 @@ class Game
     @player = Player.new(@grid)
     @ships_list = ShipsList.new
     @validations = Validations.new
+    @create_ship = CreateShip.new
   end
 
   def start
@@ -34,10 +36,10 @@ class Game
       while @validations.validate_ship_number(ship_number) == :invalid_ship_number
         ship_number = @ui.ask_for_valid_ship_number
       end
-      ship = @ships_list.convert_number_to_name(ship_number)
-      @ships_list.delete_selected_ship(ship)
+      ship_name = @ships_list.convert_number_to_name(ship_number)
+      @ships_list.delete_selected_ship(ship_name)
       @ui.display_grid(@grid_display)
-      player_places(ship)
+      player_places(@create_ship.ship_from_name(ship_name))
     end
   end
 
