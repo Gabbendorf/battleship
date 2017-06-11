@@ -49,7 +49,9 @@ class Game
       cell_to_attack = @ui.cell_to_attack(player2_name)
       result = @player.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
-      check_if_sunk(cell_to_attack)
+      if result == :hit
+        check_if_sunk(cell_to_attack)
+      end
     end
   end
 
@@ -62,11 +64,14 @@ class Game
 
   def player_places(ship)
     position = @ui.coordinates_and_orientation
-    while @validations.validate_position_for_ship(position) == :invalid_ship_position
-      position = @ui.ask_for_valid_position
-    end
-    while @validations.check_ship_is_inside_grid(ship, position) == :invalid_placement
-      position = @ui.ask_for_realistic_position
+    validation_result = @validations.validate_position_for_ship(ship, position)
+    while validation_result != :valid_ship_position
+      if validation_result == :invalid_ship_position
+        position = @ui.ask_for_valid_position
+      elsif validation_result == :invalid_placement
+        position = @ui.ask_for_realistic_position
+      end
+      validation_result = @validations.validate_position_for_ship(ship, position)
     end
     @player.place_ship(position[:x], position[:y], ship, position[:orientation])
     puts @grid.ships_placed

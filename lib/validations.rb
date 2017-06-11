@@ -9,19 +9,13 @@ class Validations
     end
   end
 
-  def validate_position_for_ship(input)
-    if invalid_position?(input[:x], input[:y], input[:orientation])
+  def validate_position_for_ship(ship, input)
+    if validate_position(input) == :invalid_ship_position
       :invalid_ship_position
-    else
-      :valid_ship_position
-    end
-  end
-
-  def check_ship_is_inside_grid(ship, input)
-    if not_inside_grid?(input[:orientation], ship.length, input[:y].downcase, input[:x])
+    elsif check_ship_is_inside_grid(ship, input) == :invalid_placement
       :invalid_placement
     else
-      :valid_placement
+      :valid_ship_position
     end
   end
 
@@ -83,6 +77,22 @@ class Validations
 
   def valid_letter?(letter)
     ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].include?(letter.downcase)
+  end
+
+  def validate_position(input)
+    if invalid_position?(input[:x], input[:y], input[:orientation])
+      :invalid_ship_position
+    else
+      :valid_ship_position
+    end
+  end
+
+  def check_ship_is_inside_grid(ship, input)
+    if not_inside_grid?(input[:orientation], ship.length, input[:y].downcase, input[:x])
+      :invalid_placement
+    else
+      :valid_placement
+    end
   end
 
 end
