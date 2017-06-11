@@ -20,7 +20,7 @@ class Validations
   end
 
   def validate_position_to_attack(input)
-    if !valid_number?(split(input)[:number]) || !valid_letter?(split(input)[:letter])
+    if !valid_number?(input[0]) || !valid_letter?(input[1])
       :invalid_attack
     else
       :valid_attack
@@ -28,14 +28,6 @@ class Validations
   end
 
   private
-
-  def split(input)
-    details = input.split(",")
-    {:number => details[0].to_i,
-     :letter => details[1],
-     :orientation => details[2]
-   }
-  end
 
   def not_inside_grid?(orientation, ship_length, letter, number)
     orientation == :horizontal ? invalid_horizontally?(ship_length, number) : invalid_vertically?(ship_length, letter)
