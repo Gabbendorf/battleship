@@ -44,15 +44,15 @@ class Validations
   end
 
   def not_inside_grid?(orientation, ship_length, letter, number)
-    invalid_vertically?(orientation, ship_length, letter) || invalid_horizontally?(orientation, ship_length, number)
+    orientation == :horizontal ? invalid_horizontally?(ship_length, number) : invalid_vertically?(ship_length, letter)
   end
 
-  def invalid_vertically?(orientation, ship_length, letter)
-    orientation == :vertical && (number_for[letter] + ship_length-1) > 10
+  def invalid_vertically?(ship_length, letter)
+    (number_for[letter.downcase] + (ship_length-1)) > 10
   end
 
-  def invalid_horizontally?(orientation, ship_length, number)
-    orientation == :horizontal && (number.to_i + ship_length-1) > 10
+  def invalid_horizontally?(ship_length, number)
+    (number.to_i + ship_length-1) > 10
   end
 
   def number_for

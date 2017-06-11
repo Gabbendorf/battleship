@@ -63,7 +63,7 @@ class Game
     while @validations.validate_position_for_ship(position) == :invalid_ship_position
       position = @ui.ask_for_valid_position
     end
-    while @validations.check_ship_is_inside_grid(ship, position) == :invalid_ship_position
+    while @validations.check_ship_is_inside_grid(ship, position) == :invalid_placement
       position = @ui.ask_for_realistic_position
     end
     @player.place_ship(position[:x], position[:y], ship, position[:orientation])
