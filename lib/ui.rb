@@ -73,6 +73,14 @@ class Ui
     details_for(input)
   end
 
+  def ask_for_valid_position_to_attack
+    @stdout.puts "Not valid position:"
+    input = @stdin.gets.chomp.split(",")
+    [input[0].to_i, input[1].capitalize]
+  end
+
+  private
+
   def details_for(input)
     if input[2] == "v"
       orientation_symbol = :vertical
