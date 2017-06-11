@@ -42,10 +42,7 @@ class Game
   def ask_to_attack(player2_name)
     while !@grid.end_game?
       @ui.display_grid(@grid_display)
-      cell_to_attack = @ui.cell_to_attack(player2_name)
-      while @validations.validate_position_to_attack(cell_to_attack) == :invalid_attack
-        cell_to_attack = @ui.ask_for_valid_position_to_attack
-      end
+      cell_to_attack = valid_cell_to_attack(player2_name)
       result = @player.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
       if result == :hit
@@ -60,6 +57,14 @@ class Game
   end
 
   private
+
+  def valid_cell_to_attack(player2_name)
+    cell_to_attack = @ui.cell_to_attack(player2_name)
+    while @validations.validate_position_to_attack(cell_to_attack) == :invalid_attack
+      cell_to_attack = @ui.ask_for_valid_position_to_attack
+    end
+    cell_to_attack
+  end
 
   def valid_ship_number
     ship_number = @ui.selected_ship(@ships_list)
