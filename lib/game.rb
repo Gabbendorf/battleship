@@ -33,7 +33,12 @@ class Game
       @ui.invite_to_select_ship_number(player1_name)
       ship_name = player1_selects_ship
       @ui.display_grid(@grid_display)
-      player1_places_ship(@create_ship.ship_from_name(ship_name))
+      ship = @create_ship.ship_from_name(ship_name)
+      position = valid_position(ship)
+      @player.place_ship(position[:x],
+                         position[:y],
+                         ship,
+                         position[:orientation])
     end
   end
 
@@ -77,7 +82,7 @@ class Game
     ship_number
   end
 
-  def player1_places_ship(ship)
+  def valid_position(ship)
     position = @ui.coordinates_and_orientation
     validation_result = @validations.validate_position_for_ship(ship, position)
     while validation_result != :valid_ship_position
@@ -88,8 +93,7 @@ class Game
       end
       validation_result = @validations.validate_position_for_ship(ship, position)
     end
-    @player.place_ship(position[:x], position[:y], ship, position[:orientation])
-    # puts @grid.ships_placed
+    position
   end
 
   def check_if_sunk(cell_to_attack, result)
