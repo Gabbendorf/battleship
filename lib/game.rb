@@ -32,9 +32,7 @@ class Game
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player1_name)
       @ui.print_list_of_ships(@ships_list)
-      ship_number = @ui.selected_ship(@ships_list)
-      validate_number(ship_number)
-      ship_name = @ships_list.convert_number_to_name(ship_number)
+      ship_name = @ships_list.convert_number_to_name(valid_ship_number)
       @ships_list.delete_selected_ship(ship_name)
       @ui.display_grid(@grid_display)
       player_places(@create_ship.ship_from_name(ship_name))
@@ -63,10 +61,12 @@ class Game
 
   private
 
-  def validate_number(ship_number)
+  def valid_ship_number
+    ship_number = @ui.selected_ship(@ships_list)
     while @validations.validate_ship_number(ship_number) == :invalid_ship_number
       ship_number = @ui.ask_for_valid_ship_number
     end
+    ship_number
   end
 
   def player_places(ship)
