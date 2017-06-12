@@ -3,6 +3,7 @@ class Ui
   def initialize(stdin, stdout, grid_display)
     @stdin = stdin
     @stdout = stdout
+    @grid_display = grid_display
     @grid = Grid.new
   end
 
@@ -15,8 +16,8 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid(grid_display)
-    @stdout.puts grid_display.grid.join("   ")
+  def display_grid
+    @stdout.puts @grid_display.grid.join("   ")
   end
 
   def invite_to_select_ship_number(player1)

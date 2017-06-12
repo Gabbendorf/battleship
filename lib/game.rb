@@ -1,21 +1,12 @@
-require_relative 'ui'
-require_relative 'grid'
-require_relative 'player'
-require_relative 'ships_list'
-require_relative 'grid_display'
-require_relative 'ship'
-require_relative 'validations'
-require_relative 'create_ship'
-
 class Game
 
-  def initialize
-    @grid_display = GridDisplay.new
-    @ui = Ui.new($stdin, $stdout, @grid_display)
-    @grid = Grid.new
-    @player = Player.new(@grid)
-    @ships_list = ShipsList.new
-    @validations = Validations.new
+  def initialize(grid_display, ui, grid, player, ships_list, validations)
+    @grid_display = grid_display
+    @ui = ui
+    @grid = grid
+    @player = player
+    @ships_list = ships_list
+    @validations = validations
     @create_ship = CreateShip.new
   end
 
@@ -31,9 +22,8 @@ class Game
   def ships_placement(player1_name)
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player1_name)
-      ship_name = player1_selects_ship
-      @ui.display_grid(@grid_display)
-      ship = @create_ship.ship_from_name(ship_name)
+      ship = player1_selects_ship
+      @ui.display_grid
       position = valid_position(ship)
       @player.place_ship(position[:x],
                          position[:y],
@@ -44,7 +34,7 @@ class Game
 
   def ships_attack(player2_name)
     while !@grid.end_game?
-      @ui.display_grid(@grid_display)
+      @ui.display_grid
       cell_to_attack = valid_cell_to_attack(player2_name)
       result = @player.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
@@ -53,7 +43,7 @@ class Game
   end
 
   def end_game(player2_name)
-    @ui.display_grid(@grid_display)
+    @ui.display_grid
     @ui.declare_winner(player2_name)
   end
 
@@ -63,7 +53,7 @@ class Game
     @ui.print_list_of_ships(@ships_list)
     ship_name = @ships_list.convert_number_to_name(valid_ship_number)
     @ships_list.delete_selected_ship(ship_name)
-    ship_name
+    @create_ship.ship_from_name(ship_name)
   end
 
   def valid_cell_to_attack(player2_name)
