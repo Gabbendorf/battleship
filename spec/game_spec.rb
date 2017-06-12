@@ -1,37 +1,70 @@
 require 'spec_helper.rb'
 require_relative '../lib/game'
-# require_relative '../lib/ships_list'
-require_relative '../lib/ui'
 
 RSpec.describe Game do
 
   let(:grid_display) {GridDisplay.new}
-  let(:input) {StringIO.new}
   let(:output) {StringIO.new}
-  let(:ui) {Ui.new(input, output, grid_display)}
+  let(:input) {StringIO.new}
   let(:grid) {Grid.new}
   let(:player) {Player.new(grid)}
   let(:ships_list) {ShipsList.new}
-  let(:game) {Game.new(grid_display, ui, grid, player, ships_list, validations)}
+  let(:validations) {Validations.new}
 
-  xit "starts a new game" do
-    ui = double("ui")
-    expect(ui).to receive(:welcome)
-    expect(ui).to receive(:ask_name_player1).and_return("Gabriella")
+  it "starts a new game" do
+    input.puts "Gabriella\n"
+    # places 1st submarine
+    input.puts "10\n" #=> invalid list number
+    input.puts "1\n"
+    input.puts "1,a,k\n" #=> invalid orientation
+    input.puts "1,a,h\n"
+    # places 2nd submarine
+    input.puts "1\n"
+    input.puts "100,b,h\n" #=> invalid number for x
+    input.puts "1,b,h\n"
+    # places 1st destroyer
+    input.puts "1\n"
+    input.puts "1,z,h\n" #=> invalid letter for y
+    input.puts "1,c,h\n"
+    # places 2nd destroyer
+    input.puts "1\n"
+    input.puts "1,d,h\n"
+    # places cruiser
+    input.puts "1\n"
+    input.puts "1,e,h\n"
+    # places aircraft-carrier
+    input.puts "1\n"
+    input.puts "1,f,h\n"
 
+    input.puts "Nicolò\n"
+    # attacks 1st submarine, 1 cell long
+    input.puts "1,k\n" #=> invalid attack (wrong letter)
+    input.puts "1,a\n"
+    # attacks 2nd submarine, 1 cell long
+    input.puts "100,b\n" #=> invalid attack (wrong number)
+    input.puts "1,b\n"
+    # attacks 1st destroyer, 2 cells long
+    input.puts "1,c\n"
+    input.puts "2,c\n"
+    # attacks 2nd destroyer, 2 cells long
+    input.puts "1,d\n"
+    input.puts "2,d\n"
+    # attacks cruiser, 3 cells long
+    input.puts "1,e\n"
+    input.puts "2,e\n"
+    input.puts "3,e\n"
+    # attacks aircraft-carrier, 4 cells long
+    input.puts "1,f\n"
+    input.puts "2,f\n"
+    input.puts "3,f\n"
+    input.puts "4,f\n"
+
+    input.rewind
+    ui = Ui.new(input, output, grid_display)
+    game = Game.new(grid_display, ui, grid, player, ships_list, validations)
     game.start
-  end
 
-  xit "prompts player to choose position for ship from list and to place all of them" do
-    ui = double("ui")
-    player = double("player")
-
-    expect(ui).to receive(:invite_to_select_ship_number).with("Gabriella") { 1 }
-    expect(ui).to receive(:display_grid).with(grid_display)
-    # expect(ui).to receive(:coordinates_and_orientation).and_return({:x => 1, :y => "b", :orientation => :vertical})
-    expect(player).to receive(:place_ship).with(1, "a", ship, :vertical)
-
-    expect(game.ships_placement("Gabriella")).to
+    expect(output.string).to include("Congratulations Nicolò: YOU WON!")
   end
 
 end

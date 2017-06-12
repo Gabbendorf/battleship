@@ -19,6 +19,8 @@ class Game
     end_game(player2)
   end
 
+  private
+
   def ships_placement(player1_name)
     while @ships_list.ships.size > 0
       @ui.invite_to_select_ship_number(player1_name)
@@ -46,8 +48,6 @@ class Game
     @ui.display_grid
     @ui.declare_winner(player2_name)
   end
-
-  private
 
   def player1_selects_ship
     @ui.print_list_of_ships(@ships_list)
