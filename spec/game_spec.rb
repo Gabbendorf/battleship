@@ -37,23 +37,24 @@ RSpec.describe Game do
     input.puts "1,f,h\n"
 
     input.puts "Nicolò\n"
-    # attacks 1st submarine, 1 cell long
+    # 1st submarine sinks, 1 cell long
     input.puts "1,k\n" #=> invalid attack (wrong letter)
     input.puts "1,a\n"
-    # attacks 2nd submarine, 1 cell long
+    # 2nd submarine sinks, 1 cell long
     input.puts "100,b\n" #=> invalid attack (wrong number)
     input.puts "1,b\n"
-    # attacks 1st destroyer, 2 cells long
+    # 1st destroyer sinks, 2 cells long
+    input.puts "9,c\n" #=> returns water
     input.puts "1,c\n"
     input.puts "2,c\n"
-    # attacks 2nd destroyer, 2 cells long
+    # 2nd destroyer sinks, 2 cells long
     input.puts "1,d\n"
     input.puts "2,d\n"
-    # attacks cruiser, 3 cells long
+    # cruiser sinks, 3 cells long
     input.puts "1,e\n"
     input.puts "2,e\n"
     input.puts "3,e\n"
-    # attacks aircraft-carrier, 4 cells long
+    # aircraft-carrier sinks, 4 cells long
     input.puts "1,f\n"
     input.puts "2,f\n"
     input.puts "3,f\n"
