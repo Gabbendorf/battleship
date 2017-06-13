@@ -14,7 +14,7 @@
       <img src="./assets/0.10.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-13T16:39:58+01:00">2017-06-13T16:39:58+01:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-13T16:41:50+01:00">2017-06-13T16:41:50+01:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.62
+         4.4
        </span>
     </span> hits/line)
   </h2>
@@ -57,7 +57,7 @@
         <td>20</td>
         <td>20</td>
         <td>0</td>
-        <td>11.4</td>
+        <td>7.9</td>
       </tr>
       
       <tr>
@@ -87,7 +87,7 @@
         <td>27</td>
         <td>27</td>
         <td>0</td>
-        <td>15.1</td>
+        <td>15.0</td>
       </tr>
       
       <tr>
@@ -107,7 +107,7 @@
         <td>14</td>
         <td>14</td>
         <td>0</td>
-        <td>40.6</td>
+        <td>33.6</td>
       </tr>
       
       <tr>
@@ -444,10 +444,10 @@
           <code class="ruby">    position = []</code>
         </li>
       
-        <li class="covered" data-hits="77" data-linenumber="25">
-          <span class="hits">77</span>
+        <li class="covered" data-hits="7" data-linenumber="25">
+          <span class="hits">7</span>
           
-          <code class="ruby">    position.push((1..10).map {|number| number}.sample)</code>
+          <code class="ruby">    position.push(rand(1..10))</code>
         </li>
       
         <li class="covered" data-hits="77" data-linenumber="26">
@@ -1497,20 +1497,20 @@
           <code class="ruby">    if orientation == :horizontal</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="45">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="18" data-linenumber="45">
+          <span class="hits">18</span>
           
           <code class="ruby">      Orientation.new.horizontal_cells(x, y, ship_length)</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="46">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="11" data-linenumber="46">
+          <span class="hits">11</span>
           
           <code class="ruby">    elsif orientation == :vertical</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="47">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="11" data-linenumber="47">
+          <span class="hits">11</span>
           
           <code class="ruby">      Orientation.new.vertical_cells(x, y, ship_length)</code>
         </li>
@@ -1985,26 +1985,26 @@
           <code class="ruby">  def horizontal_cells(x, y, ship_length)</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="4">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="19" data-linenumber="4">
+          <span class="hits">19</span>
           
           <code class="ruby">    occupied_cells = [[x, y]]</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="5">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="19" data-linenumber="5">
+          <span class="hits">19</span>
           
           <code class="ruby">    (ship_length-1).times do</code>
         </li>
       
-        <li class="covered" data-hits="22" data-linenumber="6">
-          <span class="hits">22</span>
+        <li class="covered" data-hits="27" data-linenumber="6">
+          <span class="hits">27</span>
           
           <code class="ruby">      x += 1</code>
         </li>
       
-        <li class="covered" data-hits="22" data-linenumber="7">
-          <span class="hits">22</span>
+        <li class="covered" data-hits="27" data-linenumber="7">
+          <span class="hits">27</span>
           
           <code class="ruby">      occupied_cells.push([x,y])</code>
         </li>
@@ -2015,8 +2015,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="15" data-linenumber="9">
-          <span class="hits">15</span>
+        <li class="covered" data-hits="19" data-linenumber="9">
+          <span class="hits">19</span>
           
           <code class="ruby">    occupied_cells</code>
         </li>
@@ -2039,32 +2039,32 @@
           <code class="ruby">  def vertical_cells(x, y, ship_length)</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="13">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="12" data-linenumber="13">
+          <span class="hits">12</span>
           
           <code class="ruby">    occupied_cells = [[x, y]]</code>
         </li>
       
-        <li class="covered" data-hits="392" data-linenumber="14">
-          <span class="hits">392</span>
+        <li class="covered" data-hits="294" data-linenumber="14">
+          <span class="hits">294</span>
           
           <code class="ruby">    letters_after = (y..&quot;Z&quot;).map {|letter| letter}</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="15">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="12" data-linenumber="15">
+          <span class="hits">12</span>
           
           <code class="ruby">    (ship_length-1).times do |index|</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="16">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="13" data-linenumber="16">
+          <span class="hits">13</span>
           
           <code class="ruby">      next_letter = letters_after[index+1]</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="17">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="13" data-linenumber="17">
+          <span class="hits">13</span>
           
           <code class="ruby">      occupied_cells.push([x,next_letter])</code>
         </li>
@@ -2075,8 +2075,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="19">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="12" data-linenumber="19">
+          <span class="hits">12</span>
           
           <code class="ruby">    occupied_cells</code>
         </li>

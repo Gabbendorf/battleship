@@ -22,7 +22,7 @@ class Computer
 
   def select_random_position
     position = []
-    position.push((1..10).map {|number| number}.sample)
+    position.push(rand(1..10))
     position.push(("A".."J").map {|letter| letter}.sample)
     position.push([:vertical, :horizontal].sample)
     position
