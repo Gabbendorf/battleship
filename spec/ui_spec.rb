@@ -1,4 +1,4 @@
-require 'spec_helper.rb'
+require 'spec_helper'
 require_relative '../lib/ui'
 require_relative '../lib/ship'
 require_relative '../lib/grid_display'
@@ -57,7 +57,7 @@ RSpec.describe Ui do
     expect(ship).to eq(1)
   end
 
-  it "asks for coordinates where to place ship and orientation" do
+  it "asks for coordinates where to place ship and orientation (vertical case)" do
     input = StringIO.new("1,a,v")
     ui = Ui.new(input, output, grid_display)
 
@@ -65,6 +65,16 @@ RSpec.describe Ui do
 
     expect(output.string).to include("Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)")
     expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => :vertical})
+  end
+
+  it "asks for coordinates where to place ship and orientation (horizontal case)" do
+    input = StringIO.new("1,a,h")
+    ui = Ui.new(input, output, grid_display)
+
+    coordinates_and_orientation = ui.coordinates_and_orientation
+
+    expect(output.string).to include("Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)")
+    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => :horizontal})
   end
 
   it "asks for name of player 2" do

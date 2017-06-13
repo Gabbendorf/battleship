@@ -1,4 +1,4 @@
-require 'spec_helper.rb'
+require 'spec_helper'
 require_relative '../lib/player'
 
 RSpec.describe Player do

@@ -1,4 +1,4 @@
-require 'spec_helper.rb'
+require 'spec_helper'
 require_relative "../lib/ship"
 
 RSpec.describe Ship do
