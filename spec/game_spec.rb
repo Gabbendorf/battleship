@@ -5,67 +5,18 @@ RSpec.describe Game do
 
   let(:grid_display) {GridDisplay.new}
   let(:output) {StringIO.new}
-  let(:input) {StringIO.new}
   let(:grid) {Grid.new}
   let(:player) {Player.new(grid)}
   let(:ships_list) {ShipsList.new}
   let(:validations) {Validations.new}
 
   it "starts a new game" do
-    input.puts "Gabriella\n"
-    # places 1st submarine
-    input.puts "10\n" #=> invalid list number
-    input.puts "1\n"
-    input.puts "1,a,k\n" #=> invalid orientation
-    input.puts "1,a,h\n"
-    # places 2nd submarine
-    input.puts "1\n"
-    input.puts "100,b,h\n" #=> invalid number for x
-    input.puts "1,b,h\n"
-    # places 1st destroyer
-    input.puts "1\n"
-    input.puts "1,z,h\n" #=> invalid letter for y
-    input.puts "1,c,h\n"
-    # places 2nd destroyer
-    input.puts "1\n"
-    input.puts "1,d,h\n"
-    # places cruiser
-    input.puts "1\n"
-    input.puts "1,e,h\n"
-    # places aircraft-carrier
-    input.puts "1\n"
-    input.puts "1,f,h\n"
+    input = StringIO.new("Gabriella\n10\n1\n1,a,k\n1,a,h\n1\n100,b,h\n1,b,h\n1\n1,z,h\n1,c,h\n1\n1,d,h\n1\n1,e,h\n1\n1,f,h\nNicolo\n1,k\n1,a\n100,b\n1,b\n9,c\n1,c\n2,c\n1,d\n2,d\n1,e\n2,e\n3,e\n1,f\n2,f\n3,f\n4,f\n")
 
-    input.puts "Nicolò\n"
-    # 1st submarine sinks, 1 cell long
-    input.puts "1,k\n" #=> invalid attack (wrong letter)
-    input.puts "1,a\n"
-    # 2nd submarine sinks, 1 cell long
-    input.puts "100,b\n" #=> invalid attack (wrong number)
-    input.puts "1,b\n"
-    # 1st destroyer sinks, 2 cells long
-    input.puts "9,c\n" #=> returns water
-    input.puts "1,c\n"
-    input.puts "2,c\n"
-    # 2nd destroyer sinks, 2 cells long
-    input.puts "1,d\n"
-    input.puts "2,d\n"
-    # cruiser sinks, 3 cells long
-    input.puts "1,e\n"
-    input.puts "2,e\n"
-    input.puts "3,e\n"
-    # aircraft-carrier sinks, 4 cells long
-    input.puts "1,f\n"
-    input.puts "2,f\n"
-    input.puts "3,f\n"
-    input.puts "4,f\n"
-
-    input.rewind
     ui = Ui.new(input, output, grid_display)
     game = Game.new(grid_display, ui, grid, player, ships_list, validations)
-    game.start
 
-    expect(output.string).to include("Congratulations Nicolò: YOU WON!")
+    game.start
   end
 
 end
