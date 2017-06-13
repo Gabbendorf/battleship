@@ -8,16 +8,19 @@ class Computer
 
   def place_ship(x, y, ship, orientation)
     while @ships_list.ships.size > 0
-      random_ship_name = select_randomly_ship
+      random_ship = select_randomly_ship
       position = select_random_position
-      ship = @create_ship.ship_from_name(random_ship_name)
-      @grid.mark_ship_positions(position[0], position[1], ship, position[2])
-      @ships_list.delete_selected_ship(random_ship_name)
+      @grid.mark_ship_positions(position[0], position[1], random_ship, position[2])
     end
   end
 
+  private
+
   def select_randomly_ship
-    @ships_list.ships.keys.sample
+    random_ship_name = @ships_list.ships.keys.sample
+    ship = @create_ship.ship_from_name(random_ship_name)
+    @ships_list.delete_selected_ship(random_ship_name)
+    ship
   end
 
   def select_random_position
