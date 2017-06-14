@@ -11,6 +11,11 @@ class Ui
     @stdout.puts "Welcome to Battleship!"
   end
 
+  def ask_to_choose_rival_type
+    @stdout.puts "Do you want to play against human player or computer?"
+    @stdin.gets.chomp.downcase
+  end
+
   def ask_name_player1
     @stdout.puts "Player 1: enter your name"
     @stdin.gets.chomp

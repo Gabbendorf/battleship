@@ -19,6 +19,16 @@ RSpec.describe Ui do
     expect(output.string).to include("Welcome to Battleship!")
   end
 
+  it "asks player to choose between human player or computer to play against" do
+    input = StringIO.new("Computer")
+    ui = Ui.new(input, output, grid_display)
+
+    rival = ui.ask_to_choose_rival_type
+
+    expect(output.string).to include("Do you want to play against human player or computer?")
+    expect(rival).to eq("computer")
+  end
+
   it "asks for name of player 1" do
     input = StringIO.new("Gabriella")
     ui = Ui.new(input, output, grid_display)
