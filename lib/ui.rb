@@ -16,6 +16,10 @@ class Ui
     @stdin.gets.chomp.downcase
   end
 
+  def confirm_ships_were_placed
+    @stdout.puts "Computer placed all ships."
+  end
+
   def ask_name_player1
     @stdout.puts "Player 1: enter your name"
     @stdin.gets.chomp

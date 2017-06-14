@@ -29,6 +29,12 @@ RSpec.describe Ui do
     expect(rival).to eq("computer")
   end
 
+  it "confirms computer placed all ships" do
+    ui.confirm_ships_were_placed
+
+    expect(output.string).to include("Computer placed all ships.")
+  end
+
   it "asks for name of player 1" do
     input = StringIO.new("Gabriella")
     ui = Ui.new(input, output, grid_display)
