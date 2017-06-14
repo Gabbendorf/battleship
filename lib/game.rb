@@ -14,6 +14,15 @@ class Game
   def start
     @ui.welcome
     rival = @ui.ask_to_choose_rival_type
+    human_or_computer_place_ships(rival)
+    player2 = @ui.ask_name_player2
+    ships_attack(player2)
+    end_game(player2)
+  end
+
+  private
+
+  def human_or_computer_place_ships(rival)
     if rival == "computer"
       @computer.place_ship
       @ui.confirm_ships_were_placed
@@ -21,12 +30,7 @@ class Game
       player1 = @ui.ask_name_player1
       ships_placement(player1)
     end
-    player2 = @ui.ask_name_player2
-    ships_attack(player2)
-    end_game(player2)
   end
-
-  private
 
   def ships_placement(player1_name)
     while @ships_list.ships.size > 0
