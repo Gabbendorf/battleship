@@ -1,19 +1,26 @@
 class Game
 
-  def initialize(grid_display, ui, grid, player, ships_list, validations)
+  def initialize(grid_display, ui, grid, player, ships_list, validations, computer)
     @grid_display = grid_display
     @ui = ui
     @grid = grid
     @player = player
     @ships_list = ships_list
     @validations = validations
+    @computer = computer
     @create_ship = CreateShip.new
   end
 
   def start
     @ui.welcome
-    player1 = @ui.ask_name_player1
-    ships_placement(player1)
+    rival = @ui.ask_to_choose_rival_type
+    if rival == "computer"
+      @computer.place_ship
+      @ui.confirm_ships_were_placed
+    else
+      player1 = @ui.ask_name_player1
+      ships_placement(player1)
+    end
     player2 = @ui.ask_name_player2
     ships_attack(player2)
     end_game(player2)
