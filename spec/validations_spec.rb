@@ -1,33 +1,35 @@
 require 'spec_helper'
 require_relative '../lib/validations'
 require_relative '../lib/ship'
+require_relative '../lib/ships_list'
 
 RSpec.describe Validations do
 
   let(:validations) {Validations.new}
+  let(:ships_list) {ShipsList.new}
   let(:destroyer) {Ship.new("destroyer", 2)}
 
   describe "checks player's entered number corresponds to a ship" do
     it "returns :invalid_ship_number for invalid number" do
-      output = validations.validate_ship_number("5")
+      output = validations.validate_ship_number("5", ships_list)
 
       expect(output).to eq(:invalid_ship_number)
     end
 
     it "returns :invalid_ship_number for invalid input type" do
-      output = validations.validate_ship_number("hello")
+      output = validations.validate_ship_number("hello", ships_list)
 
       expect(output).to eq(:invalid_ship_number)
     end
 
     it "returns :valid_ship_number for valid input" do
-      output = validations.validate_ship_number("2")
+      output = validations.validate_ship_number("2", ships_list)
 
       expect(output).to eq(:valid_ship_number)
     end
   end
 
-  describe "checks player's inputs for ship to place are all valid" do
+  describe "checks player's inputs for ship placement is valid" do
     it "returns :invalid_ship_position if 1st coordinate is not number" do
       ui_output = {:x => "a", :y => "b", :orientation => :horizontal}
       output = validations.validate_position_for_ship(destroyer, ui_output)
@@ -58,13 +60,6 @@ RSpec.describe Validations do
 
     it "returns :invalid_ship_position if 3rd coordinate (orientation) is not valid" do
       ui_output = {:x => "1", :y => "b", :orientation => "c"}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
-
-      expect(output).to eq(:invalid_ship_position)
-    end
-
-    it "returns :invalid_ship_position if all inputs are invalid" do
-      ui_output = {:x => "100", :y => "x", :orientation => "c"}
       output = validations.validate_position_for_ship(destroyer, ui_output)
 
       expect(output).to eq(:invalid_ship_position)

@@ -66,7 +66,7 @@ class Game
 
   def valid_ship_number
     ship_number = @ui.selected_ship(@ships_list)
-    while @validations.validate_ship_number(ship_number) == :invalid_ship_number
+    while @validations.validate_ship_number(ship_number, @ships_list) == :invalid_ship_number
       ship_number = @ui.ask_for_valid_ship_number
     end
     ship_number

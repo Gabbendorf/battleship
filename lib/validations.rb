@@ -1,7 +1,7 @@
 class Validations
 
-  def validate_ship_number(number)
-    valid_options = [1, 2, 3, 4]
+  def validate_ship_number(number, ships_list)
+    valid_options = (1..ships_list.ships.size).map {|option| option}
     if !valid_options.include?(number.to_i)
       :invalid_ship_number
     else
