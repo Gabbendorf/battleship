@@ -7,7 +7,7 @@ class Computer
     @create_ship = CreateShip.new
   end
 
-  def place_ship(x, y, ship, orientation)
+  def place_ship
     while @ships_list.ships.size > 0
       random_ship = select_randomly_ship
       position = valid_position(random_ship, select_random_position)
