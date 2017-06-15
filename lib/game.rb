@@ -1,11 +1,9 @@
 class Game
 
-  def initialize(grid_display, ui, grid, ships_list, validations, computer, ships_owner, attacker)
+  def initialize(grid_display, ui, grid, ships_list, validations, computer)
     @grid_display = grid_display
     @ui = ui
     @grid = grid
-    @ships_owner = ships_owner
-    @attacker = attacker
     @ships_list = ships_list
     @validations = validations
     @computer = computer
@@ -16,9 +14,9 @@ class Game
     @ui.welcome
     rival = @ui.ask_to_choose_rival_type
     human_or_computer_place_ships(rival)
-    @attacker = Player.new(@ui.ask_name_player2, @grid)
-    ships_attack
-    end_game
+    attacker = Player.new(@ui.ask_name_player2, @grid)
+    ships_attack(attacker)
+    end_game(attacker)
   end
 
   private
@@ -28,37 +26,37 @@ class Game
       @computer.place_ship
       @ui.confirm_ships_were_placed
     else
-      @ships_owner = Player.new(@ui.ask_name_player1, @grid)
-      ships_placement
+      ships_owner = Player.new(@ui.ask_name_player1, @grid)
+      ships_placement(ships_owner)
     end
   end
 
-  def ships_placement
+  def ships_placement(ships_owner)
     while @ships_list.ships.size > 0
-      @ui.invite_to_select_ship_number(@ships_owner.name)
+      @ui.invite_to_select_ship_number(ships_owner.name)
       ship = player1_selects_ship
       @ui.display_grid
       position = valid_position(ship)
-      @ships_owner.place_ship(position[:x],
+      ships_owner.place_ship(position[:x],
                          position[:y],
                          ship,
                          position[:orientation])
     end
   end
 
-  def ships_attack
+  def ships_attack(attacker)
     while !@grid.end_game?
       @ui.display_grid
-      cell_to_attack = valid_cell_to_attack
-      result = @attacker.attack(cell_to_attack)
+      cell_to_attack = valid_cell_to_attack(attacker)
+      result = attacker.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
       check_if_sunk(cell_to_attack, result)
     end
   end
 
-  def end_game
+  def end_game(attacker)
     @ui.display_grid
-    @ui.declare_winner(@attacker.name)
+    @ui.declare_winner(attacker.name)
   end
 
   def player1_selects_ship
@@ -68,8 +66,8 @@ class Game
     @create_ship.ship_from_name(ship_name)
   end
 
-  def valid_cell_to_attack
-    cell_to_attack = @ui.cell_to_attack(@attacker.name)
+  def valid_cell_to_attack(attacker)
+    cell_to_attack = @ui.cell_to_attack(attacker.name)
     while @validations.validate_position_to_attack(cell_to_attack) == :invalid_attack
       cell_to_attack = @ui.ask_for_valid_position_to_attack
     end
@@ -77,7 +75,7 @@ class Game
   end
 
   def valid_ship_number
-    ship_number = @ui.selected_ship(@ships_list)
+    ship_number = @ui.selected_ship
     while @validations.validate_ship_number(ship_number, @ships_list) == :invalid_ship_number
       ship_number = @ui.ask_for_valid_ship_number
     end

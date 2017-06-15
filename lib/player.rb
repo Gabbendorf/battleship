@@ -1,6 +1,3 @@
-require_relative 'create_ship'
-require_relative 'ship'
-
 class Player
 
   attr_reader :name
@@ -8,8 +5,6 @@ class Player
   def initialize(name, grid)
     @name = name
     @grid = grid
-    @grid_display = GridDisplay.new
-    @create_ship = CreateShip.new
   end
 
   def place_ship(x, y, ship, orientation)

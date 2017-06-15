@@ -4,7 +4,6 @@ class Ui
     @stdin = stdin
     @stdout = stdout
     @grid_display = grid_display
-    @grid = Grid.new
   end
 
   def welcome
@@ -41,7 +40,7 @@ class Ui
     end
   end
 
-  def selected_ship(ships_list)
+  def selected_ship
     @stdin.gets.chomp.to_i
   end
 

@@ -71,7 +71,7 @@ RSpec.describe Ui do
     input = StringIO.new("1")
     ui = Ui.new(input, output, grid_display)
 
-    ship = ui.selected_ship(ships_list)
+    ship = ui.selected_ship
 
     expect(ship).to eq(1)
   end

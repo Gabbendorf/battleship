@@ -3,6 +3,7 @@ require_relative '../lib/player'
 
 RSpec.describe Player do
 
+  let(:grid_display) {GridDisplay.new}
   let(:grid) {Grid.new}
   let(:ships_owner) {Player.new("Gabriella", grid)}
   let(:attacker) {Player.new("Jarkyn", grid)}
