@@ -4,8 +4,6 @@ require_relative "../lib/grid"
 RSpec.describe Grid do
 
   let(:grid) {Grid.new}
-  let(:game) {Game.new(grid)}
-  let(:player) {Player.new(grid)}
 
   describe "registers positions of all ships placed" do
     it "registers submarine with its position in the list of ships placed" do
