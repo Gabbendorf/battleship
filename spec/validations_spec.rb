@@ -140,7 +140,7 @@ RSpec.describe Validations do
       output = validations.validate_position_to_attack([8, "a"])
 
       expect(output).to eq(:valid_attack)
-    end
+    end 
   end
 
 end

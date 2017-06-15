@@ -9,6 +9,7 @@ RSpec.describe Game do
   let(:player) {Player.new(grid)}
   let(:ships_list) {ShipsList.new}
   let(:validations) {Validations.new}
+  let(:computer) {Computer.new(grid, ships_list, validations)}
 
   it "starts a new game" do
     PLAYER1 = "Gabriella\n"
@@ -46,7 +47,7 @@ RSpec.describe Game do
                          WRONG_ATTACK+SINK_SHIP1+SINK_SHIP2+HIT_SHIP3+SINK_SHIP3+HIT_SHIP4+SINK_SHIP4+HIT_SHIP5+HIT2_SHIP5+SINK_SHIP5+HIT_SHIP6+HIT2_SHIP6+HIT3_SHIP6+SINK_SHIP6)
 
     ui = Ui.new(input, output, grid_display)
-    game = Game.new(grid_display, ui, grid, player, ships_list, validations)
+    game = Game.new(grid_display, ui, grid, player, ships_list, validations, computer)
 
     game.start
   end
