@@ -3,6 +3,7 @@ class Ui
   def initialize(stdin, stdout, grid_display)
     @stdin = stdin
     @stdout = stdout
+    @grid_display = grid_display
     @grid = Grid.new
   end
 
@@ -15,8 +16,8 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def display_grid(grid_display)
-    @stdout.puts grid_display.grid.join("   ")
+  def display_grid
+    @stdout.puts @grid_display.grid.join("   ")
   end
 
   def invite_to_select_ship_number(player1)
@@ -32,19 +33,13 @@ class Ui
   end
 
   def selected_ship(ships_list)
-    ship_number = @stdin.gets.chomp.to_i
-    ships_list.convert_number_to_name(ship_number)
+    @stdin.gets.chomp.to_i
   end
 
   def coordinates_and_orientation
     @stdout.puts "Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)"
     input = @stdin.gets.chomp.split(",")
-    if input[2] == "v"
-      orientation_symbol = :vertical
-    elsif input[2] == "h"
-      orientation_symbol = :horizontal
-    end
-    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
+    details_for(input)
   end
 
   def ask_name_player2
@@ -62,4 +57,37 @@ class Ui
     @stdout.puts "Congratulations #{player_name}: YOU WON!"
   end
 
+  def ask_for_valid_ship_number
+    @stdout.puts "Not valid number:"
+    @stdin.gets.chomp.to_i
+  end
+
+  def ask_for_valid_position
+    @stdout.puts "Not valid position:"
+    input = @stdin.gets.chomp.split(",")
+    details_for(input)
+  end
+
+  def ask_for_realistic_position
+    @stdout.puts "Ship could not be placed"
+    input = @stdin.gets.chomp.split(",")
+    details_for(input)
+  end
+
+  def ask_for_valid_position_to_attack
+    @stdout.puts "Not valid position:"
+    input = @stdin.gets.chomp.split(",")
+    [input[0].to_i, input[1].capitalize]
+  end
+
+  private
+
+  def details_for(input)
+    if input[2] == "v"
+      orientation_symbol = :vertical
+    elsif input[2] == "h"
+      orientation_symbol = :horizontal
+    end
+    {:x => input[0].to_i, :y => input[1].capitalize, :orientation => orientation_symbol}
+  end
 end

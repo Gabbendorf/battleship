@@ -9,8 +9,8 @@ class Player
     @create_ship = CreateShip.new
   end
 
-  def place_ship(x, y, ship_name, orientation)
-    @grid.mark_ship_positions(x, y, ship_from_name(ship_name), orientation)
+  def place_ship(x, y, ship, orientation)
+    @grid.mark_ship_positions(x, y, ship, orientation)
   end
 
   def attack(cell_position)
@@ -34,10 +34,6 @@ class Player
     if ship.sunk?
       @grid.add_sunk_ship(ship)
     end
-  end
-
-  def ship_from_name(ship_name)
-    @create_ship.ship_from_name(ship_name)
   end
 
 end

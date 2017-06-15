@@ -30,7 +30,7 @@ RSpec.describe Ui do
   end
 
   it "displays the grid" do
-    ui.display_grid(grid_display)
+    ui.display_grid
 
     expect(output.string).to include("       1   2   3   4   5   6   7   8   9   10   \n   A   .   .   .   .   .   .   .   .   .   .   \n   B   .   .   .   .   .   .   .   .   .   .   \n   C   .   .   .   .   .   .   .   .   .   .   \n   D   .   .   .   .   .   .   .   .   .   .   \n   E   .   .   .   .   .   .   .   .   .   .   \n   F   .   .   .   .   .   .   .   .   .   .   \n   G   .   .   .   .   .   .   .   .   .   .   \n   H   .   .   .   .   .   .   .   .   .   .   \n   I   .   .   .   .   .   .   .   .   .   .   \n   J   .   .   .   .   .   .   .   .   .   .   \n")
 
@@ -54,7 +54,7 @@ RSpec.describe Ui do
 
     ship = ui.selected_ship(ships_list)
 
-    expect(ship).to eq("submarine")
+    expect(ship).to eq(1)
   end
 
   it "asks for coordinates where to place ship and orientation (vertical case)" do
@@ -101,6 +101,46 @@ RSpec.describe Ui do
     ui.declare_winner("Nic")
 
     expect(output.string).to include("Congratulations Nic: YOU WON!")
+  end
+
+  it "prints message for wrong ship number and asks for new number" do
+    input = StringIO.new("2\n")
+    ui = Ui.new(input, output, grid_display)
+
+    number = ui.ask_for_valid_ship_number
+
+    expect(output.string).to include("Not valid number:")
+    expect(number).to eq(2)
+  end
+
+  it "prints message for invalid position for ship to place and asks for new position" do
+    input = StringIO.new("1,a,h\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_valid_position
+
+    expect(output.string).to include("Not valid position:")
+    expect(position).to eq({:x => 1, :y => "A", :orientation => :horizontal})
+  end
+
+  it "prints message if input entered let ship go outside grid" do
+    input = StringIO.new("1,a,v\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_realistic_position
+
+    expect(output.string).to include("Ship could not be placed")
+    expect(position).to eq({:x => 1, :y=> "A", :orientation => :vertical})
+  end
+
+  it "prints message if invalid position to attack" do
+    input = StringIO.new("1,a\n")
+    ui = Ui.new(input, output, grid_display)
+
+    cell_to_attack = ui.ask_for_valid_position_to_attack
+
+    expect(output.string).to include("Not valid position:")
+    expect(cell_to_attack).to eq([1, "A"])
   end
 
 end

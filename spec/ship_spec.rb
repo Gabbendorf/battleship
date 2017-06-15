@@ -15,7 +15,6 @@ RSpec.describe Ship do
 
   it "keeps track of its cells hit" do
     aircraft_carrier = Ship.new("aircraft-carrier", 4)
-    grid.mark_ship_positions(2, "B", aircraft_carrier, :vertical)
     attacked_cell1 = [2, "D"]
     attacked_cell2 = [2, "E"]
 
@@ -27,7 +26,6 @@ RSpec.describe Ship do
 
   it "returns true if it is sunk" do
     destroyer = Ship.new("destroyer", 2)
-    grid.mark_ship_positions(5, "B", destroyer, :horizontal)
     attacked_cell1 = [5, "B"]
     attacked_cell2 = [6, "B"]
 
@@ -39,7 +37,6 @@ RSpec.describe Ship do
 
   it "returns false if it is not sunk" do
     destroyer = Ship.new("destroyer", 2)
-    grid.mark_ship_positions(5, "B", destroyer, :horizontal)
     attacked_cell1 = [5, "B"]
 
     destroyer.register_cells_hit(attacked_cell1)
@@ -49,7 +46,6 @@ RSpec.describe Ship do
 
   it "cannot register multiple times same cell hit" do
     destroyer = Ship.new("destroyer", 2)
-    grid.mark_ship_positions(5, "B", destroyer, :horizontal)
     attacked_cell1 = [5, "B"]
     attacked_cell2 = [5, "C"]
 
