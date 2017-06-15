@@ -47,6 +47,8 @@ RSpec.describe Game do
     ui = Ui.new(input, output, grid_display)
     game = Game.new(grid_display, ui, grid, ships_list, validations, computer)
     game.start
+
+    expect(grid.end_game?).to eq(true)
   end
 
 end
