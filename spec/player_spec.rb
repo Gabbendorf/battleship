@@ -4,13 +4,14 @@ require_relative '../lib/player'
 RSpec.describe Player do
 
   let(:grid) {Grid.new}
-  let(:player) {Player.new(grid)}
+  let(:ships_owner) {Player.new("Gabriella", grid)}
+  let(:attacker) {Player.new("Jarkyn", grid)}
 
   it "places ship on grid" do
     submarine = Ship.new("submarine", 1)
     destroyer = Ship.new("destroyer", 2)
-    player.place_ship(2, "A", submarine, :horizontal)
-    player.place_ship(3, "B", destroyer, :vertical)
+    ships_owner.place_ship(2, "A", submarine, :horizontal)
+    ships_owner.place_ship(3, "B", destroyer, :vertical)
 
     submarine = grid.ships_placed.keys[0]
     destroyer = grid.ships_placed.keys[1]
@@ -25,7 +26,7 @@ RSpec.describe Player do
       grid.mark_ship_positions(5, "B", destroyer, :vertical)
       cell_to_attack = [8, "B"]
 
-      result = player.attack(cell_to_attack)
+      result = attacker.attack(cell_to_attack)
 
       expect(result).to eq(:water)
     end
@@ -38,7 +39,7 @@ RSpec.describe Player do
 
       cell_hit = destroyer.register_cells_hit(cell_to_attack).to_a
       sunk_ships = grid.add_sunk_ship(destroyer)
-      result = player.attack(cell_to_attack)
+      result = attacker.attack(cell_to_attack)
 
       expect(result).to eq(:hit)
       expect(cell_hit).to eq([[5, "B"]])

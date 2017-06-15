@@ -12,6 +12,9 @@ RSpec.describe Ui do
   let(:ui) {Ui.new(input, output, grid_display)}
   let(:ship) {Ship.new}
   let(:ships_list) {ShipsList.new}
+  let(:grid) {Grid.new}
+  let(:ships_owner) {Player.new("Gabriella", grid)}
+  let(:attacker) {Player.new("Nic", grid)}
 
   it "welcomes the players" do
     ui.welcome
@@ -36,7 +39,7 @@ RSpec.describe Ui do
   end
 
   it "asks for name of player 1" do
-    input = StringIO.new("Gabriella")
+    input = StringIO.new(ships_owner.name)
     ui = Ui.new(input, output, grid_display)
 
     player_name = ui.ask_name_player1
@@ -53,7 +56,7 @@ RSpec.describe Ui do
   end
 
   it "invites player 1 to choose number for ship to place" do
-    ui.invite_to_select_ship_number("Gabriella")
+    ui.invite_to_select_ship_number(ships_owner.name)
 
     expect(output.string).to include("Gabriella, choose a number for ship to place:")
   end
@@ -107,14 +110,14 @@ RSpec.describe Ui do
     input = StringIO.new("1,a")
     ui = Ui.new(input, output, grid_display)
 
-    cell_to_attack = ui.cell_to_attack("Gabriella")
+    cell_to_attack = ui.cell_to_attack(attacker.name)
 
-    expect(output.string).to include("Gabriella, where do you want to attack (ex. 3,b)?")
+    expect(output.string).to include("Nic, where do you want to attack (ex. 3,b)?")
     expect(cell_to_attack).to eq([1, "A"])
   end
 
   it "declares a winner" do
-    ui.declare_winner("Nic")
+    ui.declare_winner(attacker.name)
 
     expect(output.string).to include("Congratulations Nic: YOU WON!")
   end

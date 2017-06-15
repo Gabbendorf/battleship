@@ -29,8 +29,8 @@ class Ui
     @stdout.puts @grid_display.grid.join("   ")
   end
 
-  def invite_to_select_ship_number(player1)
-    @stdout.puts "#{player1}, choose a number for ship to place:"
+  def invite_to_select_ship_number(ships_owner_name)
+    @stdout.puts "#{ships_owner_name}, choose a number for ship to place:"
   end
 
   def print_list_of_ships(list)
@@ -56,14 +56,14 @@ class Ui
     @stdin.gets.chomp
   end
 
-  def cell_to_attack(player_name)
-    @stdout.puts "#{player_name}, where do you want to attack (ex. 3,b)?"
+  def cell_to_attack(attacker_name)
+    @stdout.puts "#{attacker_name}, where do you want to attack (ex. 3,b)?"
     input = @stdin.gets.chomp.split(",")
     [input[0].to_i, input[1].capitalize]
   end
 
-  def declare_winner(player_name)
-    @stdout.puts "Congratulations #{player_name}: YOU WON!"
+  def declare_winner(attacker_name)
+    @stdout.puts "Congratulations #{attacker_name}: YOU WON!"
   end
 
   def ask_for_valid_ship_number

@@ -1,3 +1,5 @@
+require_relative 'create_ship'
+
 class Computer
 
   def initialize(grid, ships_list, validations)

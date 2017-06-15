@@ -3,7 +3,10 @@ require_relative 'ship'
 
 class Player
 
-  def initialize(grid)
+  attr_reader :name
+
+  def initialize(name, grid)
+    @name = name
     @grid = grid
     @grid_display = GridDisplay.new
     @create_ship = CreateShip.new
