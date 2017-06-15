@@ -18,6 +18,10 @@ class GridDisplay
             ]
   end
 
+  def prepare_grid
+    @grid.join("   ")
+  end
+
   def hit(position)
     row = position[1]
     column = position[0]

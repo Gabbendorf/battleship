@@ -5,6 +5,10 @@ RSpec.describe GridDisplay do
 
   let(:grid_display) {GridDisplay.new}
 
+  it "creates visual representation of grid" do
+    expect(grid_display.prepare_grid).to eq("       1   2   3   4   5   6   7   8   9   10   \n   A   .   .   .   .   .   .   .   .   .   .   \n   B   .   .   .   .   .   .   .   .   .   .   \n   C   .   .   .   .   .   .   .   .   .   .   \n   D   .   .   .   .   .   .   .   .   .   .   \n   E   .   .   .   .   .   .   .   .   .   .   \n   F   .   .   .   .   .   .   .   .   .   .   \n   G   .   .   .   .   .   .   .   .   .   .   \n   H   .   .   .   .   .   .   .   .   .   .   \n   I   .   .   .   .   .   .   .   .   .   .   \n   J   .   .   .   .   .   .   .   .   .   .   \n")
+  end
+
   describe "updates the grid by adding H for 'hit'" do
     it "adds H for position [1, a]" do
        grid_display.hit([1, "A"])

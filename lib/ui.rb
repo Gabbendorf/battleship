@@ -25,7 +25,7 @@ class Ui
   end
 
   def display_grid
-    @stdout.puts @grid_display.grid.join("   ")
+    @stdout.puts @grid_display.prepare_grid
   end
 
   def invite_to_select_ship_number(ships_owner_name)
