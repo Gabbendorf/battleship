@@ -76,7 +76,7 @@ RSpec.describe Ui do
     expect(ship).to eq(1)
   end
 
-  it "asks for coordinates where to place ship and orientation (vertical case)" do
+  it "asks for coordinates and orientation to place ship, checks it and returns hash" do
     input = StringIO.new("1,a,v")
     ui = Ui.new(input, output, grid_display)
 
@@ -86,14 +86,14 @@ RSpec.describe Ui do
     expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => :vertical})
   end
 
-  it "asks for coordinates where to place ship and orientation (horizontal case)" do
-    input = StringIO.new("1,a,h")
+  it "asks for coordinates and orientation to place ship, checks them and returns hash with invalid values if invalid input" do
+    input = StringIO.new("1,a,")
     ui = Ui.new(input, output, grid_display)
 
     coordinates_and_orientation = ui.coordinates_and_orientation
 
     expect(output.string).to include("Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)")
-    expect(coordinates_and_orientation).to eq({:x => 1, :y=> "A", :orientation => :horizontal})
+    expect(coordinates_and_orientation).to eq({:x => 0, :y=> "", :orientation => nil})
   end
 
   it "asks for name of player 2" do
@@ -106,7 +106,7 @@ RSpec.describe Ui do
     expect(player_name).to eq("Gabriella")
   end
 
-  it "asks for coordinates x,y to attack" do
+  it "asks for coordinates x,y to attack, checks them and returns array" do
     input = StringIO.new("1,a")
     ui = Ui.new(input, output, grid_display)
 
@@ -114,6 +114,16 @@ RSpec.describe Ui do
 
     expect(output.string).to include("Nic, where do you want to attack (ex. 3,b)?")
     expect(cell_to_attack).to eq([1, "A"])
+  end
+
+  it "asks for coordinates x,y to attack, checks them and returns array with invalid elements if invalid input" do
+    input = StringIO.new("1,")
+    ui = Ui.new(input, output, grid_display)
+
+    cell_to_attack = ui.cell_to_attack(attacker.name)
+
+    expect(output.string).to include("Nic, where do you want to attack (ex. 3,b)?")
+    expect(cell_to_attack).to eq([0, ""])
   end
 
   it "declares a winner" do
@@ -132,7 +142,7 @@ RSpec.describe Ui do
     expect(number).to eq(2)
   end
 
-  it "prints message for invalid position for ship to place and asks for new position" do
+  it "asks again for valid position for ship placement, checks it and returns hash" do
     input = StringIO.new("1,a,h\n")
     ui = Ui.new(input, output, grid_display)
 
@@ -142,7 +152,17 @@ RSpec.describe Ui do
     expect(position).to eq({:x => 1, :y => "A", :orientation => :horizontal})
   end
 
-  it "prints message if input entered let ship go outside grid" do
+  it "asks again for valid position for ship placement, checks it and returns hash with invalid values if invalid input" do
+    input = StringIO.new("\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_valid_position
+
+    expect(output.string).to include("Not valid position:")
+    expect(position).to eq({:x => 0, :y => "", :orientation => nil})
+  end
+
+  it "asks for new position if ship goes outside grid, checks it and returns hash" do
     input = StringIO.new("1,a,v\n")
     ui = Ui.new(input, output, grid_display)
 
@@ -152,7 +172,17 @@ RSpec.describe Ui do
     expect(position).to eq({:x => 1, :y=> "A", :orientation => :vertical})
   end
 
-  it "prints message if invalid position to attack" do
+  it "asks for new position if ship goes outside grid, checks it and returns hash with invalid values if invalid input" do
+    input = StringIO.new("1\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_realistic_position
+
+    expect(output.string).to include("Ship could not be placed")
+    expect(position).to eq({:x => 0, :y=> "", :orientation => nil})
+  end
+
+  it "asks for valid position to attack, checks it and returns array" do
     input = StringIO.new("1,a\n")
     ui = Ui.new(input, output, grid_display)
 
@@ -160,6 +190,16 @@ RSpec.describe Ui do
 
     expect(output.string).to include("Not valid position:")
     expect(cell_to_attack).to eq([1, "A"])
+  end
+
+  it "asks for valid position to attack, checks it and returns array with invalid elements if invalid input" do
+    input = StringIO.new("1a\n")
+    ui = Ui.new(input, output, grid_display)
+
+    cell_to_attack = ui.ask_for_valid_position_to_attack
+
+    expect(output.string).to include("Not valid position:")
+    expect(cell_to_attack).to eq([0, ""])
   end
 
 end

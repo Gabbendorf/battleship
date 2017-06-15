@@ -48,6 +48,7 @@ class Ui
   def coordinates_and_orientation
     @stdout.puts "Choose 2 coordinates X,Y and an orientation h for 'horizontal' or v for 'vertical' (ex. 2,b,h)"
     input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_hash(input)
     details_for(input)
   end
 
@@ -59,6 +60,7 @@ class Ui
   def cell_to_attack(attacker_name)
     @stdout.puts "#{attacker_name}, where do you want to attack (ex. 3,b)?"
     input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_array(input)
     [input[0].to_i, input[1].capitalize]
   end
 
@@ -74,22 +76,41 @@ class Ui
   def ask_for_valid_position
     @stdout.puts "Not valid position:"
     input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_hash(input)
     details_for(input)
   end
 
   def ask_for_realistic_position
     @stdout.puts "Ship could not be placed"
     input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_hash(input)
     details_for(input)
   end
 
   def ask_for_valid_position_to_attack
     @stdout.puts "Not valid position:"
     input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_array(input)
     [input[0].to_i, input[1].capitalize]
   end
 
   private
+
+  def first_validation_for_array(input)
+    if input.size < 2
+      input = ["", ""]
+    else
+      input
+    end
+  end
+
+  def first_validation_for_hash(input)
+    if input.size < 3
+      input = ["", "", ""]
+    else
+      input
+    end
+  end
 
   def details_for(input)
     if input[2] == "v"
