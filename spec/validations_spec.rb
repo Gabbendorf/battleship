@@ -1,11 +1,10 @@
 require 'spec_helper'
 require_relative '../lib/validations'
-require_relative '../lib/ship'
-require_relative '../lib/ships_list'
 
 RSpec.describe Validations do
 
-  let(:validations) {Validations.new}
+  let(:grid_display) {GridDisplay.new}
+  let(:validations) {Validations.new(grid_display)}
   let(:ships_list) {ShipsList.new}
   let(:destroyer) {Ship.new("destroyer", 2)}
 
@@ -140,7 +139,7 @@ RSpec.describe Validations do
       output = validations.validate_position_to_attack([8, "a"])
 
       expect(output).to eq(:valid_attack)
-    end 
+    end
   end
 
 end

@@ -145,4 +145,8 @@ RSpec.describe GridDisplay do
      end
   end
 
+  it "converts letters to numbers" do
+    expect(grid_display.number_of["A"]).to eq(1)
+  end
+
 end

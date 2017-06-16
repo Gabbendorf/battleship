@@ -7,7 +7,8 @@ RSpec.describe Game do
   let(:grid) {Grid.new}
   let(:output) {StringIO.new}
   let(:ships_list) {ShipsList.new}
-  let(:validations) {Validations.new}
+  let(:grid_display) {GridDisplay.new}
+  let(:validations) {Validations.new(grid_display)}
   let(:computer) {Computer.new(grid, ships_list, validations)}
 
   it "starts a new game" do

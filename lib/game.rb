@@ -1,3 +1,5 @@
+require_relative 'player'
+
 class Game
 
   def initialize(grid_display, ui, grid, ships_list, validations, computer)

@@ -10,8 +10,8 @@ grid_display = GridDisplay.new
 ui = Ui.new($stdin, $stdout, grid_display)
 grid = Grid.new
 ships_list = ShipsList.new
-validations = Validations.new
+validations = Validations.new(grid_display)
 computer = Computer.new(grid, ships_list, validations)
-new_game = Game.new(grid_display, ui, grid, ships_list, validations, computer, attacker, ships_owner)
+new_game = Game.new(grid_display, ui, grid, ships_list, validations, computer)
 
 new_game.start

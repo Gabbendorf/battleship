@@ -1,8 +1,5 @@
 require 'spec_helper'
 require_relative '../lib/ui'
-require_relative '../lib/ship'
-require_relative '../lib/grid_display'
-require_relative '../lib/ships_list'
 
 RSpec.describe Ui do
 

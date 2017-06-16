@@ -50,8 +50,6 @@ class GridDisplay
     end
   end
 
-  private
-
   def number_of
     {"A" => 1,
      "B" => 2,

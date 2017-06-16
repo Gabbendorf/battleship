@@ -1,5 +1,10 @@
 class Validations
 
+  def initialize(grid_display)
+    @grid_display = grid_display
+  end
+
+
   def validate_ship_number(number, ships_list)
     valid_options = (1..ships_list.ships.size).map {|option| option}
     if !valid_options.include?(number.to_i)
@@ -34,25 +39,11 @@ class Validations
   end
 
   def invalid_vertically?(ship_length, letter)
-    (number_for[letter.downcase] + (ship_length-1)) > 10
+    (@grid_display.number_of[letter.upcase] + (ship_length-1)) > 10
   end
 
   def invalid_horizontally?(ship_length, number)
     (number.to_i + ship_length-1) > 10
-  end
-
-  def number_for
-    {"a" => 1,
-     "b" => 2,
-     "c" => 3,
-     "d" => 4,
-     "e" => 5,
-     "f" => 6,
-     "g" => 7,
-     "h" => 8,
-     "i" => 9,
-     "j" => 10
-    }
   end
 
   def invalid_position?(number, letter, orientation)
@@ -64,11 +55,11 @@ class Validations
   end
 
   def valid_number?(number)
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].include?(number)
+    @grid_display.grid[0].include?(number)
   end
 
   def valid_letter?(letter)
-    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].include?(letter.downcase)
+    @grid_display.grid.map {|array| array[0]}.include?(letter.capitalize)
   end
 
   def validate_position(input)

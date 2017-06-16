@@ -5,7 +5,8 @@ RSpec.describe Computer do
 
   let(:grid) {Grid.new}
   let(:ships_list) {ShipsList.new}
-  let(:validations) {Validations.new}
+  let(:grid_display) {GridDisplay.new}
+  let(:validations) {Validations.new(grid_display)}
   let(:computer) {Computer.new(grid, ships_list, validations)}
 
   it "places ship on grid from list of 6 ships randomly" do
