@@ -38,4 +38,24 @@ RSpec.describe ShipsList do
     expect(ship_name).to eq("destroyer")
   end
 
+  describe "checks player's entered number corresponds to a ship" do
+    it "returns :invalid_ship_number for invalid number" do
+      output = ships_list.validate("5")
+
+      expect(output).to eq(:invalid_ship_number)
+    end
+
+    it "returns :invalid_ship_number for invalid input type" do
+      output = ships_list.validate("hello")
+
+      expect(output).to eq(:invalid_ship_number)
+    end
+
+    it "returns :valid_ship_number for valid input" do
+      output = ships_list.validate("2")
+
+      expect(output).to eq(:valid_ship_number)
+    end
+  end
+
 end

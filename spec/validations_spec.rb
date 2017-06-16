@@ -5,28 +5,7 @@ RSpec.describe Validations do
 
   let(:grid_display) {GridDisplay.new}
   let(:validations) {Validations.new(grid_display)}
-  let(:ships_list) {ShipsList.new}
   let(:destroyer) {Ship.new("destroyer", 2)}
-
-  describe "checks player's entered number corresponds to a ship" do
-    it "returns :invalid_ship_number for invalid number" do
-      output = validations.validate_ship_number("5", ships_list)
-
-      expect(output).to eq(:invalid_ship_number)
-    end
-
-    it "returns :invalid_ship_number for invalid input type" do
-      output = validations.validate_ship_number("hello", ships_list)
-
-      expect(output).to eq(:invalid_ship_number)
-    end
-
-    it "returns :valid_ship_number for valid input" do
-      output = validations.validate_ship_number("2", ships_list)
-
-      expect(output).to eq(:valid_ship_number)
-    end
-  end
 
   describe "checks player's inputs for ship placement is valid" do
     it "returns :invalid_ship_position if 1st coordinate is not number" do

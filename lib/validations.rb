@@ -4,16 +4,6 @@ class Validations
     @grid_display = grid_display
   end
 
-
-  def validate_ship_number(number, ships_list)
-    valid_options = (1..ships_list.ships.size).map {|option| option}
-    if !valid_options.include?(number.to_i)
-      :invalid_ship_number
-    else
-      :valid_ship_number
-    end
-  end
-
   def validate_position_for_ship(ship, input)
     if validate_position(input) == :invalid_ship_position
       :invalid_ship_position
