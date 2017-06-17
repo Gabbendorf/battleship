@@ -3,7 +3,7 @@ require_relative '../lib/grid_display'
 
 RSpec.describe GridDisplay do
 
-  let(:grid_display) {GridDisplay.new}
+  let(:grid_display) {GridDisplay.new(10)}
 
   it "creates visual representation of grid" do
     expect(grid_display.prepare_grid).to eq("       1   2   3   4   5   6   7   8   9   10   \n   A   .   .   .   .   .   .   .   .   .   .   \n   B   .   .   .   .   .   .   .   .   .   .   \n   C   .   .   .   .   .   .   .   .   .   .   \n   D   .   .   .   .   .   .   .   .   .   .   \n   E   .   .   .   .   .   .   .   .   .   .   \n   F   .   .   .   .   .   .   .   .   .   .   \n   G   .   .   .   .   .   .   .   .   .   .   \n   H   .   .   .   .   .   .   .   .   .   .   \n   I   .   .   .   .   .   .   .   .   .   .   \n   J   .   .   .   .   .   .   .   .   .   .   \n")
@@ -13,7 +13,7 @@ RSpec.describe GridDisplay do
     it "adds H for position [1, a]" do
        grid_display.hit([1, "A"])
 
-       grid_position = grid_display.grid[1][1]
+       grid_position = grid_display.representation[1][1]
 
        expect(grid_position).to eq("H")
     end
@@ -21,7 +21,7 @@ RSpec.describe GridDisplay do
     it "adds H for position [1, b]" do
        grid_display.hit([1, "B"])
 
-       grid_position = grid_display.grid[2][1]
+       grid_position = grid_display.representation[2][1]
 
        expect(grid_position).to eq("H")
     end
@@ -29,7 +29,7 @@ RSpec.describe GridDisplay do
     it "adds H for position [3, c]" do
        grid_display.hit([3, "C"])
 
-       grid_position = grid_display.grid[3][3]
+       grid_position = grid_display.representation[3][3]
 
        expect(grid_position).to eq("H")
     end
@@ -37,7 +37,7 @@ RSpec.describe GridDisplay do
     it "adds H for position [4, c]" do
        grid_display.hit([4, "C"])
 
-       grid_position = grid_display.grid[3][4]
+       grid_position = grid_display.representation[3][4]
 
        expect(grid_position).to eq("H")
     end
@@ -47,7 +47,7 @@ RSpec.describe GridDisplay do
     it "adds W for position [1, a]" do
         grid_display.water([1, "A"])
 
-        grid_position = grid_display.grid[1][1]
+        grid_position = grid_display.representation[1][1]
 
         expect(grid_position).to eq("W")
     end
@@ -55,7 +55,7 @@ RSpec.describe GridDisplay do
     it "adds W for position [1, b]" do
       grid_display.water([1, "B"])
 
-      grid_position = grid_display.grid[2][1]
+      grid_position = grid_display.representation[2][1]
 
       expect(grid_position).to eq("W")
     end
@@ -63,7 +63,7 @@ RSpec.describe GridDisplay do
     it "adds W for position [3, c]" do
       grid_display.water([3, "C"])
 
-      grid_position = grid_display.grid[3][3]
+      grid_position = grid_display.representation[3][3]
 
       expect(grid_position).to eq("W")
     end
@@ -71,7 +71,7 @@ RSpec.describe GridDisplay do
     it "adds W for position [4, c]" do
       grid_display.water([4, "C"])
 
-      grid_position = grid_display.grid[3][4]
+      grid_position = grid_display.representation[3][4]
 
       expect(grid_position).to eq("W")
     end
@@ -81,7 +81,7 @@ RSpec.describe GridDisplay do
      it "adds S for position [1, a]" do
        grid_display.sunk([[1, "A"]])
 
-       grid_position = grid_display.grid[1][1]
+       grid_position = grid_display.representation[1][1]
 
        expect(grid_position).to eq("S")
      end
@@ -89,8 +89,8 @@ RSpec.describe GridDisplay do
      it "adds S for positions [1, a] and [1, b]" do
        grid_display.sunk([[1, "A"], [1, "B"]])
 
-       grid_position1 = grid_display.grid[1][1]
-       grid_position2 = grid_display.grid[2][1]
+       grid_position1 = grid_display.representation[1][1]
+       grid_position2 = grid_display.representation[2][1]
 
        expect(grid_position1).to eq("S")
        expect(grid_position2).to eq("S")
@@ -99,9 +99,9 @@ RSpec.describe GridDisplay do
      it "adds S for positions [1, a], [1, b] and [1, c]" do
        grid_display.sunk([[1, "A"], [1, "B"], [1, "C"]])
 
-       grid_position1 = grid_display.grid[1][1]
-       grid_position2 = grid_display.grid[2][1]
-       grid_position3 = grid_display.grid[3][1]
+       grid_position1 = grid_display.representation[1][1]
+       grid_position2 = grid_display.representation[2][1]
+       grid_position3 = grid_display.representation[3][1]
 
        expect(grid_position1).to eq("S")
        expect(grid_position2).to eq("S")
@@ -111,10 +111,10 @@ RSpec.describe GridDisplay do
      it "adds S for positions [1, a], [1, b], [1, c] and [1, d]" do
        grid_display.sunk([[1, "A"], [1, "B"], [1, "C"], [1, "D"]])
 
-       grid_position1 = grid_display.grid[1][1]
-       grid_position2 = grid_display.grid[2][1]
-       grid_position3 = grid_display.grid[3][1]
-       grid_position4 = grid_display.grid[4][1]
+       grid_position1 = grid_display.representation[1][1]
+       grid_position2 = grid_display.representation[2][1]
+       grid_position3 = grid_display.representation[3][1]
+       grid_position4 = grid_display.representation[4][1]
 
        expect(grid_position1).to eq("S")
        expect(grid_position2).to eq("S")
@@ -129,7 +129,7 @@ RSpec.describe GridDisplay do
        attacked_cell = [1, "A"]
        grid_display.update_grid(result, attacked_cell)
 
-       grid_position = grid_display.grid[1][1]
+       grid_position = grid_display.representation[1][1]
 
        expect(grid_position).to eq("H")
      end
@@ -139,14 +139,10 @@ RSpec.describe GridDisplay do
        attacked_cell = [1, "A"]
        grid_display.update_grid(result, attacked_cell)
 
-       grid_position = grid_display.grid[1][1]
+       grid_position = grid_display.representation[1][1]
 
        expect(grid_position).to eq("W")
      end
-  end
-
-  it "converts letters to numbers" do
-    expect(grid_display.number_of["A"]).to eq(1)
   end
 
 end

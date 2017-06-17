@@ -6,9 +6,9 @@ require_relative 'validations'
 require_relative 'grid_display'
 require_relative 'computer'
 
-grid_display = GridDisplay.new
-ui = Ui.new($stdin, $stdout, grid_display)
 grid = Grid.new(10)
+grid_display = GridDisplay.new(grid.size)
+ui = Ui.new($stdin, $stdout, grid_display)
 ships_list = ShipsList.new
 validations = Validations.new(grid_display)
 computer = Computer.new(grid, ships_list, validations)

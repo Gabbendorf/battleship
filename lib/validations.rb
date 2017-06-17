@@ -15,10 +15,10 @@ class Validations
   private
 
   def valid_number?(number)
-    @grid_display.grid[0].include?(number)
+    @grid_display.representation[0].include?(number)
   end
 
   def valid_letter?(letter)
-    @grid_display.grid.map {|array| array[0]}.include?(letter.capitalize)
+    @grid_display.representation.map {|array| array[0]}.include?(letter.capitalize)
   end
 end

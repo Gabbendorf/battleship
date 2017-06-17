@@ -3,13 +3,13 @@ require_relative '../lib/ui'
 
 RSpec.describe Ui do
 
-  let(:grid_display) {GridDisplay.new}
+  let(:grid) {Grid.new(10)}
+  let(:grid_display) {GridDisplay.new(grid.size)}
   let(:input) {StringIO.new}
   let(:output) {StringIO.new}
   let(:ui) {Ui.new(input, output, grid_display)}
   let(:ship) {Ship.new}
   let(:ships_list) {ShipsList.new}
-  let(:grid) {Grid.new(10)}
   let(:ships_owner) {Player.new("Gabriella", grid)}
   let(:attacker) {Player.new("Nic", grid)}
 

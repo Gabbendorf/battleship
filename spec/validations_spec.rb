@@ -3,7 +3,8 @@ require_relative '../lib/validations'
 
 RSpec.describe Validations do
 
-  let(:grid_display) {GridDisplay.new}
+  let(:grid) {Grid.new(10)}
+  let(:grid_display) {GridDisplay.new(grid.size)}
   let(:validations) {Validations.new(grid_display)}
 
   describe "checks that position to attack is valid" do
