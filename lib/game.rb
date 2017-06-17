@@ -63,14 +63,14 @@ class Game
 
   def valid_position(ship)
     position = @ui.coordinates_and_orientation
-    validation_result = @validations.validate_position_for_ship(ship, position)
-    while validation_result != :valid_ship_position
+    validation_result = @grid.validate_position(position, ship.length)
+    while validation_result != :valid_position
       if validation_result == :invalid_ship_position
         position = @ui.ask_for_valid_position
       elsif validation_result == :invalid_placement
         position = @ui.ask_for_realistic_position
       end
-      validation_result = @validations.validate_position_for_ship(ship, position)
+      validation_result = @grid.validate_position(position, ship.length)
     end
     position
   end
@@ -98,7 +98,7 @@ class Game
       if result == :hit
         hit_ship = @grid.ship_on(cell_to_attack)
         if hit_ship.sunk?
-          sunk_ship_positions = hit_ship.occupied_cells(@grid)
+          sunk_ship_positions = hit_ship.occupied_cells
           @grid_display.sunk(sunk_ship_positions)
         end
       end

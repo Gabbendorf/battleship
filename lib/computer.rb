@@ -2,10 +2,9 @@ require_relative 'create_ship'
 
 class Computer
 
-  def initialize(grid, ships_list, validations)
+  def initialize(grid, ships_list)
     @grid = grid
     @ships_list = ships_list
-    @validations = validations
     @create_ship = CreateShip.new
   end
 
@@ -19,13 +18,13 @@ class Computer
 
   private
 
-  def valid_position(ship, position)
-    validation_result = @validations.validate_position_for_ship(ship, position)
+  def valid_position(position, ship)
+    validation_result = @grid.validate_position(position, ship.length)
     while validation_result != :valid_ship_position
       if validation_result == :invalid_ship_position || validation_result == :invalid_placement
         position = select_random_position
       end
-      validation_result = @validations.validate_position_for_ship(ship, position)
+      validation_result = @grid.validate_position(position, ship)
     end
     position
   end

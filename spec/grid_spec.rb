@@ -4,6 +4,7 @@ require_relative "../lib/grid"
 RSpec.describe Grid do
 
   let(:grid) {Grid.new(10)}
+  let(:destroyer) {Ship.new("destroyer", 2)}
 
   it "has a size" do
     expect(grid.size).to eq(10)
@@ -12,30 +13,64 @@ RSpec.describe Grid do
   describe "knows where ship can be placed" do
     it "returns :invalid_ship_position if 1st coordinate is invalid number" do
       ui_output = {:x => "a", :y => "b", :orientation => :horizontal}
-      result = grid.validate_position_for_ship(ui_output)
+      result = grid.validate_position(ui_output, destroyer.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
-    it "returns :invalid_ship_position if 2nd coordinate is invalid letter" do
+    it "returns false if 2nd coordinate is invalid letter" do
       ui_output = {:x => "1", :y => "z", :orientation => :horizontal}
-      result = grid.validate_position_for_ship(ui_output)
+      result = grid.validate_position(ui_output, destroyer.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
-    it "returns :invalid_ship_position if 3rd coordinate (orientation) is not valid" do
+    it "returns false if 3rd coordinate (orientation) is not valid" do
       ui_output = {:x => "1", :y => "b", :orientation => "c"}
-      result = grid.validate_position_for_ship(ui_output)
+      result = grid.validate_position(ui_output, destroyer.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
-    it "returns :valid_ship_position if all inputs are valid" do
+    it "returns true if all inputs are valid" do
       ui_output = {:x => "1".to_i, :y => "a", :orientation => :horizontal}
-      output = grid.validate_position_for_ship(ui_output)
+      output = grid.validate_position(ui_output, destroyer.length)
 
-      expect(output).to eq(:valid_ship_position)
+      expect(output).to eq(:valid_position)
+    end
+  end
+
+  describe "checks if ship stays inside grid according to player's input for position" do
+    it "returns :invalid_placement if ship doesn't stay inside grid vertically" do
+      ui_output = {:x => "1".to_i, :y => "j", :orientation => :vertical}
+
+      result = grid.validate_position(ui_output, destroyer.length)
+
+      expect(result).to eq(:invalid_placement)
+    end
+
+    it "returns true if ship stays inside grid vertically" do
+      ui_output = {:x => "9".to_i, :y => "i", :orientation => :vertical}
+
+      result = grid.validate_position(ui_output, destroyer.length)
+
+      expect(result).to eq(:valid_position)
+    end
+
+    it "returns :invalid_placement if ship doesn't stay inside grid horizontally" do
+      ui_output = {:x => "10".to_i, :y => "a", :orientation => :horizontal}
+
+      result = grid.validate_position(ui_output, destroyer.length)
+
+      expect(result).to eq(:invalid_placement)
+    end
+
+    it "returns true if ship stays inside grid horizontally" do
+      ui_output = {:x => "9".to_i, :y => "j", :orientation => :horizontal}
+
+      result = grid.validate_position(ui_output, destroyer.length)
+
+      expect(result).to eq(:valid_position)
     end
   end
 
