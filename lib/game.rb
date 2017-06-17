@@ -46,34 +46,11 @@ class Game
     end
   end
 
-  def ships_attack(attacker)
-    while !@grid.end_game?
-      @ui.display_grid
-      cell_to_attack = valid_cell_to_attack(attacker)
-      result = attacker.attack(cell_to_attack)
-      @grid_display.update_grid(result, cell_to_attack)
-      check_if_sunk(cell_to_attack, result)
-    end
-  end
-
-  def end_game(attacker)
-    @ui.display_grid
-    @ui.declare_winner(attacker.name)
-  end
-
   def player1_selects_ship
     @ui.print_list_of_ships(@ships_list)
     ship_name = @ships_list.convert_number_to_name(valid_ship_number)
     @ships_list.delete_selected_ship(ship_name)
     @create_ship.ship_from_name(ship_name)
-  end
-
-  def valid_cell_to_attack(attacker)
-    cell_to_attack = @ui.cell_to_attack(attacker.name)
-    while @validations.validate_position_to_attack(cell_to_attack) == :invalid_attack
-      cell_to_attack = @ui.ask_for_valid_position_to_attack
-    end
-    cell_to_attack
   end
 
   def valid_ship_number
@@ -98,14 +75,38 @@ class Game
     position
   end
 
-  def check_if_sunk(cell_to_attack, result)
-    if result == :hit
-      hit_ship = @grid.ship_on(cell_to_attack)
-      if hit_ship.sunk?
-        sunk_ship_positions = hit_ship.occupied_cells(@grid)
-        @grid_display.sunk(sunk_ship_positions)
+  def ships_attack(attacker)
+    while !@grid.end_game?
+      @ui.display_grid
+      cell_to_attack = valid_cell_to_attack(attacker)
+      result = attacker.attack(cell_to_attack)
+      @grid_display.update_grid(result, cell_to_attack)
+      check_if_sunk(cell_to_attack, result)
+    end
+  end
+
+  def valid_cell_to_attack(attacker)
+    cell_to_attack = @ui.cell_to_attack(attacker.name)
+    while @validations.validate_position_to_attack(cell_to_attack) == :invalid_attack
+      cell_to_attack = @ui.ask_for_valid_position_to_attack
+    end
+    cell_to_attack
+  end
+
+
+    def check_if_sunk(cell_to_attack, result)
+      if result == :hit
+        hit_ship = @grid.ship_on(cell_to_attack)
+        if hit_ship.sunk?
+          sunk_ship_positions = hit_ship.occupied_cells(@grid)
+          @grid_display.sunk(sunk_ship_positions)
+        end
       end
     end
+
+  def end_game(attacker)
+    @ui.display_grid
+    @ui.declare_winner(attacker.name)
   end
 
 end

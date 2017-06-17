@@ -8,7 +8,7 @@ require_relative 'computer'
 
 grid_display = GridDisplay.new
 ui = Ui.new($stdin, $stdout, grid_display)
-grid = Grid.new
+grid = Grid.new(10)
 ships_list = ShipsList.new
 validations = Validations.new(grid_display)
 computer = Computer.new(grid, ships_list, validations)

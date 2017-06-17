@@ -3,7 +3,41 @@ require_relative "../lib/grid"
 
 RSpec.describe Grid do
 
-  let(:grid) {Grid.new}
+  let(:grid) {Grid.new(10)}
+
+  it "has a size" do
+    expect(grid.size).to eq(10)
+  end
+
+  describe "knows where ship can be placed" do
+    it "returns :invalid_ship_position if 1st coordinate is invalid number" do
+      ui_output = {:x => "a", :y => "b", :orientation => :horizontal}
+      result = grid.validate_position_for_ship(ui_output)
+
+      expect(result).to eq(:invalid_ship_position)
+    end
+
+    it "returns :invalid_ship_position if 2nd coordinate is invalid letter" do
+      ui_output = {:x => "1", :y => "z", :orientation => :horizontal}
+      result = grid.validate_position_for_ship(ui_output)
+
+      expect(result).to eq(:invalid_ship_position)
+    end
+
+    it "returns :invalid_ship_position if 3rd coordinate (orientation) is not valid" do
+      ui_output = {:x => "1", :y => "b", :orientation => "c"}
+      result = grid.validate_position_for_ship(ui_output)
+
+      expect(result).to eq(:invalid_ship_position)
+    end
+
+    it "returns :valid_ship_position if all inputs are valid" do
+      ui_output = {:x => "1".to_i, :y => "a", :orientation => :horizontal}
+      output = grid.validate_position_for_ship(ui_output)
+
+      expect(output).to eq(:valid_ship_position)
+    end
+  end
 
   describe "registers positions of all ships placed" do
     it "registers submarine with its position in the list of ships placed" do

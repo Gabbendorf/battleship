@@ -3,11 +3,20 @@ require_relative 'ship'
 
 class Grid
 
-  attr_reader :ships_placed, :ships_sunk
+  attr_reader :ships_placed, :ships_sunk, :size
 
-  def initialize
+  def initialize(size)
+    @size = size
     @ships_placed = {}
     @ships_sunk = []
+  end
+
+  def validate_position_for_ship(position)
+    if !columns.include?(position[:x]) || !rows.include?(position[:y]) || !valid_orientation?(position[:orientation])
+      :invalid_ship_position
+    else
+      :valid_ship_position
+    end
   end
 
   def mark_ship_positions(x, y, ship, orientation)
@@ -39,6 +48,18 @@ class Grid
   end
 
   private
+
+  def columns
+    (1..@size).map {|number| number}
+  end
+
+  def rows
+    ("a".."z").take(@size)
+  end
+
+  def valid_orientation?(orientation)
+    orientation == :vertical || orientation == :horizontal
+  end
 
   def occupied_cells(x, y, ship_length, orientation)
     if orientation == :horizontal

@@ -3,7 +3,7 @@ require_relative "../lib/ship"
 
 RSpec.describe Ship do
 
-  let(:grid) {Grid.new}
+  let(:grid) {Grid.new(10)}
 
   it "knows its position in grid" do
     cruiser = Ship.new("cruiser", 3)

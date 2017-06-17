@@ -8,47 +8,47 @@ RSpec.describe Validations do
   let(:destroyer) {Ship.new("destroyer", 2)}
 
   describe "checks player's inputs for ship placement is valid" do
-    it "returns :invalid_ship_position if 1st coordinate is not number" do
-      ui_output = {:x => "a", :y => "b", :orientation => :horizontal}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
+    # it "returns :invalid_ship_position if 1st coordinate is not number" do
+    #   ui_output = {:x => "a", :y => "b", :orientation => :horizontal}
+    #   output = validations.validate_position_for_ship(destroyer, ui_output)
+    #
+    #   expect(output).to eq(:invalid_ship_position)
+    # end
 
-      expect(output).to eq(:invalid_ship_position)
-    end
+    # it "returns :invalid_ship_position if 1st coordinate is not valid number" do
+    #   ui_output = {:x => "100", :y => "b", :orientation => :horizontal}
+    #   output = validations.validate_position_for_ship(destroyer, ui_output)
+    #
+    #   expect(output).to eq(:invalid_ship_position)
+    # end
 
-    it "returns :invalid_ship_position if 1st coordinate is not valid number" do
-      ui_output = {:x => "100", :y => "b", :orientation => :horizontal}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
+    # it "returns :invalid_ship_position if 2nd coordinate is a number" do
+    #   ui_output = {:x => "1", :y => "2", :orientation => :horizontal}
+    #   output = validations.validate_position_for_ship(destroyer, ui_output)
+    #
+    #   expect(output).to eq(:invalid_ship_position)
+    # end
 
-      expect(output).to eq(:invalid_ship_position)
-    end
+    # it "returns :invalid_ship_position if 2nd coordinate is an invalid letter" do
+    #   ui_output = {:x => "1", :y => "x", :orientation => :horizontal}
+    #   output = validations.validate_position_for_ship(destroyer, ui_output)
+    #
+    #   expect(output).to eq(:invalid_ship_position)
+    # end
 
-    it "returns :invalid_ship_position if 2nd coordinate is a number" do
-      ui_output = {:x => "1", :y => "2", :orientation => :horizontal}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
+    # it "returns :invalid_ship_position if 3rd coordinate (orientation) is not valid" do
+    #   ui_output = {:x => "1", :y => "b", :orientation => "c"}
+    #   output = validations.validate_position_for_ship(destroyer, ui_output)
+    #
+    #   expect(output).to eq(:invalid_ship_position)
+    # end
 
-      expect(output).to eq(:invalid_ship_position)
-    end
-
-    it "returns :invalid_ship_position if 2nd coordinate is an invalid letter" do
-      ui_output = {:x => "1", :y => "x", :orientation => :horizontal}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
-
-      expect(output).to eq(:invalid_ship_position)
-    end
-
-    it "returns :invalid_ship_position if 3rd coordinate (orientation) is not valid" do
-      ui_output = {:x => "1", :y => "b", :orientation => "c"}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
-
-      expect(output).to eq(:invalid_ship_position)
-    end
-
-    it "returns :valid_ship_position if all inputs are valid" do
-      ui_output = {:x => "1".to_i, :y => "a", :orientation => :horizontal}
-      output = validations.validate_position_for_ship(destroyer, ui_output)
-
-      expect(output).to eq(:valid_ship_position)
-    end
+    # it "returns :valid_ship_position if all inputs are valid" do
+    #   ui_output = {:x => "1".to_i, :y => "a", :orientation => :horizontal}
+    #   output = validations.validate_position_for_ship(destroyer, ui_output)
+    #
+    #   expect(output).to eq(:valid_ship_position)
+    # end
   end
 
   describe "checks if ship stays inside grid according to player's input for its position" do

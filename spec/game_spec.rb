@@ -4,10 +4,9 @@ require_relative '../lib/game'
 RSpec.describe Game do
 
   let(:grid_display) {GridDisplay.new}
-  let(:grid) {Grid.new}
+  let(:grid) {Grid.new(10)}
   let(:output) {StringIO.new}
   let(:ships_list) {ShipsList.new}
-  let(:grid_display) {GridDisplay.new}
   let(:validations) {Validations.new(grid_display)}
   let(:computer) {Computer.new(grid, ships_list, validations)}
 
