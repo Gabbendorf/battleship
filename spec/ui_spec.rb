@@ -68,9 +68,9 @@ RSpec.describe Ui do
     input = StringIO.new("1")
     ui = Ui.new(input, output, grid_display)
 
-    ship = ui.selected_ship
+    ship_number = ui.selected_ship
 
-    expect(ship).to eq(1)
+    expect(ship_number).to eq(1)
   end
 
   it "asks for coordinates and orientation to place ship, checks it and returns hash" do

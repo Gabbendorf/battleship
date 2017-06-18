@@ -2,12 +2,13 @@ require_relative 'player'
 
 class Game
 
-  def initialize(grid_display, ui, grid, ships_list, computer)
+  def initialize(grid_display, ui, grid, ships_list, computer, validated_ui)
     @grid_display = grid_display
     @ui = ui
     @grid = grid
     @ships_list = ships_list
     @computer = computer
+    @validated_ui = validated_ui
     @create_ship = CreateShip.new
   end
 
@@ -47,17 +48,9 @@ class Game
 
   def player1_selects_ship
     @ui.print_list_of_ships(@ships_list)
-    ship_name = @ships_list.convert_number_to_name(valid_ship_number)
+    ship_name = @ships_list.convert_number_to_name(@validated_ui.selected_ship)
     @ships_list.delete_selected_ship(ship_name)
     @create_ship.ship_from_name(ship_name)
-  end
-
-  def valid_ship_number
-    ship_number = @ui.selected_ship
-    while @ships_list.validate(ship_number) == :invalid_ship_number
-      ship_number = @ui.ask_for_valid_ship_number
-    end
-    ship_number
   end
 
   def valid_position(ship)
