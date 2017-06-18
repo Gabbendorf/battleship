@@ -38,7 +38,7 @@ class Game
       @ui.invite_to_select_ship_number(ships_owner.name)
       ship = player1_selects_ship
       @ui.display_grid
-      position = valid_position(ship)
+      position = @validated_ui.valid_position(ship)
       ships_owner.place_ship(position[:x],
                          position[:y],
                          ship,
@@ -51,20 +51,6 @@ class Game
     ship_name = @ships_list.convert_number_to_name(@validated_ui.selected_ship)
     @ships_list.delete_selected_ship(ship_name)
     @create_ship.ship_from_name(ship_name)
-  end
-
-  def valid_position(ship)
-    position = @ui.coordinates_and_orientation
-    validation_result = @grid.validate_placement(position, ship.length)
-    while validation_result != :valid_position
-      if validation_result == :invalid_ship_position
-        position = @ui.ask_for_valid_position
-      elsif validation_result == :invalid_placement
-        position = @ui.ask_for_realistic_position
-      end
-      validation_result = @grid.validate_placement(position, ship.length)
-    end
-    position
   end
 
   def ships_attack(attacker)
