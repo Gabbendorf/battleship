@@ -56,31 +56,22 @@ class Game
   def ships_attack(attacker)
     while !@grid.end_game?
       @ui.display_grid
-      cell_to_attack = valid_cell_to_attack(attacker)
+      cell_to_attack = @validated_ui.valid_cell_to_attack(attacker.name)
       result = attacker.attack(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
       check_if_sunk(cell_to_attack, result)
     end
   end
 
-  def valid_cell_to_attack(attacker)
-    cell_to_attack = @ui.cell_to_attack(attacker.name)
-    while @grid.position_in_grid?(cell_to_attack[0], cell_to_attack[1]) == false
-      cell_to_attack = @ui.ask_for_valid_position_to_attack
-    end
-    cell_to_attack
-  end
-
-
-    def check_if_sunk(cell_to_attack, result)
-      if result == :hit
-        hit_ship = @grid.ship_on(cell_to_attack)
-        if hit_ship.sunk?
-          sunk_ship_positions = hit_ship.occupied_cells
-          @grid_display.sunk(sunk_ship_positions)
-        end
+  def check_if_sunk(cell_to_attack, result)
+    if result == :hit
+      hit_ship = @grid.ship_on(cell_to_attack)
+      if hit_ship.sunk?
+        sunk_ship_positions = hit_ship.occupied_cells
+        @grid_display.sunk(sunk_ship_positions)
       end
     end
+  end
 
   def end_game(attacker)
     @ui.display_grid

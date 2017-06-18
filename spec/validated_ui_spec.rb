@@ -37,4 +37,12 @@ RSpec.describe ValidatedUi do
     expect(valid_placement).to eq({:x => 1, :y => "A", :orientation => :horizontal})
   end
 
+  it "returns a valid input for cell to attack" do
+    validated_ui = set_up_validated_ui("1,z\n100,j\n1,a")
+
+    valid_attack = validated_ui.valid_cell_to_attack("Gabriella")
+
+    expect(valid_attack).to eq([1, "A"])
+  end
+
 end

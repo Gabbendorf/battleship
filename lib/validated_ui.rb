@@ -32,4 +32,12 @@ class ValidatedUi
     position
   end
 
+  def valid_cell_to_attack(attacker_name)
+    cell_to_attack = @ui.cell_to_attack(attacker_name)
+    while @grid.position_in_grid?(cell_to_attack[0], cell_to_attack[1]) == false
+      cell_to_attack = @ui.ask_for_valid_position_to_attack
+    end
+    cell_to_attack
+  end
+
 end
