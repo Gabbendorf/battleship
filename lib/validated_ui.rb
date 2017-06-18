@@ -10,8 +10,8 @@ class ValidatedUi
     @grid = grid
   end
 
-  def selected_ship
-    ship_number = @ui.selected_ship
+  def selected_ship(player_name, list)
+    ship_number = @ui.selected_ship(player_name, list)
     while @ships_list.validate(ship_number) == :invalid_ship_number
       ship_number = @ui.ask_for_valid_ship_number
     end

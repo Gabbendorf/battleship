@@ -35,8 +35,7 @@ class Game
 
   def ships_placement(ships_owner)
     while @ships_list.ships.size > 0
-      @ui.invite_to_select_ship_number(ships_owner.name)
-      ship = player1_selects_ship
+      ship = @ships_list.prepare_ship(@validated_ui.selected_ship(ships_owner.name, @ships_list))
       @ui.display_grid
       position = @validated_ui.valid_position(ship)
       ships_owner.place_ship(position[:x],
@@ -44,11 +43,6 @@ class Game
                          ship,
                          position[:orientation])
     end
-  end
-
-  def player1_selects_ship
-    @ui.print_list_of_ships(@ships_list)
-    @ships_list.prepare_ship(@validated_ui.selected_ship)
   end
 
   def ships_attack(attacker)

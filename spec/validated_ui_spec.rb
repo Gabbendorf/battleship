@@ -26,7 +26,7 @@ RSpec.describe ValidatedUi do
   it "validates input for ship number and returns ship name" do
     validated_ui = set_up_validated_ui("8\n2\n")
 
-    valid_number = validated_ui.selected_ship
+    valid_number = validated_ui.selected_ship("Gabriella", ships_list)
 
     expect(valid_number).to eq("destroyer")
   end

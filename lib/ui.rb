@@ -28,19 +28,9 @@ class Ui
     @stdout.puts @grid_display.prepare_grid
   end
 
-  def invite_to_select_ship_number(ships_owner_name)
+  def selected_ship(ships_owner_name, list)
     @stdout.puts "#{ships_owner_name}, choose a number for ship to place:"
-  end
-
-  def print_list_of_ships(list)
-    list_number = 1
-    list.ships.keys.each do |ship|
-      @stdout.puts list_number.to_s + "- " + ship
-      list_number += 1
-    end
-  end
-
-  def selected_ship
+    print_list_of_ships(list)
     @stdin.gets.chomp.to_i
   end
 
@@ -94,6 +84,14 @@ class Ui
   end
 
   private
+
+  def print_list_of_ships(list)
+    list_number = 1
+    list.ships.keys.each do |ship|
+      @stdout.puts list_number.to_s + "- " + ship
+      list_number += 1
+    end
+  end
 
   def first_validation_for_array(input)
     if input.size < 2

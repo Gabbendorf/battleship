@@ -1,5 +1,11 @@
 require 'spec_helper'
 require_relative '../lib/ui'
+require_relative '../lib/grid_display'
+require_relative '../lib/grid'
+require_relative '../lib/player'
+require_relative '../lib/ship'
+require_relative '../lib/create_ship'
+require_relative '../lib/ships_list'
 
 RSpec.describe Ui do
 
@@ -53,25 +59,15 @@ RSpec.describe Ui do
 
   end
 
-  it "invites player 1 to choose number for ship to place" do
-    ui.invite_to_select_ship_number(ships_owner.name)
-
-    expect(output.string).to include("Gabriella, choose a number for ship to place:")
-  end
-
-  it "prints the list of ships to be placed" do
-    ui.print_list_of_ships(ships_list)
-
-    expect(output.string).to include("1- submarine\n2- destroyer\n3- cruiser\n4- aircraft-carrier\n")
-  end
-
-  it "registers selected ship" do
+  it "asks to choose ship number and prints list of ships" do
     input = StringIO.new("1")
     ui = Ui.new(input, output, grid_display)
 
-    ship_number = ui.selected_ship
+    ship_number = ui.selected_ship("Gabriella", ships_list)
 
     expect(ship_number).to eq(1)
+    expect(output.string).to include("Gabriella, choose a number for ship to place:\n")
+    expect(output.string).to include("1- submarine\n2- destroyer\n3- cruiser\n4- aircraft-carrier\n")
   end
 
   it "asks for coordinates and orientation to place ship, checks it and returns hash" do
