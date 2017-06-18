@@ -3,11 +3,13 @@ require_relative '../lib/computer'
 require_relative '../lib/grid'
 require_relative '../lib/grid_display'
 require_relative '../lib/ships_list'
+require_relative '../lib/create_ship'
 
 RSpec.describe Computer do
 
   let(:grid) {Grid.new(10)}
-  let(:ships_list) {ShipsList.new}
+  let(:create_ship) {CreateShip.new}
+  let(:ships_list) {ShipsList.new(create_ship)}
   let(:grid_display) {GridDisplay.new(grid.size)}
   let(:computer) {Computer.new(grid, ships_list)}
 

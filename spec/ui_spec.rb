@@ -9,7 +9,8 @@ RSpec.describe Ui do
   let(:output) {StringIO.new}
   let(:ui) {Ui.new(input, output, grid_display)}
   let(:ship) {Ship.new}
-  let(:ships_list) {ShipsList.new}
+  let(:create_ship) {CreateShip.new}
+  let(:ships_list) {ShipsList.new(create_ship)}
   let(:ships_owner) {Player.new("Gabriella", grid)}
   let(:attacker) {Player.new("Nic", grid)}
 

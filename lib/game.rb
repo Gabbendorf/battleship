@@ -48,9 +48,7 @@ class Game
 
   def player1_selects_ship
     @ui.print_list_of_ships(@ships_list)
-    ship_name = @validated_ui.selected_ship
-    @ships_list.delete_selected_ship(ship_name)
-    @create_ship.ship_from_name(ship_name)
+    @ships_list.prepare_ship(@validated_ui.selected_ship)
   end
 
   def ships_attack(attacker)

@@ -4,6 +4,7 @@ require_relative '../lib/ui'
 require_relative '../lib/grid'
 require_relative '../lib/grid_display'
 require_relative '../lib/ship'
+require_relative '../lib/create_ship'
 
 RSpec.describe ValidatedUi do
 
@@ -11,7 +12,8 @@ RSpec.describe ValidatedUi do
   let(:grid_display) {GridDisplay.new(grid.size)}
   let(:output) {StringIO.new}
   let(:ui) {Ui.new(input, output, grid_display)}
-  let(:ships_list) {ShipsList.new}
+  let(:create_ship) {CreateShip.new}
+  let(:ships_list) {ShipsList.new(create_ship)}
   let(:grid) {Grid.new(10)}
   let(:destroyer) {Ship.new("destroyer", 2)}
 

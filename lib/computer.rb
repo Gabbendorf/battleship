@@ -32,9 +32,7 @@ class Computer
 
   def select_random_ship
     random_ship_name = @ships_list.ships.keys.sample
-    ship = @create_ship.ship_from_name(random_ship_name)
-    @ships_list.delete_selected_ship(random_ship_name)
-    ship
+    @ships_list.prepare_ship(random_ship_name)
   end
 
   def select_random_position
