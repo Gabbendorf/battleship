@@ -15,7 +15,7 @@ class ValidatedUi
     while @ships_list.validate(ship_number) == :invalid_ship_number
       ship_number = @ui.ask_for_valid_ship_number
     end
-    ship_number
+    @ships_list.convert_number_to_name(ship_number)
   end
 
   def valid_position(ship)
