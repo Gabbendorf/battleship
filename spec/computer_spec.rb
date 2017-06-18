@@ -1,14 +1,17 @@
 require 'spec_helper'
 require_relative '../lib/computer'
+require_relative '../lib/grid'
+require_relative '../lib/grid_display'
+require_relative '../lib/ships_list'
 
 RSpec.describe Computer do
 
   let(:grid) {Grid.new(10)}
   let(:ships_list) {ShipsList.new}
-  let(:grid_display) {GridDisplay.new}
+  let(:grid_display) {GridDisplay.new(grid.size)}
   let(:computer) {Computer.new(grid, ships_list)}
 
-  xit "places ship on grid from list of 6 ships randomly" do
+  it "places ship on grid from list of 6 ships randomly" do
     computer.place_ship
 
     possible_ships_name = ["submarine", "destroyer", "cruiser", "aircraft-carrier"]

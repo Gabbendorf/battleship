@@ -10,14 +10,18 @@ class Grid
     @ships_sunk = []
   end
 
-  def validate_position(position, ship_length)
-    if invalid_position_for_ship?(position[:x], position[:y], position[:orientation]) == true
+  def validate_placement(position, ship_length)
+    if invalid_inputs?(position[:x], position[:y], position[:orientation]) == true
       :invalid_ship_position
     elsif ship_out_of_grid?( position[:x], position[:y], ship_length, position[:orientation]) == true
       :invalid_placement
     else
       :valid_position
     end
+  end
+
+  def position_in_grid?(x, y)
+    columns.include?(x) && rows.include?(y)
   end
 
   def mark_ship_positions(x, y, ship, orientation)
@@ -51,21 +55,13 @@ class Grid
 
   private
 
-  def invalid_position_for_ship?(x, y, orientation)
-    if invalid_inputs?(x, y, orientation)
-      true
-    else
-      false
-    end
-  end
-
   def ship_out_of_grid?(x, y, ship_length, orientation)
     orientation == :horizontal ?
     invalid_horizontally?(x, ship_length) : invalid_vertically?(y, ship_length)
   end
 
   def invalid_inputs?(x, y, orientation)
-    !columns.include?(x) || !rows.include?(y) || !valid_orientation?(orientation)
+    !position_in_grid?(x, y) || !valid_orientation?(orientation)
   end
 
   def invalid_vertically?(y, ship_length)
@@ -85,7 +81,7 @@ class Grid
   end
 
   def rows
-    ("a".."z").take(@size)
+    ("A".."Z").take(@size)
   end
 
   def valid_orientation?(orientation)

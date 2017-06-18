@@ -2,12 +2,11 @@ require_relative 'player'
 
 class Game
 
-  def initialize(grid_display, ui, grid, ships_list, validations, computer)
+  def initialize(grid_display, ui, grid, ships_list, computer)
     @grid_display = grid_display
     @ui = ui
     @grid = grid
     @ships_list = ships_list
-    @validations = validations
     @computer = computer
     @create_ship = CreateShip.new
   end
@@ -63,14 +62,14 @@ class Game
 
   def valid_position(ship)
     position = @ui.coordinates_and_orientation
-    validation_result = @grid.validate_position(position, ship.length)
+    validation_result = @grid.validate_placement(position, ship.length)
     while validation_result != :valid_position
       if validation_result == :invalid_ship_position
         position = @ui.ask_for_valid_position
       elsif validation_result == :invalid_placement
         position = @ui.ask_for_realistic_position
       end
-      validation_result = @grid.validate_position(position, ship.length)
+      validation_result = @grid.validate_placement(position, ship.length)
     end
     position
   end
@@ -87,7 +86,7 @@ class Game
 
   def valid_cell_to_attack(attacker)
     cell_to_attack = @ui.cell_to_attack(attacker.name)
-    while @validations.validate_position_to_attack(cell_to_attack) == :invalid_attack
+    while @grid.position_in_grid?(cell_to_attack[0], cell_to_attack[1]) == false
       cell_to_attack = @ui.ask_for_valid_position_to_attack
     end
     cell_to_attack
