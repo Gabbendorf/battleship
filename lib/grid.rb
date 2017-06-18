@@ -29,6 +29,10 @@ class Grid
     @ships_placed[ship] = ship.occupied_cells
   end
 
+  # def add_ship(ship) => adds only ship
+  #   @ships_placed[ship] = ship.occupied_cells
+  # end
+
   def ship?(position)
      all_occupied_cells = @ships_placed.values.inject {|sum,array| sum + array}
      all_occupied_cells.include?(position)

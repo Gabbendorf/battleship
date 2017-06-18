@@ -1,18 +1,20 @@
+require_relative 'ships_list'
+
 class Player
 
   attr_reader :name
 
-  def initialize(name, grid)
+  def initialize(name, grid, validated_ui)
     @name = name
     @grid = grid
+    @validated_ui = validated_ui
   end
 
-  def place_ship(x, y, ship, orientation)
-    @grid.mark_ship_positions(x, y, ship, orientation)
-  end
-
-  def move(player_name)
-    @ui.invite_to_select_ship_number(player_name)
+  def placement_move(player_name, ships_list)
+    ship = ships_list.prepare_ship(@validated_ui.selected_ship(player_name, ships_list))
+    position = @validated_ui.valid_position(ship)
+    ship.register_position(position[:x], position[:y], position[:orientation])
+    ship
   end
 
   def attack(cell_position)

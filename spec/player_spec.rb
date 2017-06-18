@@ -1,24 +1,33 @@
 require 'spec_helper'
 require_relative '../lib/player'
+require_relative '../lib/grid_display'
+require_relative '../lib/grid'
+require_relative '../lib/validated_ui'
+require_relative '../lib/ships_list'
+require_relative '../lib/create_ship'
+require_relative '../lib/ui'
 
 RSpec.describe Player do
 
-  let(:grid_display) {GridDisplay.new}
   let(:grid) {Grid.new(10)}
-  let(:ships_owner) {Player.new("Gabriella", grid)}
-  let(:attacker) {Player.new("Jarkyn", grid)}
+  let(:grid_display) {GridDisplay.new(grid.size)}
+  let(:input) {StringIO.new}
+  let(:output) {StringIO.new}
+  let(:ui) {Ui.new(input, output, grid_display)}
+  let(:create_ship) {CreateShip.new}
+  let(:ships_list) {ShipsList.new(create_ship)}
+  let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
+  let(:player) {Player.new("Gabriella", grid, validated_ui)}
 
-  it "places ship on grid" do
-    submarine = Ship.new("submarine", 1)
-    destroyer = Ship.new("destroyer", 2)
-    ships_owner.place_ship(2, "A", submarine, :horizontal)
-    ships_owner.place_ship(3, "B", destroyer, :vertical)
+  it "returns a correctly placed ship with its position on grid" do
+    input = StringIO.new("1\n1,a,h\n")
+    ui = Ui.new(input, output, grid_display)
+    validated_ui = ValidatedUi.new(ui, ships_list, grid)
+    player = Player.new("Gabriella", grid, validated_ui)
 
-    submarine = grid.ships_placed.keys[0]
-    destroyer = grid.ships_placed.keys[1]
+    ship = player.placement_move(player.name, ships_list)
 
-    expect(submarine).to have_attributes(:name => "submarine", :length => 1)
-    expect(destroyer).to have_attributes(:name => "destroyer", :length => 2)
+    expect(ship).to have_attributes(:name => "submarine", :length => 1, :occupied_cells => [[1, "A"]])
   end
 
   describe "selects cell to attack from grid" do
@@ -27,7 +36,7 @@ RSpec.describe Player do
       grid.mark_ship_positions(5, "B", destroyer, :vertical)
       cell_to_attack = [8, "B"]
 
-      result = attacker.attack(cell_to_attack)
+      result = player.attack(cell_to_attack)
 
       expect(result).to eq(:water)
     end
@@ -40,7 +49,7 @@ RSpec.describe Player do
 
       cell_hit = destroyer.register_cells_hit(cell_to_attack).to_a
       sunk_ships = grid.add_sunk_ship(destroyer)
-      result = attacker.attack(cell_to_attack)
+      result = player.attack(cell_to_attack)
 
       expect(result).to eq(:hit)
       expect(cell_hit).to eq([[5, "B"]])
