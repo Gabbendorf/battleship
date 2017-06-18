@@ -1,4 +1,5 @@
 require_relative 'ships_list'
+require_relative 'ui'
 
 class Player
 
@@ -10,8 +11,9 @@ class Player
     @validated_ui = validated_ui
   end
 
-  def placement_move(player_name, ships_list)
+  def placement_move(player_name, ships_list, ui)
     ship = ships_list.prepare_ship(@validated_ui.selected_ship(player_name, ships_list))
+    ui.display_grid
     position = @validated_ui.valid_position(ship)
     ship.register_position(position[:x], position[:y], position[:orientation])
     ship
@@ -36,7 +38,7 @@ class Player
 
   def update_sunk_ships_list(ship)
     if ship.sunk?
-      @grid.add_sunk_ship(ship)
+      @grid.register_sunk_ship(ship)
     end
   end
 

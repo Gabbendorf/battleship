@@ -1,5 +1,6 @@
 require 'spec_helper'
-require_relative "../lib/grid"
+require_relative '../lib/grid'
+require_relative '../lib/ship'
 
 RSpec.describe Grid do
 
@@ -94,53 +95,34 @@ RSpec.describe Grid do
     end
   end
 
-  describe "registers positions of all ships placed" do
-    it "registers submarine with its position in the list of ships placed" do
-      submarine = Ship.new("submarine", 1)
+  it "registers ship with its position in the list of ships placed" do
+    submarine = Ship.new("submarine", 1)
+    submarine.register_position(1, "A", :horizontal)
+    destroyer = Ship.new("destroyer", 2)
+    destroyer.register_position(1, "B", :horizontal)
 
-      grid.mark_ship_positions(5, "A", submarine, :vertical)
+    grid.add_ship(submarine)
+    grid.add_ship(destroyer)
 
-      expect(grid.ships_placed).to eq({submarine => [[5, "A"]]})
-    end
-
-    it "registers destroyer with its position in the list of ships placed" do
-      destroyer = Ship.new("destroyer", 2)
-
-      grid.mark_ship_positions(5, "B", destroyer, :vertical)
-
-      expect(grid.ships_placed).to eq({destroyer => [[5, "B"], [5, "C"]]})
-    end
-
-    it "registers cruiser with its position in the list of ships placed" do
-      cruiser = Ship.new("cruiser", 3)
-
-      grid.mark_ship_positions(5, "B", cruiser, :horizontal)
-
-      expect(grid.ships_placed).to eq({cruiser => [[5, "B"], [6, "B"],[7, "B"]]})
-    end
-
-    it "registers aircraft_carrier with its position in the list of ships placed" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-
-      grid.mark_ship_positions(5, "B", aircraft_carrier, :vertical)
-
-      expect(grid.ships_placed).to eq({aircraft_carrier => [[5, "B"], [5, "C"],[5, "D"],[5, "E"]]})
-    end
+    expect(grid.ships_placed).to eq([submarine, destroyer])
+    expect(grid.ships_placed.size).to eq(2)
   end
 
   describe "checks if a cell is already occupied by a ship" do
     it "returns true if a cell is occupied" do
       aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      aircraft_carrier.register_position(2, "B", :horizontal)
 
-      grid.mark_ship_positions(2, "B", aircraft_carrier, :horizontal)
+      grid.add_ship(aircraft_carrier)
 
       expect(grid.ship?([4, "B"])).to eq(true)
     end
 
     it "returns false if a cell is not occupied" do
       aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      aircraft_carrier.register_position(2, "B", :horizontal)
 
-      grid.mark_ship_positions(2, "B", aircraft_carrier, :vertical)
+      grid.add_ship(aircraft_carrier)
 
       expect(grid.ship?([9, "B"])).to eq(false)
     end
@@ -149,8 +131,9 @@ RSpec.describe Grid do
   describe "looks for the ship that occupies a position" do
     it "returns the ship that occupies a position" do
       aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      aircraft_carrier.register_position(2, "B", :horizontal)
+      grid.add_ship(aircraft_carrier)
 
-      grid.mark_ship_positions(2, "B", aircraft_carrier, :horizontal)
       ship = grid.ship_on([4, "B"])
 
       expect(ship.name).to eq("aircraft-carrier")
@@ -158,8 +141,9 @@ RSpec.describe Grid do
 
     it "returns nil if there is no ship on a position" do
       aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      aircraft_carrier.register_position(2, "B", :horizontal)
 
-      grid.mark_ship_positions(2, "B", aircraft_carrier, :horizontal)
+      grid.add_ship(aircraft_carrier)
       ship = grid.ship_on([4, "C"])
 
       expect(ship).to eq(nil)
@@ -174,22 +158,23 @@ RSpec.describe Grid do
 
   def set_up_sunk_submarine
     submarine = Ship.new("submarine", 1)
-    grid.mark_ship_positions(1, "G", submarine, :vertical)
+    submarine.register_position(1, "A", :horizontal)
+    grid.add_ship(submarine)
     submarine.register_cells_hit([1, "G"])
-    grid.ships_placed.keys[0]
+    grid.ships_placed[0]
   end
 
   it "adds a sunk ship in a list" do
     sunk_submarine = set_up_sunk_submarine
 
-    grid.add_sunk_ship(sunk_submarine)
+    grid.register_sunk_ship(sunk_submarine)
 
     expect(grid.ships_sunk).to eq([sunk_submarine])
   end
 
   it "returns true if all ships are sunk" do
     sunk_submarine = set_up_sunk_submarine
-    grid.add_sunk_ship(sunk_submarine)
+    grid.register_sunk_ship(sunk_submarine)
 
     verdict = grid.end_game?
 
@@ -198,9 +183,10 @@ RSpec.describe Grid do
 
   it "returns false if not all ships are sunk" do
     sunk_submarine = set_up_sunk_submarine
-    grid.add_sunk_ship(sunk_submarine)
+    grid.register_sunk_ship(sunk_submarine)
     submarine2 = Ship.new("submarine", 1)
-    grid.mark_ship_positions(2, "G", submarine2, :vertical)
+    submarine2.register_position(2, "G", :vertical)
+    grid.add_ship(submarine2)
 
     verdict = grid.end_game?
 

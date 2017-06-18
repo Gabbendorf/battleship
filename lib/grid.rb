@@ -6,7 +6,7 @@ class Grid
 
   def initialize(size)
     @size = size
-    @ships_placed = {}
+    @ships_placed = []
     @ships_sunk = []
   end
 
@@ -24,30 +24,25 @@ class Grid
     columns.include?(x) && rows.include?(y)
   end
 
-  def mark_ship_positions(x, y, ship, orientation)
-    ship.register_position(x, y, orientation)
-    @ships_placed[ship] = ship.occupied_cells
+  def add_ship(ship)
+    @ships_placed.push(ship)
   end
 
-  # def add_ship(ship) => adds only ship
-  #   @ships_placed[ship] = ship.occupied_cells
-  # end
-
   def ship?(position)
-     all_occupied_cells = @ships_placed.values.inject {|sum,array| sum + array}
-     all_occupied_cells.include?(position)
+    all_occupied_cells = @ships_placed.map {|ship| ship.occupied_cells}
+    all_occupied_cells.flatten(1).include?(position)
   end
 
   def ship_on(position)
-    @ships_placed.each do |key, value|
-      if value.include?(position)
-        return key
+    @ships_placed.each do |ship|
+      if ship.occupied_cells.include?(position)
+        return ship
       end
     end
     nil
   end
 
-  def add_sunk_ship(ship)
+  def register_sunk_ship(ship)
     if ship.sunk?
       @ships_sunk.push(ship)
     end

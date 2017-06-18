@@ -16,7 +16,7 @@ class Game
     @ui.welcome
     rival = @ui.ask_to_choose_rival_type
     human_or_computer_place_ships(rival)
-    attacker = Player.new(@ui.ask_name_player2, @grid)
+    attacker = Player.new(@ui.ask_name_player2, @grid, @ui)
     ships_attack(attacker)
     end_game(attacker)
   end
@@ -28,15 +28,14 @@ class Game
       @computer.place_ship
       @ui.confirm_ships_were_placed
     else
-      ships_owner = Player.new(@ui.ask_name_player1, @grid)
+      ships_owner = Player.new(@ui.ask_name_player1, @grid, @validated_ui)
       ships_placement(ships_owner)
     end
   end
 
   def ships_placement(ships_owner)
     while @ships_list.ships.size > 0
-      @ui.display_grid
-      ship = ships_owner.placement_move(ships_owner.name, @ships_list)
+      ship = ships_owner.placement_move(ships_owner.name, @ships_list, @ui)
       @grid.add_ship(ship)
     end
   end
