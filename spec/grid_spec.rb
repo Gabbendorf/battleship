@@ -5,7 +5,7 @@ require_relative '../lib/ship'
 RSpec.describe Grid do
 
   let(:grid) {Grid.new(10)}
-  let(:destroyer) {Ship.new("destroyer", 2)}
+  let(:ship) {Ship.new("destroyer", 2)}
 
   it "has a size" do
     expect(grid.size).to eq(10)
@@ -14,28 +14,28 @@ RSpec.describe Grid do
   describe "knows where ship can be placed" do
     it "returns :invalid_ship_position if 1st coordinate is invalid number" do
       ui_output = {:x => "a", :y => "B", :orientation => :horizontal}
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
     it "returns false if 2nd coordinate is invalid letter" do
       ui_output = {:x => "1", :y => "Z", :orientation => :horizontal}
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
     it "returns false if 3rd coordinate (orientation) is not valid" do
       ui_output = {:x => "1", :y => "B", :orientation => "c"}
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
     it "returns true if all inputs are valid" do
       ui_output = {:x => "1".to_i, :y => "A", :orientation => :horizontal}
-      output = grid.validate_placement(ui_output, destroyer.length)
+      output = grid.validate_placement(ui_output, ship.length)
 
       expect(output).to eq(:valid_position)
     end
@@ -45,7 +45,7 @@ RSpec.describe Grid do
     it "returns :invalid_placement if ship doesn't stay inside grid vertically" do
       ui_output = {:x => "1".to_i, :y => "J", :orientation => :vertical}
 
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_placement)
     end
@@ -53,7 +53,7 @@ RSpec.describe Grid do
     it "returns true if ship stays inside grid vertically" do
       ui_output = {:x => "9".to_i, :y => "I", :orientation => :vertical}
 
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:valid_position)
     end
@@ -61,7 +61,7 @@ RSpec.describe Grid do
     it "returns :invalid_placement if ship doesn't stay inside grid horizontally" do
       ui_output = {:x => "10".to_i, :y => "A", :orientation => :horizontal}
 
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_placement)
     end
@@ -69,7 +69,7 @@ RSpec.describe Grid do
     it "returns true if ship stays inside grid horizontally" do
       ui_output = {:x => "9".to_i, :y => "J", :orientation => :horizontal}
 
-      result = grid.validate_placement(ui_output, destroyer.length)
+      result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:valid_position)
     end
@@ -165,16 +165,16 @@ RSpec.describe Grid do
   end
 
   it "adds a sunk ship in a list" do
-    sunk_submarine = Ship.new("submarine", 1)
+    sunk_submarine = set_up_sunk_submarine
 
-    grid.register_sunk_ship(sunk_submarine)
+    grid.register_sunk_ship_positions(sunk_submarine)
 
-    expect(grid.ships_sunk).to eq([sunk_submarine])
+    expect(grid.ships_sunk_positions).to eq([[1, "A"]])
   end
 
   it "returns true if all ships are sunk" do
     sunk_submarine = set_up_sunk_submarine
-    grid.register_sunk_ship(sunk_submarine)
+    grid.register_sunk_ship_positions(sunk_submarine)
 
     verdict = grid.end_game?
 
@@ -183,7 +183,7 @@ RSpec.describe Grid do
 
   it "returns false if not all ships are sunk" do
     sunk_submarine = set_up_sunk_submarine
-    grid.register_sunk_ship(sunk_submarine)
+    grid.register_sunk_ship_positions(sunk_submarine)
     submarine2 = Ship.new("submarine", 1)
     submarine2.register_position(2, "G", :vertical)
     grid.add_ship(submarine2)
@@ -191,6 +191,41 @@ RSpec.describe Grid do
     verdict = grid.end_game?
 
     expect(verdict).to eq(false)
+  end
+
+  describe "returns result :hit, :sunk or :water after each attack" do
+    it "returns :hit for hit occupied cell" do
+      ship.register_position(1, "A", :horizontal)
+      grid.add_ship(ship)
+
+      attacked_cell = [1, "A"]
+
+      expect(grid.show_result(attacked_cell)).to eq(:hit)
+      expect(ship.cells_hit.include?(attacked_cell)).to eq(true)
+    end
+
+    it "returns :water for no hit cell" do
+      ship.register_position(1, "A", :horizontal)
+      grid.add_ship(ship)
+
+      attacked_cell = [8, "A"]
+
+      expect(grid.show_result(attacked_cell)).to eq(:water)
+      expect(ship.cells_hit.include?(attacked_cell)).to eq(false)
+    end
+
+    it "returns :sunk for all cells of ship hit" do
+      ship.register_position(1, "A", :horizontal)
+      grid.add_ship(ship)
+
+      attacked_cell = [1, "A"]
+      attacked_cell2 = [2, "A"]
+      ship.register_cells_hit(attacked_cell)
+      ship.register_cells_hit(attacked_cell2)
+
+      expect(grid.show_result(attacked_cell)).to eq(:sunk)
+      expect(grid.ships_sunk_positions).to eq([[1, "A"], [2, "A"]])
+    end
   end
 
 end

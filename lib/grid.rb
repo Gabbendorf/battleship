@@ -2,12 +2,12 @@ require_relative 'ship'
 
 class Grid
 
-  attr_reader :ships_placed, :ships_sunk, :size
+  attr_reader :ships_placed, :ships_sunk_positions, :size
 
   def initialize(size)
     @size = size
     @ships_placed = []
-    @ships_sunk = []
+    @ships_sunk_positions = []
   end
 
   def validate_placement(position, ship_length)
@@ -28,11 +28,13 @@ class Grid
     @ships_placed.push(ship)
   end
 
+# could become private?
   def ship?(position)
     all_occupied_cells = @ships_placed.map {|ship| ship.occupied_cells}
     all_occupied_cells.flatten(1).include?(position)
   end
 
+  # this becomes private
   def ship_on(position)
     @ships_placed.each do |ship|
       if ship.occupied_cells.include?(position)
@@ -42,15 +44,35 @@ class Grid
     nil
   end
 
-  def register_sunk_ship(ship)
-      @ships_sunk.push(ship)
+  def show_result(attacked_cell)
+    if ship?(attacked_cell)
+      ship = ship_on(attacked_cell)
+      ship.register_cells_hit(attacked_cell)
+      result = :hit
+      if ship.sunk?
+        result = result_for_sunk(ship)
+      end
+    else
+      result = :water
+    end
+    result
+  end
+
+  def register_sunk_ship_positions(ship)
+    cells = ship.occupied_cells
+    cells.each {|cell| @ships_sunk_positions.push(cell)}
   end
 
   def end_game?
-    @ships_placed.length == @ships_sunk.length
+    @ships_placed.length == @ships_sunk_positions.length
   end
 
   private
+
+  def result_for_sunk(ship)
+    register_sunk_ship_positions(ship)
+    :sunk
+  end
 
   def ship_out_of_grid?(x, y, ship_length, orientation)
     orientation == :horizontal ?

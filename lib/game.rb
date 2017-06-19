@@ -12,18 +12,28 @@ class Game
     @create_ship = CreateShip.new
   end
 
+  # def start
+  #   @ui.welcome
+  #   rival = @ui.ask_to_choose_rival_type
+  #   human_or_computer_place_ships(rival)
+  #   attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
+  #   ships_attack(attacker)
+  #   end_game(attacker)
+  # end
+
   def start
     @ui.welcome
-    rival = @ui.ask_to_choose_rival_type
+    # rival = @ui.ask_to_choose_rival_type
     human_or_computer_place_ships(rival)
-    attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
+    # attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
     ships_attack(attacker)
     end_game(attacker)
   end
 
   private
 
-  def human_or_computer_place_ships(rival)
+  def human_or_computer_place_ships
+    rival = @ui.ask_to_choose_rival_type
     if rival == "computer"
       @computer.place_ship
       @ui.confirm_ships_were_placed
@@ -42,29 +52,38 @@ class Game
 
   def ships_attack(attacker)
     while !@grid.end_game?
+      attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
       cell_to_attack = attacker.attack_move(attacker.name)
-      if @grid.ship?(cell_to_attack)
-        ship = @grid.ship_on(cell_to_attack)
-        ship.register_cells_hit(cell_to_attack)
-        result = :hit
-      else
-        result = :water
-      end
+      result = @grid.show_result(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack)
-      check_if_sunk(cell_to_attack, result)
     end
   end
 
-  def check_if_sunk(cell_to_attack, result)
-    if result == :hit
-      hit_ship = @grid.ship_on(cell_to_attack)
-      if hit_ship.sunk?
-        sunk_ship_positions = hit_ship.occupied_cells
-        @grid_display.sunk(sunk_ship_positions)
-        @grid.register_sunk_ship(hit_ship)
-      end
-    end
-  end
+  # def ships_attack(attacker)
+  #   while !@grid.end_game?
+  #     cell_to_attack = attacker.attack_move(attacker.name)
+  #     if @grid.ship?(cell_to_attack)
+  #       ship = @grid.ship_on(cell_to_attack)
+  #       ship.register_cells_hit(cell_to_attack)
+  #       result = :hit
+  #     else
+  #       result = :water
+  #     end
+  #     @grid_display.update_grid(result, cell_to_attack)
+  #     check_if_sunk(cell_to_attack, result)
+  #   end
+  # end
+
+  # def check_if_sunk(cell_to_attack, result)
+  #   if result == :hit
+  #     hit_ship = @grid.ship_on(cell_to_attack)
+  #     if hit_ship.sunk?
+  #       sunk_ship_positions = hit_ship.occupied_cells
+  #       @grid_display.sunk(sunk_ship_positions)
+  #       @grid.register_sunk_ship(hit_ship)
+  #     end
+  #   end
+  # end
 
   def end_game(attacker)
     @ui.display_grid
