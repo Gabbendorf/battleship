@@ -11,15 +11,16 @@ class GridDisplay
     @representation.join("   ")
   end
 
-# Need to add :sunk as result and test
-  def update_grid(result, cell_to_attack) #, grid)
-    if result == :hit
+  def update_grid(result, cell_to_attack, grid)
+    case result
+    when :hit
       hit(cell_to_attack)
-    elsif result == :water
+    when :water
       water(cell_to_attack)
-    #elsif result == :sunk
-    #   sunk_ship_positions = grid.ships_sunk_positions # => this should only return positions
-      #sunk(sunk_ship_positions)
+    when :sunk
+      sunk_ship_positions = grid.ships_sunk_positions
+      grid.ships_sunk_positions
+      sunk(sunk_ship_positions)
     end
   end
 
