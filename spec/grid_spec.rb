@@ -108,54 +108,6 @@ RSpec.describe Grid do
     expect(grid.ships_placed.size).to eq(2)
   end
 
-  describe "checks if a cell is already occupied by a ship" do
-    it "returns true if a cell is occupied" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      aircraft_carrier.register_position(2, "B", :horizontal)
-
-      grid.add_ship(aircraft_carrier)
-
-      expect(grid.ship?([4, "B"])).to eq(true)
-    end
-
-    it "returns false if a cell is not occupied" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      aircraft_carrier.register_position(2, "B", :horizontal)
-
-      grid.add_ship(aircraft_carrier)
-
-      expect(grid.ship?([9, "B"])).to eq(false)
-    end
-  end
-
-  describe "looks for the ship that occupies a position" do
-    it "returns the ship that occupies a position" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      aircraft_carrier.register_position(2, "B", :horizontal)
-      grid.add_ship(aircraft_carrier)
-
-      ship = grid.ship_on([4, "B"])
-
-      expect(ship.name).to eq("aircraft-carrier")
-    end
-
-    it "returns nil if there is no ship on a position" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      aircraft_carrier.register_position(2, "B", :horizontal)
-
-      grid.add_ship(aircraft_carrier)
-      ship = grid.ship_on([4, "C"])
-
-      expect(ship).to eq(nil)
-    end
-
-    it "returns nil if there are no ships in the list" do
-      ship = grid.ship_on([4, "C"])
-
-      expect(ship).to eq(nil)
-    end
-  end
-
   def set_up_sunk_submarine
     submarine = Ship.new("submarine", 1)
     submarine.register_position(1, "A", :horizontal)

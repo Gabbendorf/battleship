@@ -1,5 +1,14 @@
 require 'spec_helper.rb'
 require_relative '../lib/game'
+require_relative '../lib/grid'
+require_relative '../lib/grid_display'
+require_relative '../lib/ui'
+require_relative '../lib/create_ship'
+require_relative '../lib/ships_list'
+require_relative '../lib/validated_ui'
+require_relative '../lib/computer'
+require_relative '../lib/player'
+
 
 RSpec.describe Game do
 
@@ -9,7 +18,10 @@ RSpec.describe Game do
   let(:ui) {Ui.new(input, output, grid_display)}
   let(:create_ship) {CreateShip.new}
   let(:ships_list) {ShipsList.new(create_ship)}
+  let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
   let(:computer) {Computer.new(grid, ships_list)}
+  # let(:player1) {Player.new("Gabriella", grid, validated_ui, ui)}
+  # let(:player2) {Player.new("Nicolo", grid, validated_ui, ui)}
 
   it "starts a new game" do
     PLAYER1 = "Gabriella\n"

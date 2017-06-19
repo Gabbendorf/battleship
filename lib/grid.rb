@@ -28,22 +28,6 @@ class Grid
     @ships_placed.push(ship)
   end
 
-# could become private?
-  def ship?(position)
-    all_occupied_cells = @ships_placed.map {|ship| ship.occupied_cells}
-    all_occupied_cells.flatten(1).include?(position)
-  end
-
-  # this becomes private
-  def ship_on(position)
-    @ships_placed.each do |ship|
-      if ship.occupied_cells.include?(position)
-        return ship
-      end
-    end
-    nil
-  end
-
   def show_result(attacked_cell)
     if ship?(attacked_cell)
       ship = ship_on(attacked_cell)
@@ -68,6 +52,19 @@ class Grid
   end
 
   private
+
+  def ship?(position)
+    all_occupied_cells = @ships_placed.map {|ship| ship.occupied_cells}
+    all_occupied_cells.flatten(1).include?(position)
+  end
+
+  def ship_on(position)
+    @ships_placed.each do |ship|
+      if ship.occupied_cells.include?(position)
+        return ship
+      end
+    end
+  end
 
   def result_for_sunk(ship)
     register_sunk_ship_positions(ship)
