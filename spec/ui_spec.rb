@@ -6,6 +6,7 @@ require_relative '../lib/player'
 require_relative '../lib/ship'
 require_relative '../lib/create_ship'
 require_relative '../lib/ships_list'
+require_relative '../lib/validated_ui'
 
 RSpec.describe Ui do
 
@@ -17,8 +18,9 @@ RSpec.describe Ui do
   let(:ship) {Ship.new}
   let(:create_ship) {CreateShip.new}
   let(:ships_list) {ShipsList.new(create_ship)}
-  let(:ships_owner) {Player.new("Gabriella", grid)}
-  let(:attacker) {Player.new("Nic", grid)}
+  let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
+  let(:ships_owner) {Player.new("Gabriella", grid, validated_ui, ui)}
+  let(:attacker) {Player.new("Nic", grid, validated_ui, ui)}
 
   it "welcomes the players" do
     ui.welcome

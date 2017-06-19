@@ -16,7 +16,7 @@ class Game
     @ui.welcome
     rival = @ui.ask_to_choose_rival_type
     human_or_computer_place_ships(rival)
-    attacker = Player.new(@ui.ask_name_player2, @grid, @ui)
+    attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
     ships_attack(attacker)
     end_game(attacker)
   end
@@ -28,7 +28,7 @@ class Game
       @computer.place_ship
       @ui.confirm_ships_were_placed
     else
-      ships_owner = Player.new(@ui.ask_name_player1, @grid, @validated_ui)
+      ships_owner = Player.new(@ui.ask_name_player1, @grid, @validated_ui, @ui)
       ships_placement(ships_owner)
     end
   end
@@ -42,13 +42,32 @@ class Game
 
   def ships_attack(attacker)
     while !@grid.end_game?
-      @ui.display_grid
-      cell_to_attack = @validated_ui.valid_cell_to_attack(attacker.name)
-      result = attacker.attack(cell_to_attack)
+      cell_to_attack = attacker.attack_move(attacker.name)
+      ship = @grid.ship_on(cell_to_attack)
+      if ship != nil
+        result = :hit
+        ship.register_cells_hit(cell_to_attack)
+        if ship.sunk?
+          @grid.register_sunk_ship(ship)
+        end
+      else
+        result = :water
+      end
       @grid_display.update_grid(result, cell_to_attack)
-      check_if_sunk(cell_to_attack, result)
+      # ship.register_cells_hit(cell_to_attack)
+      # check_if_sunk(cell_to_attack, result)
     end
   end
+
+  # def ships_attack(attacker)
+  #   while !@grid.end_game?
+  #     @ui.display_grid
+  #     cell_to_attack = @validated_ui.valid_cell_to_attack(attacker.name)
+  #     result = attacker.attack(cell_to_attack)
+  #     @grid_display.update_grid(result, cell_to_attack)
+  #     check_if_sunk(cell_to_attack, result)
+  #   end
+  # end
 
   def check_if_sunk(cell_to_attack, result)
     if result == :hit

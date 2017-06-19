@@ -1,4 +1,7 @@
 require_relative 'create_ship'
+require_relative 'grid'
+require_relative 'ships_list'
+require_relative 'ship'
 
 class Computer
 
@@ -8,11 +11,12 @@ class Computer
     @create_ship = CreateShip.new
   end
 
-  def place_ship
+  def place_ship(ship)
     while @ships_list.ships.size > 0
       random_ship = select_random_ship
       position = valid_position(select_random_position, random_ship.length)
-      @grid.mark_ship_positions(position[:x], position[:y], random_ship, position[:orientation])
+      ship = random_ship.register_position(position[:x], position[:y], position[:orientation])
+      @grid.add_ship(ship)
     end
   end
 
