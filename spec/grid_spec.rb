@@ -165,7 +165,7 @@ RSpec.describe Grid do
   end
 
   it "adds a sunk ship in a list" do
-    sunk_submarine = set_up_sunk_submarine
+    sunk_submarine = Ship.new("submarine", 1)
 
     grid.register_sunk_ship(sunk_submarine)
 

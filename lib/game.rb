@@ -43,31 +43,17 @@ class Game
   def ships_attack(attacker)
     while !@grid.end_game?
       cell_to_attack = attacker.attack_move(attacker.name)
-      ship = @grid.ship_on(cell_to_attack)
-      if ship != nil
-        result = :hit
+      if @grid.ship?(cell_to_attack)
+        ship = @grid.ship_on(cell_to_attack)
         ship.register_cells_hit(cell_to_attack)
-        if ship.sunk?
-          @grid.register_sunk_ship(ship)
-        end
+        result = :hit
       else
         result = :water
       end
       @grid_display.update_grid(result, cell_to_attack)
-      # ship.register_cells_hit(cell_to_attack)
-      # check_if_sunk(cell_to_attack, result)
+      check_if_sunk(cell_to_attack, result)
     end
   end
-
-  # def ships_attack(attacker)
-  #   while !@grid.end_game?
-  #     @ui.display_grid
-  #     cell_to_attack = @validated_ui.valid_cell_to_attack(attacker.name)
-  #     result = attacker.attack(cell_to_attack)
-  #     @grid_display.update_grid(result, cell_to_attack)
-  #     check_if_sunk(cell_to_attack, result)
-  #   end
-  # end
 
   def check_if_sunk(cell_to_attack, result)
     if result == :hit
@@ -75,6 +61,7 @@ class Game
       if hit_ship.sunk?
         sunk_ship_positions = hit_ship.occupied_cells
         @grid_display.sunk(sunk_ship_positions)
+        @grid.register_sunk_ship(hit_ship)
       end
     end
   end

@@ -43,9 +43,7 @@ class Grid
   end
 
   def register_sunk_ship(ship)
-    if ship.sunk?
       @ships_sunk.push(ship)
-    end
   end
 
   def end_game?
