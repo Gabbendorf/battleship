@@ -11,12 +11,12 @@ class Computer
     @create_ship = CreateShip.new
   end
 
-  def place_ship(ship)
+  def place_ship
     while @ships_list.ships.size > 0
       random_ship = select_random_ship
       position = valid_position(select_random_position, random_ship.length)
-      ship = random_ship.register_position(position[:x], position[:y], position[:orientation])
-      @grid.add_ship(ship)
+      random_ship.register_position(position[:x], position[:y], position[:orientation])
+      @grid.add_ship(random_ship)
     end
   end
 
@@ -24,9 +24,8 @@ class Computer
 
   def valid_position(position, ship_length)
     validation_result = @grid.validate_placement(position, ship_length)
-
     while validation_result != :valid_position
-      if validation_result == :invalid_ship_position || validation_result == :invalid_placement
+      if validation_result == :invalid_placement
         position = select_random_position
       end
       validation_result = @grid.validate_placement(position, ship_length)

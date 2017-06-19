@@ -48,7 +48,8 @@ class Grid
   end
 
   def end_game?
-    @ships_placed.length == @ships_sunk_positions.length
+    all_ships_positions = @ships_placed.map {|ship| ship.occupied_cells}
+    all_ships_positions.flatten(1).length == @ships_sunk_positions.length
   end
 
   private

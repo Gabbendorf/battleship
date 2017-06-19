@@ -36,7 +36,6 @@ class Game
     end
   end
 
-  #TODO: need to fix bug that let the game never end
   def ships_attack
     attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
     while !@grid.end_game?

@@ -12,8 +12,9 @@ RSpec.describe Computer do
   let(:create_ship) {CreateShip.new}
   let(:ships_list) {ShipsList.new(create_ship)}
   let(:grid_display) {GridDisplay.new(grid.size)}
-  let(:computer) {Computer.new(grid, ships_list)}
   let(:ship) {Ship.new("submarine", 1)}
+  let(:computer) {Computer.new(grid, ships_list, ship)}
+
 
   xit "places ship on grid from list of 6 ships randomly" do
     computer.place_ship(ship)

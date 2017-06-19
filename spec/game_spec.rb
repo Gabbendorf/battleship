@@ -20,8 +20,6 @@ RSpec.describe Game do
   let(:ships_list) {ShipsList.new(create_ship)}
   let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
   let(:computer) {Computer.new(grid, ships_list)}
-  # let(:player1) {Player.new("Gabriella", grid, validated_ui, ui)}
-  # let(:player2) {Player.new("Nicolo", grid, validated_ui, ui)}
 
   it "starts a new game" do
     PLAYER1 = "Gabriella\n"
