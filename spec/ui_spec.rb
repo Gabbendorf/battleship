@@ -198,4 +198,14 @@ RSpec.describe Ui do
     expect(cell_to_attack).to eq([0, ""])
   end
 
+  it "asks for new position if previous given is already occupied and returns hash" do
+    input = StringIO.new("1,a,v\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_empty_position
+
+    expect(output.string).to include("Position already occupied:")
+    expect(position).to eq({:x => 1, :y=> "A", :orientation => :vertical})
+  end
+
 end

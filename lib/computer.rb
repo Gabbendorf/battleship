@@ -22,10 +22,11 @@ class Computer
 
   private
 
+# something's wrong with validations: computer possibly places ship outside grid (game never ends)
   def valid_position(position, ship_length)
     validation_result = @grid.validate_placement(position, ship_length)
     while validation_result != :valid_position
-      if validation_result == :invalid_placement
+      if validation_result == :invalid_placement || validation_result == :already_occupied
         position = select_random_position
       end
       validation_result = @grid.validate_placement(position, ship_length)

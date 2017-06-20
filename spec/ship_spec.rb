@@ -54,24 +54,4 @@ RSpec.describe Ship do
     expect(destroyer.cells_hit.size).to eq(2)
   end
 
-  describe "looks if ship occupies a position" do
-    it "returns true if ship occupies a position" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      aircraft_carrier.register_position(2, "B", :horizontal)
-
-      existing_ship = aircraft_carrier.does_occupy?([4, "B"])
-
-      expect(existing_ship).to eq(true)
-    end
-
-    it "returns false if no ship occupies a position" do
-      aircraft_carrier = Ship.new("aircraft-carrier", 4)
-      aircraft_carrier.register_position(2, "B", :horizontal)
-
-      existing_ship = aircraft_carrier.does_occupy?([3, "C"])
-
-      expect(existing_ship).to eq(false)
-    end
-  end
-
 end

@@ -26,6 +26,8 @@ class ValidatedUi
         position = @ui.ask_for_valid_position
       elsif validation_result == :invalid_placement
         position = @ui.ask_for_realistic_position
+      elsif validation_result == :already_occupied
+        position = @ui.ask_for_empty_position
       end
       validation_result = @grid.validate_placement(position, ship.length)
     end

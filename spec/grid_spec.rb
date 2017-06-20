@@ -75,6 +75,14 @@ RSpec.describe Grid do
     end
   end
 
+  it "checks that a position is not already occupied" do
+    ship.register_position(1, "A", :horizontal)
+    grid.add_ship(ship)
+    ui_output = {:x => "2".to_i, :y => "A", :orientation => :horizontal}
+
+    expect(grid.validate_placement(ui_output, ship.length)).to eq(:already_occupied)
+  end
+
   describe "checks that position to attack is valid" do
     it "returns false for invalid number" do
       result = grid.position_in_grid?(11, "A")

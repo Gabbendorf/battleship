@@ -22,6 +22,7 @@ RSpec.describe Game do
   let(:computer) {Computer.new(grid, ships_list)}
 
   it "starts a new game" do
+
     PLAYER1 = "Gabriella\n"
     WRONG_INPUT = "10\n"
     FIRST_SHIP = "1\n"
@@ -62,5 +63,4 @@ RSpec.describe Game do
 
     expect(grid.end_game?).to eq(true)
   end
-
 end

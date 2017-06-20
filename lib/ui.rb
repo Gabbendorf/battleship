@@ -83,6 +83,13 @@ class Ui
     [input[0].to_i, input[1].capitalize]
   end
 
+  def ask_for_empty_position
+    @stdout.puts "Position already occupied:"
+    input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_hash(input)
+    details_for(input)
+  end
+
   private
 
   def print_list_of_ships(list)
