@@ -19,21 +19,21 @@ RSpec.describe Grid do
       expect(result).to eq(:invalid_ship_position)
     end
 
-    it "returns false if 2nd coordinate is invalid letter" do
+    it "returns :invalid_ship_position if 2nd coordinate is invalid letter" do
       ui_output = {:x => "1", :y => "Z", :orientation => :horizontal}
       result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
-    it "returns false if 3rd coordinate (orientation) is not valid" do
+    it "returns :invalid_ship_position if 3rd coordinate (orientation) is not valid" do
       ui_output = {:x => "1", :y => "B", :orientation => "c"}
       result = grid.validate_placement(ui_output, ship.length)
 
       expect(result).to eq(:invalid_ship_position)
     end
 
-    it "returns true if all inputs are valid" do
+    it "returns :valid_position if all inputs are valid" do
       ui_output = {:x => "1".to_i, :y => "A", :orientation => :horizontal}
       output = grid.validate_placement(ui_output, ship.length)
 
@@ -50,7 +50,7 @@ RSpec.describe Grid do
       expect(result).to eq(:invalid_placement)
     end
 
-    it "returns true if ship stays inside grid vertically" do
+    it "returns :valid_position if ship stays inside grid vertically" do
       ui_output = {:x => "9".to_i, :y => "I", :orientation => :vertical}
 
       result = grid.validate_placement(ui_output, ship.length)
@@ -66,7 +66,7 @@ RSpec.describe Grid do
       expect(result).to eq(:invalid_placement)
     end
 
-    it "returns true if ship stays inside grid horizontally" do
+    it "returns :valid_position if ship stays inside grid horizontally" do
       ui_output = {:x => "9".to_i, :y => "J", :orientation => :horizontal}
 
       result = grid.validate_placement(ui_output, ship.length)
@@ -153,7 +153,6 @@ RSpec.describe Grid do
       attacked_cell = [1, "A"]
 
       expect(grid.show_result(attacked_cell)).to eq(:hit)
-      expect(ship.cells_hit.include?(attacked_cell)).to eq(true)
     end
 
     it "returns :water for no hit cell" do
@@ -163,7 +162,6 @@ RSpec.describe Grid do
       attacked_cell = [8, "A"]
 
       expect(grid.show_result(attacked_cell)).to eq(:water)
-      expect(ship.cells_hit.include?(attacked_cell)).to eq(false)
     end
 
     it "returns :sunk for all cells of ship hit" do
@@ -176,7 +174,6 @@ RSpec.describe Grid do
       ship.register_cells_hit(attacked_cell2)
 
       expect(grid.show_result(attacked_cell)).to eq(:sunk)
-      expect(grid.ships_sunk_positions).to eq([[1, "A"], [2, "A"]])
     end
   end
 
