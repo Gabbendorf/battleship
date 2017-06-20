@@ -1,9 +1,11 @@
 require 'spec_helper'
 require_relative '../lib/ships_list'
+require_relative '../lib/ship'
 
 RSpec.describe ShipsList do
 
-  let(:ships_list) {ShipsList.new}
+  let(:create_ship) {CreateShip.new}
+  let(:ships_list) {ShipsList.new(create_ship)}
 
   def count_ships(list)
     list.values.inject {|sum, value| sum + value}
@@ -15,19 +17,14 @@ RSpec.describe ShipsList do
     expect(ships_count).to eq(6)
   end
 
-  it "deletes a selected ship from the list of ships to place on grid" do
-    ships_list.delete_selected_ship("submarine")
+  it "deletes a selected ship from the list and creates ship instance" do
+    ship = ships_list.prepare_ship("submarine")
 
     ships_count = count_ships(ships_list.ships)
 
     expect(ships_count).to eq(5)
     expect(ships_list.ships["submarine"]).to eq(1)
-  end
-
-  it "deletes ship from list if there are 0 of that type" do
-    ships_list.delete_selected_ship("cruiser")
-
-    expect(ships_list.ships).to eq({"submarine" => 2, "destroyer" => 2, "aircraft-carrier" =>1})
+    expect(ship).to have_attributes(:name => "submarine", :length => 1)
   end
 
   it "converts the player's input as number into name of ship" do
@@ -36,6 +33,26 @@ RSpec.describe ShipsList do
     ship_name = ships_list.convert_number_to_name(players_input)
 
     expect(ship_name).to eq("destroyer")
+  end
+
+  describe "checks player's entered number corresponds to a ship" do
+    it "returns :invalid_ship_number for invalid number" do
+      output = ships_list.validate("5")
+
+      expect(output).to eq(:invalid_ship_number)
+    end
+
+    it "returns :invalid_ship_number for invalid input type" do
+      output = ships_list.validate("hello")
+
+      expect(output).to eq(:invalid_ship_number)
+    end
+
+    it "returns :valid_ship_number for valid input" do
+      output = ships_list.validate("2")
+
+      expect(output).to eq(:valid_ship_number)
+    end
   end
 
 end

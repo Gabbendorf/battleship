@@ -1,65 +1,83 @@
 class GridDisplay
 
-  attr_reader :grid
+  attr_reader :representation
 
-  def initialize
-    @grid = [
-            ["    ", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "\n"],
-            ["A", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["B", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["C", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["D", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["E", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["F", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["G", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["H", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["I", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-            ["J", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "\n"],
-          ]
+  def initialize(grid_size)
+    @grid_size = grid_size
+    @representation = rows_and_columns
+  end
+
+  def prepare_grid
+    @representation.join("   ")
+  end
+
+  def update_grid(result, cell_to_attack, grid)
+    case result
+    when :hit
+      hit(cell_to_attack)
+    when :water
+      water(cell_to_attack)
+    when :sunk
+      sunk_ship_positions = grid.ships_sunk_positions
+      grid.ships_sunk_positions
+      sunk(sunk_ship_positions)
+    end
   end
 
   def hit(position)
     row = position[1]
     column = position[0]
-    @grid[number_of[row]][column] = "H"
+    @representation[number_of[row]][column] = "H"
   end
 
   def water(position)
     row = position[1]
     column = position[0]
-    @grid[number_of[row]][column] = "W"
+    @representation[number_of[row]][column] = "W"
   end
 
   def sunk(ship_position)
     ship_position.each do |position|
       row = position[1]
       column = position[0]
-      @grid[number_of[row]][column] = "S"
-    end
-  end
-
-  def update_grid(result, cell_to_attack)
-    if result == :hit
-      hit(cell_to_attack)
-    elsif result == :water
-      water(cell_to_attack)
+      @representation[number_of[row]][column] = "S"
     end
   end
 
   private
 
+  def rows_and_columns
+    rows = [first_row]
+    letters = ("A".."Z").take(@grid_size)
+    letters.each do |letter|
+      row = []
+      row.push(letter)
+      @grid_size.times do
+        row.push(".")
+      end
+      row.push("\n")
+      rows.push(row)
+    end
+    rows
+  end
+
+  def first_row
+    first_row = ["    "]
+    numbers = (1..@grid_size).to_a
+    numbers.each {|number| first_row.push(number)}
+    first_row.push("\n")
+    first_row
+  end
+
   def number_of
-    {"A" => 1,
-     "B" => 2,
-     "C" => 3,
-     "D" => 4,
-     "E" => 5,
-     "F" => 6,
-     "G" => 7,
-     "H" => 8,
-     "I" => 9,
-     "J" => 10,
-    }
+    letters = ("A".."Z").take(@grid_size)
+    hash = {}
+    number = 1
+    letters.each do |letter|
+      hash[letter] = number
+      number += 1
+    end
+    hash
   end
 
 end

@@ -1,14 +1,25 @@
 require 'spec_helper.rb'
 require_relative '../lib/game'
+require_relative '../lib/grid'
+require_relative '../lib/grid_display'
+require_relative '../lib/ui'
+require_relative '../lib/create_ship'
+require_relative '../lib/ships_list'
+require_relative '../lib/validated_ui'
+require_relative '../lib/computer'
+require_relative '../lib/player'
+
 
 RSpec.describe Game do
 
-  let(:grid_display) {GridDisplay.new}
+  let(:grid) {Grid.new(10)}
+  let(:grid_display) {GridDisplay.new(grid.size)}
   let(:output) {StringIO.new}
-  let(:grid) {Grid.new}
-  let(:player) {Player.new(grid)}
-  let(:ships_list) {ShipsList.new}
-  let(:validations) {Validations.new}
+  let(:ui) {Ui.new(input, output, grid_display)}
+  let(:create_ship) {CreateShip.new}
+  let(:ships_list) {ShipsList.new(create_ship)}
+  let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
+  let(:computer) {Computer.new(grid, ships_list)}
 
   it "starts a new game" do
     PLAYER1 = "Gabriella\n"
@@ -44,11 +55,12 @@ RSpec.describe Game do
 
     input = StringIO.new(PLAYER1+WRONG_INPUT+FIRST_SHIP+WRONG_POSITION+POSITION1+SECOND_SHIP+POSITION2+THIRD_SHIP+POSITION3+FOURTH_SHIP+POSITION4+FIFTH_SHIP+POSITION5+SIXTH_SHIP+POSITION6+PLAYER2+
                          WRONG_ATTACK+SINK_SHIP1+SINK_SHIP2+HIT_SHIP3+SINK_SHIP3+HIT_SHIP4+SINK_SHIP4+HIT_SHIP5+HIT2_SHIP5+SINK_SHIP5+HIT_SHIP6+HIT2_SHIP6+HIT3_SHIP6+SINK_SHIP6)
-
     ui = Ui.new(input, output, grid_display)
-    game = Game.new(grid_display, ui, grid, player, ships_list, validations)
-
+    validated_ui = ValidatedUi.new(ui, ships_list, grid)
+    game = Game.new(grid_display, ui, grid, ships_list, computer, validated_ui)
     game.start
+
+    expect(grid.end_game?).to eq(true)
   end
 
 end

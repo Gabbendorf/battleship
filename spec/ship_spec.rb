@@ -3,14 +3,12 @@ require_relative "../lib/ship"
 
 RSpec.describe Ship do
 
-  let(:grid) {Grid.new}
-
-  it "knows its position in grid" do
+  it "generates its position on grid" do
     cruiser = Ship.new("cruiser", 3)
 
-    grid.mark_ship_positions(5, "B", cruiser, :vertical)
+    cruiser.register_position(5, "B", :vertical)
 
-    expect(cruiser.occupied_cells(grid)).to eq([[5, "B"], [5, "C"], [5, "D"]])
+    expect(cruiser.occupied_cells).to eq([[5, "B"], [5, "C"], [5, "D"]])
   end
 
   it "keeps track of its cells hit" do
@@ -54,6 +52,26 @@ RSpec.describe Ship do
     destroyer.register_cells_hit(attacked_cell2)
 
     expect(destroyer.cells_hit.size).to eq(2)
+  end
+
+  describe "looks if ship occupies a position" do
+    it "returns true if ship occupies a position" do
+      aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      aircraft_carrier.register_position(2, "B", :horizontal)
+
+      existing_ship = aircraft_carrier.does_occupy?([4, "B"])
+
+      expect(existing_ship).to eq(true)
+    end
+
+    it "returns false if no ship occupies a position" do
+      aircraft_carrier = Ship.new("aircraft-carrier", 4)
+      aircraft_carrier.register_position(2, "B", :horizontal)
+
+      existing_ship = aircraft_carrier.does_occupy?([3, "C"])
+
+      expect(existing_ship).to eq(false)
+    end
   end
 
 end
