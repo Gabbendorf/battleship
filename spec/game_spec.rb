@@ -9,7 +9,6 @@ require_relative '../lib/validated_ui'
 require_relative '../lib/computer'
 require_relative '../lib/player'
 
-
 RSpec.describe Game do
 
   let(:grid) {Grid.new(10)}
@@ -21,7 +20,7 @@ RSpec.describe Game do
   let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
   let(:computer) {Computer.new(grid, ships_list)}
 
-  it "starts a new game" do
+  it "starts a new game with human player placing ships" do
 
     PLAYER1 = "Gabriella\n"
     WRONG_INPUT = "10\n"
@@ -59,8 +58,44 @@ RSpec.describe Game do
     ui = Ui.new(input, output, grid_display)
     validated_ui = ValidatedUi.new(ui, ships_list, grid)
     game = Game.new(grid_display, ui, grid, ships_list, computer, validated_ui)
+
     game.start
 
     expect(grid.end_game?).to eq(true)
   end
+
+  it "starts a new game with computer placing ships" do
+    input = StringIO.new("computer\ngabriella\n1,f\n2,f\n3,f\n4,f\n5f\n1,e\n2,e\n3,e\n1,d\n2,d\n1,c\n2,c\n1,b\n1,z\n1,a")
+    ui = Ui.new(input, output, grid_display)
+    validated_ui = ValidatedUi.new(ui, ships_list, grid)
+    fake_computer = FakeComputer.new(grid, ships_list)
+    game = Game.new(grid_display, ui, grid, ships_list, fake_computer, validated_ui)
+
+    game.start
+
+    expect(grid.end_game?).to eq(true)
+  end
+end
+
+require_relative '../lib/ship'
+
+class FakeComputer
+
+  def initialize(grid, ships_list)
+    @ships_list = ships_list
+    @grid = grid
+    @ships_to_place = ["submarine", "submarine", "destroyer", "destroyer", "cruiser", "aircraft-carrier"]
+    @positions = [[1, "A", :horizontal], [1, "B", :horizontal], [1, "C", :horizontal], [1, "D", :horizontal], [1, "E", :horizontal], [1, "F", :horizontal]]
+  end
+
+  def place_ship
+    while @ships_to_place.size > 0
+      ship_name = @ships_to_place.pop
+      position = @positions.pop
+      ship = @ships_list.prepare_ship(ship_name)
+      ship.register_position(position[0], position[1], position[2])
+      @grid.add_ship(ship)
+    end
+  end
+
 end
