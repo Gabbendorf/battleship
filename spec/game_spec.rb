@@ -7,7 +7,7 @@ require_relative '../lib/create_ship'
 require_relative '../lib/ships_list'
 require_relative '../lib/validated_ui'
 require_relative '../lib/computer'
-require_relative '../lib/player'
+require_relative '../lib/human_player'
 
 RSpec.describe Game do
 
@@ -88,7 +88,7 @@ class FakeComputer
     @positions = [[1, "A", :horizontal], [1, "B", :horizontal], [1, "C", :horizontal], [1, "D", :horizontal], [1, "E", :horizontal], [1, "F", :horizontal]]
   end
 
-  def place_ship
+  def ship_placement
     while @ships_to_place.size > 0
       ship_name = @ships_to_place.pop
       position = @positions.pop

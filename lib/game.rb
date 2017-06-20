@@ -1,4 +1,4 @@
-require_relative 'player'
+require_relative 'human_player'
 require_relative 'create_ship'
 
 class Game
@@ -24,22 +24,25 @@ class Game
 
   def ships_placement
     rival = @ui.ask_to_choose_rival_type
+    # rival_type = @ui.ask_to_choose_rival_type
+    # rival = ShipsPlacer.new.create_ships_placer(rival_type)
+    # rival.ships_placement
     if rival == "computer"
-      @computer.place_ship
+      @computer.ship_placement
       @ui.confirm_ships_were_placed
     else
-      ships_owner = Player.new(@ui.ask_name_player1, @grid, @validated_ui, @ui)
+      ships_owner = HumanPlayer.new(@ui.ask_name_player1, @grid, @validated_ui, @ui)
       while @ships_list.ships.size > 0
-        ship = ships_owner.placement_move(ships_owner.name, @ships_list, @ui)
+        ship = ships_owner.ship_placement(ships_owner.name, @ships_list, @ui)
         @grid.add_ship(ship)
       end
     end
   end
 
   def ships_attack
-    attacker = Player.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
+    attacker = HumanPlayer.new(@ui.ask_name_player2, @grid, @validated_ui, @ui)
     while !@grid.end_game?
-      cell_to_attack = attacker.attack_move(attacker.name)
+      cell_to_attack = attacker.ship_attack(attacker.name)
       result = @grid.show_result(cell_to_attack)
       @grid_display.update_grid(result, cell_to_attack, @grid)
     end

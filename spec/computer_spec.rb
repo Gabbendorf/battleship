@@ -26,7 +26,7 @@ RSpec.describe Computer do
   end
 
   it "places ship on grid from list of 6 ships randomly" do
-    computer.place_ship
+    computer.ship_placement
 
     possible_ships = {"submarine" => 2,
                       "destroyer" => 2,

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../lib/player'
+require_relative '../lib/human_player'
 require_relative '../lib/grid_display'
 require_relative '../lib/grid'
 require_relative '../lib/validated_ui'
@@ -8,7 +8,7 @@ require_relative '../lib/create_ship'
 require_relative '../lib/ui'
 require_relative '../lib/ship'
 
-RSpec.describe Player do
+RSpec.describe HumanPlayer do
 
   let(:grid) {Grid.new(10)}
   let(:grid_display) {GridDisplay.new(grid.size)}
@@ -21,9 +21,9 @@ RSpec.describe Player do
     input = StringIO.new("1\n1,a,z\n1,a,h\n")
     ui = Ui.new(input, output, grid_display)
     validated_ui = ValidatedUi.new(ui, ships_list, grid)
-    player = Player.new("Gabriella", grid, validated_ui, ui)
+    player = HumanPlayer.new("Gabriella", grid, validated_ui, ui)
 
-    ship = player.placement_move(player.name, ships_list, ui)
+    ship = player.ship_placement(player.name, ships_list, ui)
 
     expect(ship).to have_attributes(:name => "submarine", :length => 1, :occupied_cells => [[1, "A"]])
   end
@@ -32,9 +32,9 @@ RSpec.describe Player do
     input = StringIO.new("8,z\n7,b\n")
     ui = Ui.new(input, output, grid_display)
     validated_ui = ValidatedUi.new(ui, ships_list, grid)
-    player = Player.new("Gabriella", grid, validated_ui, ui)
+    player = HumanPlayer.new("Gabriella", grid, validated_ui, ui)
 
-    result = player.attack_move("Gabriella")
+    result = player.ship_attack("Gabriella")
 
     expect(result).to eq([7, "B"])
   end

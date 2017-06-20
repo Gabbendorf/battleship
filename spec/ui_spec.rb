@@ -2,7 +2,7 @@ require 'spec_helper'
 require_relative '../lib/ui'
 require_relative '../lib/grid_display'
 require_relative '../lib/grid'
-require_relative '../lib/player'
+require_relative '../lib/human_player'
 require_relative '../lib/ship'
 require_relative '../lib/create_ship'
 require_relative '../lib/ships_list'
@@ -19,8 +19,8 @@ RSpec.describe Ui do
   let(:create_ship) {CreateShip.new}
   let(:ships_list) {ShipsList.new(create_ship)}
   let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
-  let(:ships_owner) {Player.new("Gabriella", grid, validated_ui, ui)}
-  let(:attacker) {Player.new("Nic", grid, validated_ui, ui)}
+  let(:ships_owner) {HumanPlayer.new("Gabriella", grid, validated_ui, ui)}
+  let(:attacker) {HumanPlayer.new("Nic", grid, validated_ui, ui)}
 
   it "welcomes the players" do
     ui.welcome
