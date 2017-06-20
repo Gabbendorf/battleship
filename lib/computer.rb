@@ -3,7 +3,7 @@ require_relative 'grid'
 require_relative 'ships_list'
 require_relative 'ship'
 
-class Computer
+class Computer < ShipsPlacer
 
   def initialize(grid, ships_list)
     @grid = grid
