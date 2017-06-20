@@ -13,24 +13,37 @@ RSpec.describe Computer do
   let(:ships_list) {ShipsList.new(create_ship)}
   let(:grid_display) {GridDisplay.new(grid.size)}
   let(:ship) {Ship.new("submarine", 1)}
-  let(:computer) {Computer.new(grid, ships_list, ship)}
+  let(:computer) {Computer.new(grid, ships_list)}
 
+  def placed_ships_count(ship_name)
+    ships = []
+    grid.ships_placed.each do |ship|
+      if ship.name == ship_name
+        ships.push(ship)
+      end
+    end
+    ships.count
+  end
 
-  xit "places ship on grid from list of 6 ships randomly" do
-    computer.place_ship(ship)
+  it "places ship on grid from list of 6 ships randomly" do
+    computer.place_ship
 
-    possible_ships_name = ["submarine", "destroyer", "cruiser", "aircraft-carrier"]
-    ship1_name = grid.ships_placed[0].name
-    ship2_name = grid.ships_placed[1].name
-    ship3_name = grid.ships_placed[2].name
-    ship4_name = grid.ships_placed[3].name
-    ship5_name = grid.ships_placed[4].name
-    ship6_name = grid.ships_placed[5].name
-    all_ship_names = [ship1_name, ship2_name, ship3_name, ship4_name, ship5_name, ship6_name]
-    is_valid_name = all_ship_names.map {|name| possible_ships_name.include?(name)}
+    possible_ships = {"submarine" => 2,
+                      "destroyer" => 2,
+                      "cruiser" => 1,
+                      "aircraft-carrier" => 1
+                      }
+    submarine = possible_ships.keys[0]
+    destroyer = possible_ships.keys[1]
+    cruiser = possible_ships.keys[2]
+    aircraft_carrier = possible_ships.keys[3]
 
-    expect(is_valid_name).to eq([true] * 6)
     expect(grid.ships_placed.size).to eq(6)
+    expect(placed_ships_count(submarine)).to eq(2)
+    expect(placed_ships_count(destroyer)).to eq(2)
+    expect(placed_ships_count(cruiser)).not_to eq(2)
+    expect(placed_ships_count(cruiser)).to eq(1)
+    expect(placed_ships_count(aircraft_carrier)).to eq(1)
   end
 
 end
