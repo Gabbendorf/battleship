@@ -1,21 +1,20 @@
 class ShipsPlacer
 
-  def initialize(name)
-    @name = name
-  end
-
-  # def create_ships_placer(rival_type)
-  #   if rival_type == "computer"
-  #     Computer.new()
-  #   else
-  #     HumanPlayer.new()
-  #   end
-  # end
-
-  def ships_placement(position)
+  def ship_placement
+    ship = generate_ship
+    position = generate_position(ship)
     ship.register_position(position[:x], position[:y], position[:orientation])
-    @grid.add_ship
+    ship
   end
 
+  private
+
+  def generate_ship
+
+  end
+
+  def generate_position(ship)
+
+  end
 
 end

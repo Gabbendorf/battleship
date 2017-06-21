@@ -16,7 +16,7 @@ class Ui
   end
 
   def confirm_ships_were_placed
-    @stdout.puts "Computer placed all ships."
+    @stdout.puts "All ships were placed."
   end
 
   def ask_name_player1
@@ -28,8 +28,8 @@ class Ui
     @stdout.puts @grid_display.prepare_grid
   end
 
-  def selected_ship(ships_owner_name, list)
-    @stdout.puts "#{ships_owner_name}, choose a number for ship to place:"
+  def selected_ship(ships_placer, list)
+    @stdout.puts "#{ships_placer}, choose a number for ship to place:"
     print_list_of_ships(list)
     @stdin.gets.chomp.to_i
   end

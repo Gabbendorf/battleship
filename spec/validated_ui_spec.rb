@@ -20,7 +20,7 @@ RSpec.describe ValidatedUi do
   def set_up_validated_ui(input)
     input = StringIO.new(input)
     ui = Ui.new(input, output, grid_display)
-    ValidatedUi.new(ui, ships_list, grid)
+    ValidatedUi.new(ui, grid)
   end
 
   it "validates input for ship number and returns ship name" do

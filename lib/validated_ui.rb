@@ -4,18 +4,17 @@ require_relative 'grid'
 
 class ValidatedUi
 
-  def initialize(ui, ships_list, grid)
+  def initialize(ui, grid)
     @ui = ui
-    @ships_list = ships_list
     @grid = grid
   end
 
-  def selected_ship(player_name, list)
-    ship_number = @ui.selected_ship(player_name, list)
-    while @ships_list.validate(ship_number) == :invalid_ship_number
+  def selected_ship(ships_placer, list)
+    ship_number = @ui.selected_ship(ships_placer, list)
+    while list.validate(ship_number) == :invalid_ship_number
       ship_number = @ui.ask_for_valid_ship_number
     end
-    @ships_list.convert_number_to_name(ship_number)
+    list.convert_number_to_name(ship_number)
   end
 
   def valid_position(ship)

@@ -20,10 +20,10 @@ RSpec.describe HumanPlayer do
   it "returns a ship with valid position to be placed on grid" do
     input = StringIO.new("1\n1,a,z\n1,a,h\n")
     ui = Ui.new(input, output, grid_display)
-    validated_ui = ValidatedUi.new(ui, ships_list, grid)
-    player = HumanPlayer.new("Gabriella", grid, validated_ui, ui)
+    validated_ui = ValidatedUi.new(ui, grid)
+    player = HumanPlayer.new("Gabriella", grid, validated_ui, ui, ships_list)
 
-    ship = player.ship_placement(player.name, ships_list, ui)
+    ship = player.ship_placement
 
     expect(ship).to have_attributes(:name => "submarine", :length => 1, :occupied_cells => [[1, "A"]])
   end
@@ -31,8 +31,8 @@ RSpec.describe HumanPlayer do
   it "returns player's valid cell given to attack" do
     input = StringIO.new("8,z\n7,b\n")
     ui = Ui.new(input, output, grid_display)
-    validated_ui = ValidatedUi.new(ui, ships_list, grid)
-    player = HumanPlayer.new("Gabriella", grid, validated_ui, ui)
+    validated_ui = ValidatedUi.new(ui, grid)
+    player = HumanPlayer.new("Gabriella", grid, validated_ui, ui, ships_list)
 
     result = player.ship_attack("Gabriella")
 

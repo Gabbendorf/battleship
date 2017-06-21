@@ -18,9 +18,9 @@ RSpec.describe Ui do
   let(:ship) {Ship.new}
   let(:create_ship) {CreateShip.new}
   let(:ships_list) {ShipsList.new(create_ship)}
-  let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
-  let(:ships_owner) {HumanPlayer.new("Gabriella", grid, validated_ui, ui)}
-  let(:attacker) {HumanPlayer.new("Nic", grid, validated_ui, ui)}
+  let(:validated_ui) {ValidatedUi.new(ui, grid)}
+  let(:ships_owner) {HumanPlayer.new("Gabriella", grid, validated_ui, ui, ships_list)}
+  let(:attacker) {HumanPlayer.new("Nic", grid, validated_ui, ui, ships_list)}
 
   it "welcomes the players" do
     ui.welcome
@@ -38,10 +38,10 @@ RSpec.describe Ui do
     expect(rival).to eq("computer")
   end
 
-  it "confirms computer placed all ships" do
+  it "confirms all ships were placed" do
     ui.confirm_ships_were_placed
 
-    expect(output.string).to include("Computer placed all ships.")
+    expect(output.string).to include("All ships were placed.")
   end
 
   it "asks for name of player 1" do
