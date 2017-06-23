@@ -15,23 +15,19 @@ RSpec.describe Computer do
   let(:ship) {Ship.new("submarine", 1)}
   let(:computer) {Computer.new(grid, ships_list)}
 
-    it "returns random ship on grid from list of 6 ships" do
-    ship = computer.ship_placement
-
+  it "returns random ship with random position from list of 6 ships" do
     possible_ships = {"submarine" => 2,
                       "destroyer" => 2,
                       "cruiser" => 1,
                       "aircraft-carrier" => 1
                       }
-    possible_positions = {:x => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                         :y => ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-                       }
-    ship_coordinate_x = ship.occupied_cells[0][0]
-    ship_coordinate_y = ship.occupied_cells[0][1]
+
+    ship = computer.ship_placement
+    grid.add_ship(ship)
+    occupied_grid_cells = grid.ships_placed[0].occupied_cells
 
     expect(possible_ships.keys.include?(ship.name)).to eq(true)
-    expect(possible_positions[:x].include?(ship_coordinate_x)).to eq(true)
-    expect(possible_positions[:y].include?(ship_coordinate_y)).to eq(true)
+    expect(occupied_grid_cells).to eq(ship.occupied_cells)
   end
 
 end

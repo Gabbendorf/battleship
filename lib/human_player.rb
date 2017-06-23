@@ -2,9 +2,8 @@ require_relative 'ships_list'
 require_relative 'ui'
 require_relative 'ship'
 require_relative 'validated_ui'
-require_relative 'ships_placer'
 
-class HumanPlayer < ShipsPlacer
+class HumanPlayer
 
   attr_reader :name
 

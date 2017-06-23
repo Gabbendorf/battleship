@@ -2,9 +2,8 @@ require_relative 'create_ship'
 require_relative 'grid'
 require_relative 'ships_list'
 require_relative 'ship'
-require_relative 'ships_placer'
 
-class Computer < ShipsPlacer
+class Computer
 
   def initialize(grid, ships_list)
     @grid = grid
@@ -13,7 +12,7 @@ class Computer < ShipsPlacer
 
   def ship_placement
     random_ship = generate_ship
-    position = generate_position(select_random_position, random_ship.length)
+    position = generate_position(random_ship.length)
     random_ship.register_position(position[:x], position[:y], position[:orientation])
     random_ship
   end
@@ -24,20 +23,18 @@ class Computer < ShipsPlacer
     select_random_ship
   end
 
-  def generate_position(position, ship_length)
-    valid_position(position, ship_length)
+  def generate_position(ship_length)
+    valid_position(ship_length)
   end
 
-  # TODO: fix bug, looks like computer doesn't give valid position
-  def valid_position(position, ship_length)
-    validation_result = @grid.validate_placement(position, ship_length)
+  def valid_position(ship_length)
+    random_position = select_random_position
+    validation_result = @grid.validate_placement(random_position, ship_length)
     while validation_result != :valid_position
-      if validation_result == :invalid_placement || validation_result == :already_occupied
-        position = select_random_position
-        validation_result = @grid.validate_placement(position, ship_length)
-      end
+      random_position = select_random_position
+      validation_result = @grid.validate_placement(random_position, ship_length)
     end
-    position
+    random_position
   end
 
   def select_random_ship

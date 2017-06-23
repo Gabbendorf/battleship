@@ -53,8 +53,12 @@ RSpec.describe Game do
     HIT3_SHIP6 = "3,f\n"
     SINK_SHIP6 = "4,f\n"
 
-    input = StringIO.new(PLAYER1+WRONG_INPUT+FIRST_SHIP+WRONG_POSITION+POSITION1+SECOND_SHIP+POSITION2+THIRD_SHIP+POSITION3+FOURTH_SHIP+POSITION4+FIFTH_SHIP+POSITION5+SIXTH_SHIP+POSITION6+PLAYER2+
-                         WRONG_ATTACK+SINK_SHIP1+SINK_SHIP2+HIT_SHIP3+SINK_SHIP3+HIT_SHIP4+SINK_SHIP4+HIT_SHIP5+HIT2_SHIP5+SINK_SHIP5+HIT_SHIP6+HIT2_SHIP6+HIT3_SHIP6+SINK_SHIP6)
+    input = StringIO.new(PLAYER1+WRONG_INPUT+FIRST_SHIP+WRONG_POSITION+POSITION1+
+                         SECOND_SHIP+POSITION2+THIRD_SHIP+POSITION3+FOURTH_SHIP+
+                         POSITION4+FIFTH_SHIP+POSITION5+SIXTH_SHIP+POSITION6+
+                         PLAYER2+WRONG_ATTACK+SINK_SHIP1+SINK_SHIP2+HIT_SHIP3+
+                         SINK_SHIP3+HIT_SHIP4+SINK_SHIP4+HIT_SHIP5+HIT2_SHIP5+
+                         SINK_SHIP5+HIT_SHIP6+HIT2_SHIP6+HIT3_SHIP6+SINK_SHIP6)
     ui = Ui.new(input, output, grid_display)
     validated_ui = ValidatedUi.new(ui, grid)
     game = Game.new(grid_display, ui, grid, ships_list, computer, validated_ui)
@@ -65,7 +69,8 @@ RSpec.describe Game do
   end
 
   it "starts a new game with computer placing ships" do
-    input = StringIO.new("computer\ngabriella\n1,f\n2,f\n3,f\n4,f\n5f\n1,e\n2,e\n3,e\n1,d\n2,d\n1,c\n2,c\n1,b\n1,z\n1,a")
+    input = StringIO.new("computer\ngabriella\n1,f\n2,f\n3,f\n4,f\n5,f\n1,e\n2,e\n
+                          3,e\n1,d\n2,d\n1,c\n2,c\n1,b\n1,z\n1,a")
     ui = Ui.new(input, output, grid_display)
     validated_ui = ValidatedUi.new(ui, grid)
     fake_computer = FakeComputer.new(grid, ships_list)
@@ -85,7 +90,14 @@ class FakeComputer
     @ships_list = ships_list
     @grid = grid
     @ships_to_place = ["submarine", "submarine", "destroyer", "destroyer", "cruiser", "aircraft-carrier"]
-    @positions = [[1, "A", :horizontal], [1, "B", :horizontal], [1, "C", :horizontal], [1, "D", :horizontal], [1, "E", :horizontal], [1, "F", :horizontal]]
+    @positions = [
+                  [1, "A", :horizontal],
+                  [1, "B", :horizontal],
+                  [1, "C", :horizontal],
+                  [1, "D", :horizontal],
+                  [1, "E", :horizontal],
+                  [1, "F", :horizontal]
+                 ]
   end
 
   def ship_placement

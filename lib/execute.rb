@@ -6,7 +6,6 @@ require_relative 'grid_display'
 require_relative 'computer'
 require_relative 'validated_ui'
 require_relative 'create_ship'
-require_relative 'ships_placer'
 
 grid = Grid.new(10)
 grid_display = GridDisplay.new(grid.size)

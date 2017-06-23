@@ -6,7 +6,6 @@ require_relative 'grid'
 require_relative 'ships_list'
 require_relative 'computer'
 require_relative 'validated_ui'
-require_relative 'ships_placer'
 
 class Game
 
