@@ -15,6 +15,11 @@ class Ui
     @stdin.gets.chomp.downcase
   end
 
+  def repeat_rival_type
+    @stdout.puts "Sorry, I didn't understand:"
+    @stdin.gets.chomp.downcase
+  end
+
   def confirm_ships_were_placed
     @stdout.puts "All ships were placed."
   end

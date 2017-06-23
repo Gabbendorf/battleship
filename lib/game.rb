@@ -30,6 +30,9 @@ class Game
 
   def selected_ships_placer
     rival = @ui.ask_to_choose_rival_type
+    while rival != "computer" && rival != "human player"
+      rival = @ui.repeat_rival_type
+    end
     if rival == "computer"
       ships_placer = @computer
     else

@@ -38,6 +38,16 @@ RSpec.describe Ui do
     expect(rival).to eq("computer")
   end
 
+  it "asks to correctly type either human player or computer as opponent" do
+    input = StringIO.new("Computer")
+    ui = Ui.new(input, output, grid_display)
+
+    rival = ui.repeat_rival_type
+
+    expect(output.string).to include("Sorry, I didn't understand:")
+    expect(rival).to eq("computer")
+  end
+
   it "confirms all ships were placed" do
     ui.confirm_ships_were_placed
 
