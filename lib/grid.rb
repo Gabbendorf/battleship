@@ -11,11 +11,11 @@ class Grid
   end
 
   def validate_placement(position, ship_length)
-    if invalid_inputs?(position[:x], position[:y], position[:orientation]) == true
+    if invalid_inputs?(position[:x], position[:y], position[:orientation])
       :invalid_ship_position
-    elsif ship_out_of_grid?( position[:x], position[:y], ship_length, position[:orientation]) == true
+    elsif ship_out_of_grid?( position[:x], position[:y], ship_length, position[:orientation])
       :invalid_placement
-    elsif already_occupied?(position) == true
+    elsif already_occupied?(position)
       :already_occupied
     else
       :valid_position

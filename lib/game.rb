@@ -41,11 +41,15 @@ class Game
   end
 
   def ships_placement(ships_placer)
-    while @ships_list.ships.size > 0
+    while !all_ships_placed?
       ship = ships_placer.ship_placement
       @grid.add_ship(ship)
     end
     @ui.confirm_ships_were_placed
+  end
+
+  def all_ships_placed?
+    @ships_list.ships.size == 0
   end
 
   def ships_attack

@@ -26,7 +26,7 @@ RSpec.describe Computer do
     grid.add_ship(ship)
     occupied_grid_cells = grid.ships_placed[0].occupied_cells
 
-    expect(possible_ships.keys.include?(ship.name)).to eq(true)
+    expect(possible_ships.keys.include?(ship.name))
     expect(occupied_grid_cells).to eq(ship.occupied_cells)
   end
 
