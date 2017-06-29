@@ -12,7 +12,7 @@ grid_display = GridDisplay.new(grid.size)
 ui = Ui.new($stdin, $stdout, grid_display)
 create_ship = CreateShip.new
 ships_list = ShipsList.new(create_ship)
-validated_ui = ValidatedUi.new(ui, ships_list, grid)
+validated_ui = ValidatedUi.new(ui, grid)
 computer = Computer.new(grid, ships_list)
 new_game = Game.new(grid_display, ui, grid, ships_list, computer, validated_ui)
 

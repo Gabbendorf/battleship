@@ -15,8 +15,13 @@ class Ui
     @stdin.gets.chomp.downcase
   end
 
+  def repeat_rival_type
+    @stdout.puts "Sorry, I didn't understand:"
+    @stdin.gets.chomp.downcase
+  end
+
   def confirm_ships_were_placed
-    @stdout.puts "Computer placed all ships."
+    @stdout.puts "All ships were placed."
   end
 
   def ask_name_player1
@@ -28,8 +33,8 @@ class Ui
     @stdout.puts @grid_display.prepare_grid
   end
 
-  def selected_ship(ships_owner_name, list)
-    @stdout.puts "#{ships_owner_name}, choose a number for ship to place:"
+  def selected_ship(ships_placer, list)
+    @stdout.puts "#{ships_placer}, choose a number for ship to place:"
     print_list_of_ships(list)
     @stdin.gets.chomp.to_i
   end
@@ -81,6 +86,13 @@ class Ui
     input = @stdin.gets.chomp.split(",")
     input = first_validation_for_array(input)
     [input[0].to_i, input[1].capitalize]
+  end
+
+  def ask_for_empty_position
+    @stdout.puts "Position already occupied:"
+    input = @stdin.gets.chomp.split(",")
+    input = first_validation_for_hash(input)
+    details_for(input)
   end
 
   private

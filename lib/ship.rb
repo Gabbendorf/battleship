@@ -16,10 +16,6 @@ class Ship
     all_cells(x, y, @length, orientation).each {|array| @occupied_cells.push(array)}
   end
 
-  def does_occupy?(position)
-    @occupied_cells.include?(position)
-  end
-
   def register_cells_hit(attacked_cell)
     @cells_hit_set.add(attacked_cell)
   end

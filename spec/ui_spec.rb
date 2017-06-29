@@ -2,7 +2,7 @@ require 'spec_helper'
 require_relative '../lib/ui'
 require_relative '../lib/grid_display'
 require_relative '../lib/grid'
-require_relative '../lib/player'
+require_relative '../lib/human_player'
 require_relative '../lib/ship'
 require_relative '../lib/create_ship'
 require_relative '../lib/ships_list'
@@ -18,9 +18,9 @@ RSpec.describe Ui do
   let(:ship) {Ship.new}
   let(:create_ship) {CreateShip.new}
   let(:ships_list) {ShipsList.new(create_ship)}
-  let(:validated_ui) {ValidatedUi.new(ui, ships_list, grid)}
-  let(:ships_owner) {Player.new("Gabriella", grid, validated_ui, ui)}
-  let(:attacker) {Player.new("Nic", grid, validated_ui, ui)}
+  let(:validated_ui) {ValidatedUi.new(ui, grid)}
+  let(:ships_owner) {HumanPlayer.new("Gabriella", grid, validated_ui, ui, ships_list)}
+  let(:attacker) {HumanPlayer.new("Nic", grid, validated_ui, ui, ships_list)}
 
   it "welcomes the players" do
     ui.welcome
@@ -38,10 +38,20 @@ RSpec.describe Ui do
     expect(rival).to eq("computer")
   end
 
-  it "confirms computer placed all ships" do
+  it "asks to correctly type either human player or computer as opponent" do
+    input = StringIO.new("Computer")
+    ui = Ui.new(input, output, grid_display)
+
+    rival = ui.repeat_rival_type
+
+    expect(output.string).to include("Sorry, I didn't understand:")
+    expect(rival).to eq("computer")
+  end
+
+  it "confirms all ships were placed" do
     ui.confirm_ships_were_placed
 
-    expect(output.string).to include("Computer placed all ships.")
+    expect(output.string).to include("All ships were placed.")
   end
 
   it "asks for name of player 1" do
@@ -196,6 +206,16 @@ RSpec.describe Ui do
 
     expect(output.string).to include("Not valid position:")
     expect(cell_to_attack).to eq([0, ""])
+  end
+
+  it "asks for new position if previous given is already occupied and returns hash" do
+    input = StringIO.new("1,a,v\n")
+    ui = Ui.new(input, output, grid_display)
+
+    position = ui.ask_for_empty_position
+
+    expect(output.string).to include("Position already occupied:")
+    expect(position).to eq({:x => 1, :y=> "A", :orientation => :vertical})
   end
 
 end

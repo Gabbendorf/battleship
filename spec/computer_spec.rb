@@ -13,24 +13,21 @@ RSpec.describe Computer do
   let(:ships_list) {ShipsList.new(create_ship)}
   let(:grid_display) {GridDisplay.new(grid.size)}
   let(:ship) {Ship.new("submarine", 1)}
-  let(:computer) {Computer.new(grid, ships_list, ship)}
+  let(:computer) {Computer.new(grid, ships_list)}
 
+  it "returns random ship with random position from list of 6 ships" do
+    possible_ships = {"submarine" => 2,
+                      "destroyer" => 2,
+                      "cruiser" => 1,
+                      "aircraft-carrier" => 1
+                      }
 
-  xit "places ship on grid from list of 6 ships randomly" do
-    computer.place_ship(ship)
+    ship = computer.ship_placement
+    grid.add_ship(ship)
+    occupied_grid_cells = grid.ships_placed[0].occupied_cells
 
-    possible_ships_name = ["submarine", "destroyer", "cruiser", "aircraft-carrier"]
-    ship1_name = grid.ships_placed[0].name
-    ship2_name = grid.ships_placed[1].name
-    ship3_name = grid.ships_placed[2].name
-    ship4_name = grid.ships_placed[3].name
-    ship5_name = grid.ships_placed[4].name
-    ship6_name = grid.ships_placed[5].name
-    all_ship_names = [ship1_name, ship2_name, ship3_name, ship4_name, ship5_name, ship6_name]
-    is_valid_name = all_ship_names.map {|name| possible_ships_name.include?(name)}
-
-    expect(is_valid_name).to eq([true] * 6)
-    expect(grid.ships_placed.size).to eq(6)
+    expect(possible_ships.keys.include?(ship.name))
+    expect(occupied_grid_cells).to eq(ship.occupied_cells)
   end
 
 end

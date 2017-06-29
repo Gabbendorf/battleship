@@ -11,10 +11,12 @@ class Grid
   end
 
   def validate_placement(position, ship_length)
-    if invalid_inputs?(position[:x], position[:y], position[:orientation]) == true
+    if invalid_inputs?(position[:x], position[:y], position[:orientation])
       :invalid_ship_position
-    elsif ship_out_of_grid?( position[:x], position[:y], ship_length, position[:orientation]) == true
+    elsif ship_out_of_grid?( position[:x], position[:y], ship_length, position[:orientation])
       :invalid_placement
+    elsif already_occupied?(position)
+      :already_occupied
     else
       :valid_position
     end
@@ -53,6 +55,12 @@ class Grid
   end
 
   private
+
+  def already_occupied?(position)
+    position = [position[:x], position[:y]]
+    occupied_positions = @ships_placed.map {|ship| ship.occupied_cells}
+    occupied_positions.flatten(1).include?(position)
+  end
 
   def ship?(position)
     all_occupied_cells = @ships_placed.map {|ship| ship.occupied_cells}
